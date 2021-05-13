@@ -20,4 +20,9 @@ public class PlayerCharacter : StateMachine
         LeftHandOccupied = false;
         RightHandOccupied = false;
     }
+
+    public void PrintStuff(string stringToPrint)
+    {
+        print(stringToPrint);
+    }
 }
