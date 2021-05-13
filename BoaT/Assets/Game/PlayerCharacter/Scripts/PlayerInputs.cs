@@ -9,38 +9,38 @@ public class PlayerInputs : MonoBehaviour
     public float SideInput { get; private set; }
     private void Update()
     {
-        Inputs();
+        GetInputs();
     }
 
-    void Inputs()
+    void GetInputs()
     {
-        LeftHand();
-        RightHand();
-        Dash();
-        Front();
-        Side();
+        GetLeftHandInput();
+        GetRightHandInput();
+        GetDashInput();
+        GetFrontInput();
+        GetSideInput();
     }
 
-    void LeftHand()
+    void GetLeftHandInput()
     {
         if (Input.GetButtonDown("Fire1") == true) LeftHandInput = true;
         else LeftHandInput = false;
     }
-    void RightHand()
+    void GetRightHandInput()
     {
         if (Input.GetButtonDown("Fire2") == true) RightHandInput = true;
         else RightHandInput = false;
     }
-    void Dash()
+    void GetDashInput()
     {
         if (Input.GetKeyDown(KeyCode.Space) == true) DashInput = true;
         else DashInput = false;
     }
-    void Front()
+    void GetFrontInput()
     {
         FrontInput = Input.GetAxis("Horizontal");
     }
-    void Side()
+    void GetSideInput()
     {
         SideInput = Input.GetAxis("Vertical");
     }

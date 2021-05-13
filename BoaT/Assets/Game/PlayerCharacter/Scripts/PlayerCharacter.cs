@@ -1,16 +1,23 @@
 ﻿using UnityEngine;
 public class PlayerCharacter : StateMachine
 {
-    public bool LeftHand { get; set; }
-    public bool RightHand { get; set; }
+    public bool LeftHandOccupied { get; set; }
+    public bool RightHandOccupied { get; set; }
     [HideInInspector] public PlayerInputs playerInputs;
 
     private void Awake()
     {
+        SetState(new Idle(this));
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
+    }
+    private void Update()
+    {
+        _state.StateUpdate();
     }
     private void Start()
     {
-        SetState(new Idle(this));
+        _state.Start();
+        LeftHandOccupied = false;
+        RightHandOccupied = false;
     }
 }
