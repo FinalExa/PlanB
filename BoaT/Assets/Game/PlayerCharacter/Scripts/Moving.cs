@@ -13,7 +13,14 @@
 
     private void Movement()
     {
-        _playerCharacter.playerCharacterRigidbody.velocity = _playerCharacter.playerInputs.MovementInput * _playerCharacter.movementSpeed;
+        var forward = _playerCharacter.mainCamera.transform.forward;
+        forward.y = 0f;
+        var right = _playerCharacter.mainCamera.transform.right;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+        var movementWithDirection = (_playerCharacter.playerInputs.MovementInput.x * forward) + (_playerCharacter.playerInputs.MovementInput.z * right);
+        _playerCharacter.playerCharacterGameObject.transform.Translate(movementWithDirection * _playerCharacter.movementSpeed * UnityEngine.Time.deltaTime);
     }
 
     private void StateChangesCheck()

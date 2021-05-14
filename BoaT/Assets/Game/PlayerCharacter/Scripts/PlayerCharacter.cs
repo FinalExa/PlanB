@@ -12,6 +12,7 @@ public class PlayerCharacter : StateMachine
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public GameObject playerCharacterGameObject;
     [HideInInspector] public Rigidbody playerCharacterRigidbody;
+    [HideInInspector] public Camera mainCamera;
     public float movementSpeed;
 
     private void Awake()
@@ -20,6 +21,7 @@ public class PlayerCharacter : StateMachine
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
         playerCharacterGameObject = this.gameObject;
         playerCharacterRigidbody = playerCharacterGameObject.GetComponent<Rigidbody>();
+        mainCamera = FindObjectOfType<Camera>();
     }
     private void Update()
     {
