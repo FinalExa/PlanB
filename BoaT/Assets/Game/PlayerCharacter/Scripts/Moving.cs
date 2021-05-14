@@ -7,29 +7,34 @@
     }
     public override void StateUpdate()
     {
+        StateChangesCheck();
+    }
+
+    private void StateChangesCheck()
+    {
         GoToIdleState();
         GoToDashState();
         GoToHandsState();
     }
 
     #region ToIdleState
-    void GoToIdleState()
+    private void GoToIdleState()
     {
         if ((_playerCharacter.playerInputs.MovementInput.x == 0) && (_playerCharacter.playerInputs.MovementInput.z == 0)) _playerCharacter.SetState(new Idle(_playerCharacter));
     }
     #endregion
 
     #region ToDashState
-    void GoToDashState()
+    private void GoToDashState()
     {
         GetDashInput();
         CheckTransitionToDash(dashInput);
     }
-    void GetDashInput()
+    private void GetDashInput()
     {
         dashInput = _playerCharacter.playerInputs.DashInput;
     }
-    void CheckTransitionToDash(bool dash)
+    private void CheckTransitionToDash(bool dash)
     {
         if (dash) _playerCharacter.SetState(new Dash(_playerCharacter));
     }
