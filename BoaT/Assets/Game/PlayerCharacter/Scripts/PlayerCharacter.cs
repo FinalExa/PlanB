@@ -4,11 +4,13 @@ public class PlayerCharacter : StateMachine
     public bool LeftHandOccupied { get; set; }
     public bool RightHandOccupied { get; set; }
     [HideInInspector] public PlayerInputs playerInputs;
+    [HideInInspector] public GameObject playerCharacter;
 
     private void Awake()
     {
         SetState(new Idle(this));
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
+        playerCharacter = this.gameObject;
     }
     private void Update()
     {

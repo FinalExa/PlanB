@@ -1,6 +1,9 @@
-﻿public class Moving : PlayerState
+﻿using System;
+public class Moving : PlayerState
 {
     bool dashInput;
+    Idle.SelectedHand handContainer;
+    public static Action<Idle.SelectedHand> passHand;
     public Moving(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerCharacter.PrintStuff("Moving");
@@ -42,20 +45,32 @@
     }
     private void GetHandsInput()
     {
-        if (_playerCharacter.playerInputs.LeftHandInput || _playerCharacter.playerInputs.RightHandInput) CheckActionToPerform();
+        if (_playerCharacter.playerInputs.LeftHandInput) CheckLeftHandAction();
+        else if (_playerCharacter.playerInputs.RightHandInput) CheckRightHandAction();
     }
-    private void CheckActionToPerform()
+    private void CheckLeftHandAction()
     {
-        if (_playerCharacter.LeftHandOccupied == false && _playerCharacter.RightHandOccupied == false) GoToGrab();
-        else if (_playerCharacter.LeftHandOccupied == true && _playerCharacter.RightHandOccupied == true) GoToThrow();
+        handContainer = Idle.SelectedHand.Left;
+        if (_playerCharacter.LeftHandOccupied == false) GoToGrab();
+        else GoToThrow();
+    }
+    private void CheckRightHandAction()
+    {
+        handContainer = Idle.SelectedHand.Right;
+        if (_playerCharacter.RightHandOccupied == false) GoToGrab();
+        else GoToThrow();
     }
     private void GoToGrab()
     {
         _playerCharacter.SetState(new Grab(_playerCharacter));
+        passHand(handContainer);
+        handContainer = Idle.SelectedHand.None;
     }
     private void GoToThrow()
     {
         _playerCharacter.SetState(new Throw(_playerCharacter));
+        passHand(handContainer);
+        handContainer = Idle.SelectedHand.None;
     }
     #endregion
 }
