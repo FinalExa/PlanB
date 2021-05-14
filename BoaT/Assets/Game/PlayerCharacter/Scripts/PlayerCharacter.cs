@@ -8,15 +8,18 @@ public class PlayerCharacter : StateMachine
         Left,
         Right
     }
-    public SelectedHand selectedHand;
+    [HideInInspector] public SelectedHand selectedHand;
     [HideInInspector] public PlayerInputs playerInputs;
-    [HideInInspector] public GameObject playerCharacter;
+    [HideInInspector] public GameObject playerCharacterGameObject;
+    [HideInInspector] public Rigidbody playerCharacterRigidbody;
+    public float movementSpeed;
 
     private void Awake()
     {
         SetState(new Idle(this));
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
-        playerCharacter = this.gameObject;
+        playerCharacterGameObject = this.gameObject;
+        playerCharacterRigidbody = playerCharacterGameObject.GetComponent<Rigidbody>();
     }
     private void Update()
     {

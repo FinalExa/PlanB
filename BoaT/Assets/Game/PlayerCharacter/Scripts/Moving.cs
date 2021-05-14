@@ -7,7 +7,13 @@
     }
     public override void StateUpdate()
     {
+        Movement();
         StateChangesCheck();
+    }
+
+    private void Movement()
+    {
+        _playerCharacter.playerCharacterRigidbody.velocity = _playerCharacter.playerInputs.MovementInput * _playerCharacter.movementSpeed;
     }
 
     private void StateChangesCheck()
