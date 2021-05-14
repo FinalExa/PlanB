@@ -2,13 +2,11 @@
 
 public class Rotation : MonoBehaviour
 {
-    private RaycastHit hit;
-    private Ray ray;
-    private Camera mainCamera;
+    private MouseData mouseData;
     private Transform playerCharacterTransform;
     void Awake()
     {
-        mainCamera = FindObjectOfType<Camera>();
+        mouseData = FindObjectOfType<MouseData>();
         playerCharacterTransform = this.gameObject.transform;
     }
     void Update()
@@ -18,9 +16,7 @@ public class Rotation : MonoBehaviour
 
     void Rotate()
     {
-        ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out hit);
-        float angle = CalculateAngle(playerCharacterTransform.position, hit.point);
+        float angle = CalculateAngle(playerCharacterTransform.position, mouseData.mousePositionInSpace);
         playerCharacterTransform.rotation = Quaternion.Euler(new Vector3(playerCharacterTransform.rotation.x, angle, playerCharacterTransform.rotation.z));
     }
 

@@ -15,14 +15,24 @@
         if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Left)
         {
             _playerCharacter.PrintStuff("Grab with Left Hand");
-            SetLeftHandOccupied();
+            GrabLeftHand();
 
         }
         else if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Right)
         {
             _playerCharacter.PrintStuff("Grab with Right Hand");
-            SetRightHandOccupied();
+            GrabRightHand();
         }
+    }
+
+    void GrabLeftHand()
+    {
+        SetLeftHandOccupied();
+    }
+
+    void GrabRightHand()
+    {
+        SetRightHandOccupied();
     }
 
     void ReturnToDestination()
