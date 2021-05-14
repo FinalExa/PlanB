@@ -5,43 +5,37 @@ public class PlayerInputs : MonoBehaviour
     public bool LeftHandInput { get; private set; }
     public bool RightHandInput { get; private set; }
     public bool DashInput { get; private set; }
-    public float FrontInput { get; private set; }
-    public float SideInput { get; private set; }
+    public Vector3 MovementInput { get; private set; }
     private void Update()
     {
-        Inputs();
+        GetInputs();
     }
-
-    void Inputs()
+    void GetInputs()
     {
-        LeftHand();
-        RightHand();
-        Dash();
-        Front();
-        Side();
+        GetLeftHandInput();
+        GetRightHandInput();
+        GetDashInput();
+        GetFrontInput();
     }
-
-    void LeftHand()
+    void GetLeftHandInput()
     {
         if (Input.GetButtonDown("Fire1") == true) LeftHandInput = true;
         else LeftHandInput = false;
     }
-    void RightHand()
+    void GetRightHandInput()
     {
         if (Input.GetButtonDown("Fire2") == true) RightHandInput = true;
         else RightHandInput = false;
     }
-    void Dash()
+    void GetDashInput()
     {
         if (Input.GetKeyDown(KeyCode.Space) == true) DashInput = true;
         else DashInput = false;
     }
-    void Front()
+    void GetFrontInput()
     {
-        FrontInput = Input.GetAxis("Horizontal");
-    }
-    void Side()
-    {
-        SideInput = Input.GetAxis("Vertical");
+        float frontInput = Input.GetAxisRaw("Horizontal");
+        float sideInput = Input.GetAxisRaw("Vertical");
+        MovementInput = new Vector3(sideInput, 0, frontInput).normalized;
     }
 }

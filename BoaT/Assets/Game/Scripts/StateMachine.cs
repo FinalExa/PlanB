@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-
 public abstract class StateMachine : MonoBehaviour
 {
-    protected State _state;
+    protected PlayerState _state;
 
-    public void SetState(State state)
+    public void SetState(PlayerState state)
     {
         _state = state;
         state.Start();
