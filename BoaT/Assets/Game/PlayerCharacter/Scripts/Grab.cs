@@ -3,53 +3,49 @@
 
     public Grab(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        Idle.passHand += CheckHand;
-        playerCharacter.PrintStuff("Grab");
     }
-    void CheckHand(Idle.SelectedHand hand)
+
+    public override void Start()
     {
-        bool doOnce = false;
-        if (doOnce == false)
+        CheckHand();
+    }
+    void CheckHand()
+    {
+        if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Left)
         {
-            if (hand == Idle.SelectedHand.Left)
-            {
-                _playerCharacter.PrintStuff("Left");
-                hand = Idle.SelectedHand.None;
-                SetLeftHandOccupied();
-                ReturnToDestination();
-            }
-            else if (hand == Idle.SelectedHand.Right)
-            {
-                _playerCharacter.PrintStuff("Right");
-                hand = Idle.SelectedHand.None;
-                SetRightHandOccupied();
-                ReturnToDestination();
-            }
-            doOnce = true;
+            _playerCharacter.PrintStuff("Grab with Left Hand");
+            SetLeftHandOccupied();
+
+        }
+        else if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Right)
+        {
+            _playerCharacter.PrintStuff("Grab with Right Hand");
+            SetRightHandOccupied();
         }
     }
 
     void ReturnToDestination()
     {
-        ReturnToIdle();
-        ReturnToMovement();
+        if ((_playerCharacter.playerInputs.MovementInput.x == 0) && (_playerCharacter.playerInputs.MovementInput.z == 0)) ReturnToIdle();
+        else if ((_playerCharacter.playerInputs.MovementInput.x != 0) || (_playerCharacter.playerInputs.MovementInput.z != 0)) ReturnToMovement();
     }
-
     void ReturnToIdle()
     {
-        if ((_playerCharacter.playerInputs.MovementInput.x == 0) && (_playerCharacter.playerInputs.MovementInput.z == 0)) _playerCharacter.SetState(new Idle(_playerCharacter));
+        _playerCharacter.SetState(new Idle(_playerCharacter));
     }
     void ReturnToMovement()
     {
-        if ((_playerCharacter.playerInputs.MovementInput.x != 0) || (_playerCharacter.playerInputs.MovementInput.z != 0)) _playerCharacter.SetState(new Moving(_playerCharacter));
+        _playerCharacter.SetState(new Moving(_playerCharacter));
     }
 
     void SetLeftHandOccupied()
     {
         _playerCharacter.LeftHandOccupied = true;
+        ReturnToDestination();
     }
     void SetRightHandOccupied()
     {
         _playerCharacter.RightHandOccupied = true;
+        ReturnToDestination();
     }
 }

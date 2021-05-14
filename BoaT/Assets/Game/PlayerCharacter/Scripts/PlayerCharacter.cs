@@ -3,6 +3,12 @@ public class PlayerCharacter : StateMachine
 {
     public bool LeftHandOccupied { get; set; }
     public bool RightHandOccupied { get; set; }
+    public enum SelectedHand
+    {
+        Left,
+        Right
+    }
+    public SelectedHand selectedHand;
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public GameObject playerCharacter;
 

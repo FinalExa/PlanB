@@ -1,16 +1,6 @@
-﻿using System;
-
-public class Idle : PlayerState
+﻿public class Idle : PlayerState
 {
     private bool dashInput;
-    public enum SelectedHand
-    {
-        Left,
-        Right,
-        None
-    }
-    SelectedHand handContainer;
-    public static Action<SelectedHand> passHand;
     public Idle(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerCharacter.PrintStuff("Idle");
@@ -54,31 +44,27 @@ public class Idle : PlayerState
     private void GetHandsInput()
     {
         if (_playerCharacter.playerInputs.LeftHandInput) CheckLeftHandAction();
-        else if (_playerCharacter.playerInputs.RightHandInput) CheckRightHandAction();
+        if (_playerCharacter.playerInputs.RightHandInput) CheckRightHandAction();
     }
     private void CheckLeftHandAction()
     {
-        handContainer = SelectedHand.Left;
+        _playerCharacter.selectedHand = PlayerCharacter.SelectedHand.Left;
         if (_playerCharacter.LeftHandOccupied == false) GoToGrab();
         else GoToThrow();
     }
     private void CheckRightHandAction()
     {
-        handContainer = SelectedHand.Right;
+        _playerCharacter.selectedHand = PlayerCharacter.SelectedHand.Right;
         if (_playerCharacter.RightHandOccupied == false) GoToGrab();
         else GoToThrow();
     }
     private void GoToGrab()
     {
         _playerCharacter.SetState(new Grab(_playerCharacter));
-        passHand(handContainer);
-        handContainer = SelectedHand.None;
     }
     private void GoToThrow()
     {
         _playerCharacter.SetState(new Throw(_playerCharacter));
-        passHand(handContainer);
-        handContainer = SelectedHand.None;
     }
     #endregion
 }
