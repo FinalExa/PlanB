@@ -3,6 +3,7 @@
 
     public Dash(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
+        playerCharacter.rotation.enabled = false;
         playerCharacter.PrintStuff("Dash");
     }
 

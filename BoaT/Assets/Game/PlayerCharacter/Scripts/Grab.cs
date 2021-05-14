@@ -3,6 +3,7 @@
 
     public Grab(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
+        playerCharacter.rotation.enabled = false;
     }
 
     public override void Start()

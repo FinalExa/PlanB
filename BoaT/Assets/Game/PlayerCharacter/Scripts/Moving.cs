@@ -3,6 +3,7 @@
     bool dashInput;
     public Moving(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
+        playerCharacter.rotation.enabled = true;
         playerCharacter.PrintStuff("Moving");
     }
     public override void StateUpdate()
