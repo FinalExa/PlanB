@@ -36,6 +36,6 @@ public class PlayerInputs : MonoBehaviour
     {
         float frontInput = Input.GetAxisRaw("Horizontal");
         float sideInput = Input.GetAxisRaw("Vertical");
-        MovementInput = new Vector3(sideInput, 0, frontInput).normalized;
+        MovementInput = new Vector3(frontInput, 0, sideInput).normalized;
     }
 }
