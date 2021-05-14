@@ -11,7 +11,6 @@ public class PlayerCharacter : StateMachine
     [HideInInspector] public SelectedHand selectedHand;
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public GameObject playerCharacterGameObject;
-    [HideInInspector] public Rigidbody playerCharacterRigidbody;
     [HideInInspector] public Camera mainCamera;
     public float movementSpeed;
 
@@ -20,7 +19,6 @@ public class PlayerCharacter : StateMachine
         SetState(new Idle(this));
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
         playerCharacterGameObject = this.gameObject;
-        playerCharacterRigidbody = playerCharacterGameObject.GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<Camera>();
     }
     private void Update()
