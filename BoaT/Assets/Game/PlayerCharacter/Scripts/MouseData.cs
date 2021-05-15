@@ -4,7 +4,7 @@ public class MouseData : MonoBehaviour
 {
     public RaycastHit hit;
     public Ray ray;
-    public Vector3 mousePositionInSpace;
+    [HideInInspector] public Vector3 mousePositionInSpace;
     private Camera mainCamera;
     IThrowable lastCollider;
 

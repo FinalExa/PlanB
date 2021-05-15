@@ -4,7 +4,8 @@ public class PlayerCharacter : StateMachine
     public bool LeftHandOccupied { get; set; }
     public bool RightHandOccupied { get; set; }
     public float throwSpeed;
-
+    public float dashDistance;
+    public float dashDuration;
     public enum SelectedHand
     {
         Left,
@@ -14,7 +15,6 @@ public class PlayerCharacter : StateMachine
     [HideInInspector] public Rotation rotation;
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public MouseData mouseData;
-    [HideInInspector] public GameObject playerCharacterGameObject;
     public GameObject LeftHand;
     public GameObject RightHand;
     [HideInInspector] public Camera mainCamera;
@@ -24,7 +24,6 @@ public class PlayerCharacter : StateMachine
     {
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
         mouseData = this.gameObject.GetComponent<MouseData>();
-        playerCharacterGameObject = this.gameObject;
         mainCamera = FindObjectOfType<Camera>();
         rotation = FindObjectOfType<Rotation>();
         rotation.rotationEnabled = false;
