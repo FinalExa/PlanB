@@ -50,14 +50,14 @@
     private void CheckLeftHandAction()
     {
         _playerCharacter.selectedHand = PlayerCharacter.SelectedHand.Left;
-        if (_playerCharacter.LeftHandOccupied == false) GoToGrab();
-        else GoToThrow();
+        if (_playerCharacter.LeftHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) GoToGrab();
+        else if (_playerCharacter.LeftHandOccupied == true) GoToThrow();
     }
     private void CheckRightHandAction()
     {
         _playerCharacter.selectedHand = PlayerCharacter.SelectedHand.Right;
-        if (_playerCharacter.RightHandOccupied == false) GoToGrab();
-        else GoToThrow();
+        if (_playerCharacter.RightHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) GoToGrab();
+        else if (_playerCharacter.RightHandOccupied == true) GoToThrow();
     }
     private void GoToGrab()
     {

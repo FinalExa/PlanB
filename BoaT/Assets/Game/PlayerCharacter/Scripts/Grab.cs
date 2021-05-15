@@ -4,6 +4,7 @@
     public Grab(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerCharacter.rotation.enabled = false;
+        playerCharacter.PrintStuff("Grab");
     }
 
     public override void Start()
@@ -14,31 +15,13 @@
     {
         if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Left)
         {
-            GrabLeftHand();
+            SetLeftHandOccupied();
 
         }
         else if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Right)
         {
-            GrabRightHand();
-        }
-    }
-
-    void GrabLeftHand()
-    {
-        if (_playerCharacter.mouseData.CheckForThrowableObject() == true)
-        {
-            SetLeftHandOccupied();
-        }
-        else ReturnToDestination();
-    }
-
-    void GrabRightHand()
-    {
-        if (_playerCharacter.mouseData.CheckForThrowableObject() == true)
-        {
             SetRightHandOccupied();
         }
-        else ReturnToDestination();
     }
 
     void ReturnToDestination()
