@@ -2,6 +2,7 @@
 {
     public Throw(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
+        playerCharacter.rotation.enabled = false;
     }
     public override void Start()
     {
@@ -12,13 +13,41 @@
         if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Left)
         {
             _playerCharacter.PrintStuff("Throw with Left Hand");
-            SetLeftHandFree();
-
+            ThrowLeftHand();
         }
         else if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Right)
         {
             _playerCharacter.PrintStuff("Throw with Right Hand");
+            ThrowRightHand();
+        }
+    }
+
+    void ThrowLeftHand()
+    {
+        if (_playerCharacter.LeftHand.transform.childCount > 0)
+        {
+            IThrowable iThrowable = _playerCharacter.LeftHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
+            iThrowable.DetachFromPlayer();
+            SetLeftHandFree();
+        }
+        else
+        {
+            SetLeftHandFree();
+            ReturnToDestination();
+        }
+    }
+    void ThrowRightHand()
+    {
+        if (_playerCharacter.RightHand.transform.childCount > 0)
+        {
+            IThrowable iThrowable = _playerCharacter.RightHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
+            iThrowable.DetachFromPlayer();
             SetRightHandFree();
+        }
+        else
+        {
+            SetRightHandFree();
+            ReturnToDestination();
         }
     }
 
