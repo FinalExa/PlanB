@@ -4,7 +4,6 @@
     public Moving(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerCharacter.rotation.rotationEnabled = true;
-        playerCharacter.PrintStuff("Moving");
     }
     public override void StateUpdate()
     {

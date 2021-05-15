@@ -4,7 +4,6 @@
     public Grab(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerCharacter.rotation.rotationEnabled = false;
-        playerCharacter.PrintStuff("Grab");
     }
 
     public override void Start()
