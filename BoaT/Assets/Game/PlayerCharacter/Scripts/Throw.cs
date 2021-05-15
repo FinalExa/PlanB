@@ -13,14 +13,34 @@
         if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Left)
         {
             _playerCharacter.PrintStuff("Throw with Left Hand");
-            SetLeftHandFree();
-
+            ThrowLeftHand();
         }
         else if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Right)
         {
             _playerCharacter.PrintStuff("Throw with Right Hand");
+            ThrowRightHand();
+        }
+    }
+
+    void ThrowLeftHand()
+    {
+        if (_playerCharacter.LeftHand.transform.GetChild(0) != null)
+        {
+            IThrowable iThrowable = _playerCharacter.LeftHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
+            iThrowable.DetachFromPlayer();
+            SetLeftHandFree();
+        }
+        else ReturnToDestination();
+    }
+    void ThrowRightHand()
+    {
+        if (_playerCharacter.LeftHand.transform.GetChild(0) != null)
+        {
+            IThrowable iThrowable = _playerCharacter.RightHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
+            iThrowable.DetachFromPlayer();
             SetRightHandFree();
         }
+        else ReturnToDestination();
     }
 
     void ReturnToDestination()

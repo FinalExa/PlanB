@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-public interface iThrowable
+public interface IThrowable
 {
     float Weight { get; set; }
     void AttachToPlayer(GameObject playerHand);
-    void GetThrown(GameObject playerHand);
+    void DetachFromPlayer();
 }

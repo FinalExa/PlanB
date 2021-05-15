@@ -14,13 +14,11 @@
     {
         if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Left)
         {
-            _playerCharacter.PrintStuff("Grab with Left Hand");
             GrabLeftHand();
 
         }
         else if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Right)
         {
-            _playerCharacter.PrintStuff("Grab with Right Hand");
             GrabRightHand();
         }
     }
@@ -59,14 +57,14 @@
 
     void SetLeftHandOccupied()
     {
-        var iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<iThrowable>();
+        IThrowable iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<IThrowable>();
         iThrowable.AttachToPlayer(_playerCharacter.LeftHand);
         _playerCharacter.LeftHandOccupied = true;
         ReturnToDestination();
     }
     void SetRightHandOccupied()
     {
-        var iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<iThrowable>();
+        IThrowable iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<IThrowable>();
         iThrowable.AttachToPlayer(_playerCharacter.RightHand);
         _playerCharacter.LeftHandOccupied = true;
         _playerCharacter.RightHandOccupied = true;

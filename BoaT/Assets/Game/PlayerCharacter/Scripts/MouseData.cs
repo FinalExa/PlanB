@@ -28,7 +28,7 @@ public class MouseData : MonoBehaviour
     {
         if (hit.collider != null)
         {
-            if (hit.collider.GetComponent<iThrowable>() != null) return true;
+            if (hit.collider.GetComponent<IThrowable>() != null) return true;
             else return false;
         }
         else return false;

@@ -1,23 +1,33 @@
 ﻿using UnityEngine;
 
-public class GenericThrowableObject : MonoBehaviour, iThrowable
+public class GenericThrowableObject : MonoBehaviour, IThrowable
 {
     public float Weight { get; set; }
     private Collider physicsCollider;
+    private GameObject baseContainer;
 
     void Awake()
     {
         physicsCollider = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Collider>();
+        baseContainer = GameObject.FindGameObjectWithTag("GenericObjectsContainer");
+    }
+
+    void Start()
+    {
+        this.gameObject.transform.SetParent(baseContainer.transform);
     }
 
     public void AttachToPlayer(GameObject playerHand)
     {
+        this.gameObject.GetComponent<Rigidbody>().useGravity = false;
         this.gameObject.transform.position = playerHand.transform.position;
         this.gameObject.transform.SetParent(playerHand.transform);
         physicsCollider.enabled = false;
     }
-    public void GetThrown(GameObject playerHand)
+    public void DetachFromPlayer()
     {
-
+        this.gameObject.transform.SetParent(baseContainer.transform);
+        physicsCollider.enabled = true;
+        this.gameObject.GetComponent<Rigidbody>().useGravity = true;
     }
 }
