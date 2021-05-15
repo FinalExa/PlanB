@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 public class PlayerCharacter : StateMachine
 {
+    public float movementSpeed;
     public bool LeftHandOccupied { get; set; }
     public bool RightHandOccupied { get; set; }
     public float throwSpeed;
@@ -18,7 +19,6 @@ public class PlayerCharacter : StateMachine
     public GameObject LeftHand;
     public GameObject RightHand;
     [HideInInspector] public Camera mainCamera;
-    public float movementSpeed;
 
     private void Awake()
     {
