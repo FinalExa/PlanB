@@ -24,6 +24,7 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
     public void AttachToPlayer(GameObject playerHand)
     {
         isAttachedToHand = true;
+        gameObject.layer = 2;
         this.gameObject.GetComponent<Rigidbody>().useGravity = false;
         this.gameObject.transform.position = playerHand.transform.position;
         this.gameObject.transform.SetParent(playerHand.transform);
@@ -32,6 +33,7 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
     public void DetachFromPlayer()
     {
         isAttachedToHand = false;
+        gameObject.layer = 0;
         this.gameObject.transform.SetParent(baseContainer.transform);
         physicsCollider.enabled = true;
         this.gameObject.GetComponent<Rigidbody>().useGravity = true;
