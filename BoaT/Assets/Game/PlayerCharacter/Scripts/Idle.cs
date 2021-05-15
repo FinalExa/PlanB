@@ -4,7 +4,6 @@
     public Idle(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerCharacter.rotation.rotationEnabled = true;
-        playerCharacter.PrintStuff("Idle");
     }
 
     public override void StateUpdate()

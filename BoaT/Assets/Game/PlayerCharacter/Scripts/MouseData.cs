@@ -26,6 +26,11 @@ public class MouseData : MonoBehaviour
         mousePositionInSpace = hit.point;
     }
 
+    public RaycastHit GetClickPosition()
+    {
+        return hit;
+    }
+
     public bool CheckForThrowableObject()
     {
         if (hit.collider != null)

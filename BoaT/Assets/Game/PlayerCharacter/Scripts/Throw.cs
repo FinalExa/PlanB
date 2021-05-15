@@ -12,12 +12,10 @@
     {
         if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Left)
         {
-            _playerCharacter.PrintStuff("Throw with Left Hand");
             ThrowLeftHand();
         }
         else if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Right)
         {
-            _playerCharacter.PrintStuff("Throw with Right Hand");
             ThrowRightHand();
         }
     }
@@ -27,7 +25,7 @@
         if (_playerCharacter.LeftHand.transform.childCount > 0)
         {
             IThrowable iThrowable = _playerCharacter.LeftHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
-            _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform);
+            _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform, _playerCharacter.mouseData.GetClickPosition().point);
             iThrowable.DetachFromPlayer();
             iThrowable.LaunchSelf(_playerCharacter.throwSpeed);
             SetLeftHandFree();
@@ -43,7 +41,7 @@
         if (_playerCharacter.RightHand.transform.childCount > 0)
         {
             IThrowable iThrowable = _playerCharacter.RightHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
-            _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform);
+            _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform, _playerCharacter.mouseData.GetClickPosition().point);
             iThrowable.DetachFromPlayer();
             iThrowable.LaunchSelf(_playerCharacter.throwSpeed);
             SetRightHandFree();

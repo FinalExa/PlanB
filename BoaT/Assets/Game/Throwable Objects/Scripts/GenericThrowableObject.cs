@@ -70,7 +70,7 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player") && isAttachedToHand)
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), physicsCollider);
         }
