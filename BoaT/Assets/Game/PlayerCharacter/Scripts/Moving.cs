@@ -20,7 +20,7 @@
         forward.Normalize();
         right.Normalize();
         var movementWithDirection = (_playerCharacter.playerInputs.MovementInput.x * forward) + (_playerCharacter.playerInputs.MovementInput.z * right);
-        _playerCharacter.playerCharacterGameObject.transform.Translate(movementWithDirection * _playerCharacter.movementSpeed * UnityEngine.Time.deltaTime);
+        _playerCharacter.gameObject.transform.Translate(movementWithDirection * _playerCharacter.movementSpeed * UnityEngine.Time.deltaTime);
     }
 
     private void StateChangesCheck()

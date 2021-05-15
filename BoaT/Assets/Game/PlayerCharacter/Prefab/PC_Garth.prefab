@@ -168,11 +168,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwSpeed: 10
+  dashDistance: 15
+  dashDuration: 0.4
   selectedHand: 0
   rotation: {fileID: 0}
   playerInputs: {fileID: 0}
   mouseData: {fileID: 0}
-  playerCharacterGameObject: {fileID: 0}
   LeftHand: {fileID: 5918292791908574987}
   RightHand: {fileID: 5707342504787091415}
   mainCamera: {fileID: 0}

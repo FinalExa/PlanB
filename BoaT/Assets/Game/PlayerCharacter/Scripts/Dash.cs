@@ -1,6 +1,9 @@
 ﻿public class Dash : PlayerState
 {
-
+    private bool dashFinished;
+    private float speed;
+    private UnityEngine.Vector3 forward;
+    private float dashTimer;
     public Dash(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerCharacter.rotation.rotationEnabled = false;
@@ -9,7 +12,29 @@
 
     public override void Start()
     {
-        ReturnToDestination();
+        dashFinished = false;
+        speed = _playerCharacter.dashDistance / _playerCharacter.dashDuration;
+        forward = _playerCharacter.transform.GetChild(0).forward;
+        dashTimer = _playerCharacter.dashDuration;
+    }
+
+    public override void StateUpdate()
+    {
+        if (!dashFinished) PerformDash();
+        else ReturnToDestination();
+    }
+
+    void PerformDash()
+    {
+        if (dashTimer > 0)
+        {
+            dashTimer -= UnityEngine.Time.deltaTime;
+            _playerCharacter.gameObject.transform.Translate(forward * speed * UnityEngine.Time.deltaTime);
+        }
+        else
+        {
+            dashFinished = true;
+        }
     }
 
     void ReturnToDestination()
