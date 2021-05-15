@@ -27,12 +27,20 @@
 
     void GrabLeftHand()
     {
-        SetLeftHandOccupied();
+        if (_playerCharacter.mouseData.CheckForThrowableObject() == true)
+        {
+            SetLeftHandOccupied();
+        }
+        else ReturnToDestination();
     }
 
     void GrabRightHand()
     {
-        SetRightHandOccupied();
+        if (_playerCharacter.mouseData.CheckForThrowableObject() == true)
+        {
+            SetRightHandOccupied();
+        }
+        else ReturnToDestination();
     }
 
     void ReturnToDestination()
@@ -51,11 +59,16 @@
 
     void SetLeftHandOccupied()
     {
+        var iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<iThrowable>();
+        iThrowable.AttachToPlayer(_playerCharacter.LeftHand);
         _playerCharacter.LeftHandOccupied = true;
         ReturnToDestination();
     }
     void SetRightHandOccupied()
     {
+        var iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<iThrowable>();
+        iThrowable.AttachToPlayer(_playerCharacter.RightHand);
+        _playerCharacter.LeftHandOccupied = true;
         _playerCharacter.RightHandOccupied = true;
         ReturnToDestination();
     }

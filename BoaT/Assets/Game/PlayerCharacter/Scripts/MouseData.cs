@@ -15,7 +15,6 @@ public class MouseData : MonoBehaviour
     private void Update()
     {
         MouseRaycast();
-        CheckForCollider();
     }
 
     void MouseRaycast()
@@ -25,14 +24,18 @@ public class MouseData : MonoBehaviour
         mousePositionInSpace = hit.point;
     }
 
-    private void CheckForCollider()
+    public bool CheckForThrowableObject()
     {
         if (hit.collider != null)
         {
-            if (hit.collider.GetComponent<iThrowable>() != null)
-            {
-                print("Pepo");
-            }
+            if (hit.collider.GetComponent<iThrowable>() != null) return true;
+            else return false;
         }
+        else return false;
+    }
+
+    public GameObject PassThrowableObject()
+    {
+        return hit.collider.gameObject;
     }
 }
