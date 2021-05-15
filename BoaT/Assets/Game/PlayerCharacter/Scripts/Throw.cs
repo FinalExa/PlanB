@@ -24,23 +24,31 @@
 
     void ThrowLeftHand()
     {
-        if (_playerCharacter.LeftHand.transform.GetChild(0) != null)
+        if (_playerCharacter.LeftHand.transform.childCount > 0)
         {
             IThrowable iThrowable = _playerCharacter.LeftHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
             iThrowable.DetachFromPlayer();
             SetLeftHandFree();
         }
-        else ReturnToDestination();
+        else
+        {
+            SetLeftHandFree();
+            ReturnToDestination();
+        }
     }
     void ThrowRightHand()
     {
-        if (_playerCharacter.LeftHand.transform.GetChild(0) != null)
+        if (_playerCharacter.RightHand.transform.childCount > 0)
         {
             IThrowable iThrowable = _playerCharacter.RightHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
             iThrowable.DetachFromPlayer();
             SetRightHandFree();
         }
-        else ReturnToDestination();
+        else
+        {
+            SetRightHandFree();
+            ReturnToDestination();
+        }
     }
 
     void ReturnToDestination()
