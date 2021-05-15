@@ -7,4 +7,5 @@ public interface IThrowable
     void DetachFromPlayer();
     void LaunchSelf(float launchSpeed);
     void Highlighted(bool isHighlighted);
+    void StopForce();
 }

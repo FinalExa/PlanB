@@ -62,4 +62,17 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
             mat.color = baseColor;
         }
     }
+
+    public void StopForce()
+    {
+        selfRB.velocity = Vector3.zero;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), physicsCollider);
+        }
+    }
 }

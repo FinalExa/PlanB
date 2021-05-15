@@ -41,6 +41,7 @@
     void SetLeftHandOccupied()
     {
         IThrowable iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<IThrowable>();
+        iThrowable.StopForce();
         iThrowable.AttachToPlayer(_playerCharacter.LeftHand);
         _playerCharacter.LeftHandOccupied = true;
         ReturnToDestination();
@@ -48,6 +49,7 @@
     void SetRightHandOccupied()
     {
         IThrowable iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<IThrowable>();
+        iThrowable.StopForce();
         iThrowable.AttachToPlayer(_playerCharacter.RightHand);
         _playerCharacter.LeftHandOccupied = true;
         _playerCharacter.RightHandOccupied = true;
