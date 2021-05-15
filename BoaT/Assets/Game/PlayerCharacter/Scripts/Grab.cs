@@ -3,7 +3,7 @@
 
     public Grab(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerCharacter.rotation.enabled = false;
+        playerCharacter.rotation.rotationEnabled = false;
         playerCharacter.PrintStuff("Grab");
     }
 

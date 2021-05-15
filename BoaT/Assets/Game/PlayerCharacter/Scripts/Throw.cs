@@ -2,7 +2,7 @@
 {
     public Throw(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerCharacter.rotation.enabled = false;
+        playerCharacter.rotation.rotationEnabled = false;
     }
     public override void Start()
     {
@@ -27,7 +27,9 @@
         if (_playerCharacter.LeftHand.transform.childCount > 0)
         {
             IThrowable iThrowable = _playerCharacter.LeftHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
+            _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform);
             iThrowable.DetachFromPlayer();
+            iThrowable.LaunchSelf(_playerCharacter.throwSpeed);
             SetLeftHandFree();
         }
         else
@@ -41,7 +43,9 @@
         if (_playerCharacter.RightHand.transform.childCount > 0)
         {
             IThrowable iThrowable = _playerCharacter.RightHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
+            _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform);
             iThrowable.DetachFromPlayer();
+            iThrowable.LaunchSelf(_playerCharacter.throwSpeed);
             SetRightHandFree();
         }
         else

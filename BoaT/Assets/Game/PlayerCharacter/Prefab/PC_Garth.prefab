@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358d61a8108afe649b326463cce540d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEnabled: 0
 --- !u!1 &5707342504787091415
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 302ddb846101bc347a830333f9e4764c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwSpeed: 10
   selectedHand: 0
   rotation: {fileID: 0}
   playerInputs: {fileID: 0}

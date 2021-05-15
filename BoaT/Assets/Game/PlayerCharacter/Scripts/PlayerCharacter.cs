@@ -3,6 +3,7 @@ public class PlayerCharacter : StateMachine
 {
     public bool LeftHandOccupied { get; set; }
     public bool RightHandOccupied { get; set; }
+    public float throwSpeed;
 
     public enum SelectedHand
     {
@@ -26,7 +27,7 @@ public class PlayerCharacter : StateMachine
         playerCharacterGameObject = this.gameObject;
         mainCamera = FindObjectOfType<Camera>();
         rotation = FindObjectOfType<Rotation>();
-        rotation.enabled = false;
+        rotation.rotationEnabled = false;
         SetState(new Idle(this));
     }
     private void Update()

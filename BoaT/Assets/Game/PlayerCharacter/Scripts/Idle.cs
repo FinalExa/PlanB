@@ -3,7 +3,7 @@
     private bool dashInput;
     public Idle(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerCharacter.rotation.enabled = true;
+        playerCharacter.rotation.rotationEnabled = true;
         playerCharacter.PrintStuff("Idle");
     }
 
