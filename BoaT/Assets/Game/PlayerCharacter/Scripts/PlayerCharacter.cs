@@ -3,11 +3,11 @@ public class PlayerCharacter : StateMachine
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private float minSpeedValue;
-    public float actualSpeed;
+    [HideInInspector] public float actualSpeed;
     public bool LeftHandOccupied { get; set; }
     public bool RightHandOccupied { get; set; }
-    public float leftHandWeight;
-    public float rightHandWeight;
+    [HideInInspector] public float leftHandWeight;
+    [HideInInspector] public float rightHandWeight;
     public float throwSpeed;
     public float dashDistance;
     public float dashDuration;
