@@ -70,11 +70,15 @@
     void SetLeftHandFree()
     {
         _playerCharacter.LeftHandOccupied = false;
+        _playerCharacter.leftHandWeight = 0;
+        _playerCharacter.UpdateSpeedValue();
         ReturnToDestination();
     }
     void SetRightHandFree()
     {
         _playerCharacter.RightHandOccupied = false;
+        _playerCharacter.rightHandWeight = 0;
+        _playerCharacter.UpdateSpeedValue();
         ReturnToDestination();
     }
 }

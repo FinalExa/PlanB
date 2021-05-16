@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 public class PlayerCharacter : StateMachine
 {
-    public float movementSpeed;
+    [SerializeField] private float movementSpeed;
+    [SerializeField] private float minSpeedValue;
+    public float actualSpeed;
     public bool LeftHandOccupied { get; set; }
     public bool RightHandOccupied { get; set; }
+    public float leftHandWeight;
+    public float rightHandWeight;
     public float throwSpeed;
     public float dashDistance;
     public float dashDuration;
@@ -37,7 +41,13 @@ public class PlayerCharacter : StateMachine
     {
         LeftHandOccupied = false;
         RightHandOccupied = false;
+        actualSpeed = movementSpeed;
         _state.Start();
+    }
+    public void UpdateSpeedValue()
+    {
+        actualSpeed = movementSpeed - (leftHandWeight + rightHandWeight);
+        if (actualSpeed < minSpeedValue) actualSpeed = minSpeedValue;
     }
 
     public void PrintStuff(string stringToPrint)

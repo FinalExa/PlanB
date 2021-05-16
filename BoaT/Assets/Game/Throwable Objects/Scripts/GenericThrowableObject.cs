@@ -3,6 +3,7 @@
 public class GenericThrowableObject : MonoBehaviour, IThrowable
 {
     public float Weight { get; set; }
+    [SerializeField] private float objectWeight;
     public GameObject Self { get; set; }
     [HideInInspector] public Rigidbody selfRB;
     private bool isAttachedToHand;
@@ -15,12 +16,13 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
         physicsCollider = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Collider>();
         baseContainer = GameObject.FindGameObjectWithTag("GenericObjectsContainer");
         baseColor = this.gameObject.GetComponent<Renderer>().material.color;
+        Self = this.gameObject;
+        selfRB = Self.GetComponent<Rigidbody>();
     }
 
     void Start()
     {
-        Self = this.gameObject;
-        selfRB = Self.GetComponent<Rigidbody>();
+        Weight = objectWeight;
         isAttachedToHand = false;
         this.gameObject.transform.SetParent(baseContainer.transform);
     }
@@ -46,7 +48,6 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
     {
         //FIND A WAY TO FIX THE HARDCODED PART ASAP
         selfRB.AddForce(transform.forward * launchSpeed * 100);
-
     }
 
     public void Highlighted(bool isHighlighted)
