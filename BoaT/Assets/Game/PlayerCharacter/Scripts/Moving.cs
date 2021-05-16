@@ -20,7 +20,7 @@
         forward.Normalize();
         right.Normalize();
         var movementWithDirection = (_playerCharacter.playerInputs.MovementInput.x * forward) + (_playerCharacter.playerInputs.MovementInput.z * right);
-        _playerCharacter.gameObject.transform.Translate(movementWithDirection * _playerCharacter.movementSpeed * UnityEngine.Time.deltaTime);
+        _playerCharacter.gameObject.transform.Translate(movementWithDirection * _playerCharacter.actualSpeed * UnityEngine.Time.deltaTime);
     }
 
     private void StateChangesCheck()
@@ -49,7 +49,7 @@
     }
     private void CheckTransitionToDash(bool dash)
     {
-        if (dash) _playerCharacter.SetState(new Dash(_playerCharacter));
+        if (dash && !_playerCharacter.LeftHandOccupied && !_playerCharacter.RightHandOccupied) _playerCharacter.SetState(new Dash(_playerCharacter));
     }
     #endregion
 

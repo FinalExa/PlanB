@@ -7,7 +7,6 @@
     public Dash(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerCharacter.rotation.rotationEnabled = false;
-        playerCharacter.PrintStuff("Dash");
     }
 
     public override void Start()
