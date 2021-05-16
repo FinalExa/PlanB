@@ -4,7 +4,7 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
 {
     public float Weight { get; set; }
     public GameObject Self { get; set; }
-    public Rigidbody selfRB;
+    [HideInInspector] public Rigidbody selfRB;
     private bool isAttachedToHand;
     private Collider physicsCollider;
     private GameObject baseContainer;
