@@ -755,16 +755,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1673490640784394817, guid: 1e4049fc1ce201b4fbe232a2e592ef0e,
-        type: 3}
-      propertyPath: dashDistance
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1673490640784394817, guid: 1e4049fc1ce201b4fbe232a2e592ef0e,
-        type: 3}
-      propertyPath: dashDuration
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 8877571697949988489, guid: 1e4049fc1ce201b4fbe232a2e592ef0e,
         type: 3}
       propertyPath: m_Name

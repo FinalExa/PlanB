@@ -49,7 +49,7 @@
     }
     private void CheckTransitionToDash(bool dash)
     {
-        if (dash) _playerCharacter.SetState(new Dash(_playerCharacter));
+        if (dash && !_playerCharacter.LeftHandOccupied && !_playerCharacter.RightHandOccupied) _playerCharacter.SetState(new Dash(_playerCharacter));
     }
     #endregion
 
