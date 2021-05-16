@@ -5,4 +5,8 @@
     {
         _playerCharacter = playerCharacter;
     }
+    public virtual void Collisions(UnityEngine.Collision collision)
+    {
+        return;
+    }
 }

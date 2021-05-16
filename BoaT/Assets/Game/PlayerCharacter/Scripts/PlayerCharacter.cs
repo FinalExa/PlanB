@@ -44,6 +44,10 @@ public class PlayerCharacter : StateMachine
         actualSpeed = movementSpeed;
         _state.Start();
     }
+    private void OnCollisionStay(Collision collision)
+    {
+        _state.Collisions(collision);
+    }
     public void UpdateSpeedValue()
     {
         actualSpeed = movementSpeed - (leftHandWeight + rightHandWeight);

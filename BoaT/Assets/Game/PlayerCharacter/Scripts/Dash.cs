@@ -1,4 +1,6 @@
-﻿public class Dash : PlayerState
+﻿using UnityEngine;
+
+public class Dash : PlayerState
 {
     private bool dashFinished;
     private float speed;
@@ -21,6 +23,15 @@
     {
         if (!dashFinished) PerformDash();
         else ReturnToDestination();
+    }
+
+    public override void Collisions(Collision collision)
+    {
+        if (!collision.gameObject.CompareTag("Ground"))
+        {
+            dashFinished = true;
+            _playerCharacter.PrintStuff("ciao");
+        }
     }
 
     void PerformDash()
