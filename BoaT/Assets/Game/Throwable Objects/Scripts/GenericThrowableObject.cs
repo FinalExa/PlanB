@@ -34,10 +34,12 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
         this.gameObject.GetComponent<Rigidbody>().useGravity = false;
         this.gameObject.transform.position = playerHand.transform.position;
         this.gameObject.transform.SetParent(playerHand.transform);
+        ActivateConstraints();
         physicsCollider.enabled = false;
     }
     public void DetachFromPlayer()
     {
+        DeactivateConstraints();
         isAttachedToHand = false;
         gameObject.layer = 0;
         this.gameObject.transform.SetParent(baseContainer.transform);
@@ -47,7 +49,7 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
     public void LaunchSelf(float launchSpeed)
     {
         //FIND A WAY TO FIX THE HARDCODED PART ASAP
-        selfRB.AddForce(transform.forward * launchSpeed * 100);
+        selfRB.AddForce(transform.forward * launchSpeed / Time.deltaTime);
     }
 
     public void Highlighted(bool isHighlighted)
@@ -67,6 +69,16 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
     public void StopForce()
     {
         selfRB.velocity = Vector3.zero;
+    }
+
+    private void ActivateConstraints()
+    {
+        selfRB.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+    }
+
+    private void DeactivateConstraints()
+    {
+        selfRB.constraints = ~RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     private void OnCollisionEnter(Collision collision)

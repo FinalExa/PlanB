@@ -173,11 +173,12 @@ MonoBehaviour:
   actualSpeed: 0
   leftHandWeight: 0
   rightHandWeight: 0
-  throwSpeed: 10
+  throwSpeed: 4
   dashDistance: 8
   dashDuration: 0.2
   selectedHand: 0
   rotation: {fileID: 0}
+  playerRB: {fileID: 0}
   playerInputs: {fileID: 0}
   mouseData: {fileID: 0}
   LeftHand: {fileID: 5918292791908574987}
