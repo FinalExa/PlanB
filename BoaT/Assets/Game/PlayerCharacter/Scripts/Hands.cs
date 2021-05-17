@@ -39,13 +39,11 @@
         }
         else GoToThrow();
     }
-
     private void CheckIfThrowableIsSelected()
     {
         if (mouseData.CheckForThrowableObject() == true) CheckIfObjectIsInPlayerRange();
-        else CheckForIdleOrMovement();
+        else Transitions();
     }
-
     private void CheckIfObjectIsInPlayerRange()
     {
         bool noObjectInRange = true;
@@ -60,9 +58,11 @@
                 break;
             }
         }
-        if (noObjectInRange) CheckForIdleOrMovement();
+        if (noObjectInRange) Transitions();
     }
-    void CheckForIdleOrMovement()
+
+    #region Transitions
+    private void Transitions()
     {
         if (playerInputs.MovementInput == UnityEngine.Vector3.zero) GoToIdle();
         else GoToMoving();
@@ -83,4 +83,5 @@
     {
         _playerCharacter.SetState(new Moving(_playerCharacter));
     }
+    #endregion
 }
