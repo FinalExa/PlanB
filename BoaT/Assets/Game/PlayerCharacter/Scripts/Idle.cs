@@ -1,14 +1,12 @@
 ﻿public class Idle : PlayerState
 {
-    private Rotation rotation;
     private PlayerData playerData;
     private PlayerInputs playerInputs;
     public Idle(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        rotation = playerCharacter.rotation;
         playerData = playerCharacter.playerData;
         playerInputs = playerCharacter.playerInputs;
-        rotation.rotationEnabled = true;
+        playerCharacter.rotation.rotationEnabled = true;
     }
 
     public override void StateUpdate()

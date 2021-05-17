@@ -9,6 +9,7 @@ public class PlayerData : ScriptableObject
     public float throwSpeed;
     public float dashDistance;
     public float dashDuration;
+    public float dashCooldown;
     [HideInInspector] public float actualSpeed;
     public bool LeftHandOccupied { get; set; }
     public bool RightHandOccupied { get; set; }

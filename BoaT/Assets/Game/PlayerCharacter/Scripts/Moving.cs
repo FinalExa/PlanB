@@ -1,18 +1,16 @@
 ﻿public class Moving : PlayerState
 {
-    private Rotation rotation;
     private PlayerData playerData;
     private PlayerInputs playerInputs;
-    private UnityEngine.Rigidbody playerRB;
+    private UnityEngine.Rigidbody playerRb;
     private UnityEngine.Camera mainCamera;
     public Moving(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        rotation = playerCharacter.rotation;
         playerData = playerCharacter.playerData;
         playerInputs = playerCharacter.playerInputs;
-        playerRB = _playerCharacter.GetComponent<UnityEngine.Rigidbody>();
+        playerRb = _playerCharacter.playerRb;
         mainCamera = UnityEngine.GameObject.FindObjectOfType<UnityEngine.Camera>();
-        rotation.rotationEnabled = true;
+        playerCharacter.rotation.rotationEnabled = true;
     }
     public override void Start()
     {
@@ -33,7 +31,7 @@
     private void Movement()
     {
         UnityEngine.Vector3 movementWithDirection = MovementInitialization();
-        playerRB.velocity = new UnityEngine.Vector3(movementWithDirection.x, movementWithDirection.y, movementWithDirection.z) * playerData.actualSpeed;
+        playerRb.velocity = new UnityEngine.Vector3(movementWithDirection.x, movementWithDirection.y, movementWithDirection.z) * playerData.actualSpeed;
     }
 
     private UnityEngine.Vector3 MovementInitialization()
@@ -58,7 +56,7 @@
     #region ToIdleState
     private void GoToIdleState()
     {
-        if ((_playerCharacter.playerInputs.MovementInput.x == 0) && (_playerCharacter.playerInputs.MovementInput.z == 0)) _playerCharacter.SetState(new Idle(_playerCharacter));
+        if (playerInputs.MovementInput == UnityEngine.Vector3.zero) _playerCharacter.SetState(new Idle(_playerCharacter));
     }
     #endregion
     #region ToDashState

@@ -1,82 +1,79 @@
 ﻿public class Throw : PlayerState
 {
+    private PlayerData playerData;
+    private PlayerInputs playerInputs;
+    private MouseData mouseData;
     public Throw(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
+        playerData = playerCharacter.playerData;
+        playerInputs = playerCharacter.playerInputs;
+        mouseData = playerCharacter.mouseData;
         playerCharacter.rotation.rotationEnabled = false;
     }
     public override void Start()
     {
         CheckHand();
     }
-    void CheckHand()
-    {
-        if (_playerCharacter.playerData.selectedHand == PlayerData.SelectedHand.Left)
-        {
-            ThrowLeftHand();
-        }
-        else if (_playerCharacter.playerData.selectedHand == PlayerData.SelectedHand.Right)
-        {
-            ThrowRightHand();
-        }
-    }
 
-    void ThrowLeftHand()
+    #region Throw
+    private void CheckHand()
+    {
+        if (playerData.selectedHand == PlayerData.SelectedHand.Left) ThrowLeftHand();
+        else if (playerData.selectedHand == PlayerData.SelectedHand.Right) ThrowRightHand();
+    }
+    private void ThrowLeftHand()
     {
         if (_playerCharacter.LeftHand.transform.childCount > 0)
         {
             IThrowable iThrowable = _playerCharacter.LeftHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
-            _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform, _playerCharacter.mouseData.GetClickPosition().point);
-            iThrowable.DetachFromPlayer();
-            iThrowable.LaunchSelf(_playerCharacter.playerData.throwSpeed);
-            SetLeftHandFree();
+            LaunchObject(iThrowable);
         }
-        else
-        {
-            SetLeftHandFree();
-            ReturnToDestination();
-        }
+        SetHandFree();
     }
-    void ThrowRightHand()
+    private void ThrowRightHand()
     {
         if (_playerCharacter.RightHand.transform.childCount > 0)
         {
             IThrowable iThrowable = _playerCharacter.RightHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
-            _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform, _playerCharacter.mouseData.GetClickPosition().point);
-            iThrowable.DetachFromPlayer();
-            iThrowable.LaunchSelf(_playerCharacter.playerData.throwSpeed);
-            SetRightHandFree();
+            LaunchObject(iThrowable);
+        }
+        SetHandFree();
+    }
+    private void LaunchObject(IThrowable iThrowable)
+    {
+        _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform, mouseData.GetClickPosition().point);
+        iThrowable.DetachFromPlayer();
+        iThrowable.LaunchSelf(playerData.throwSpeed);
+    }
+    private void SetHandFree()
+    {
+        if (playerData.selectedHand == PlayerData.SelectedHand.Left)
+        {
+            playerData.LeftHandOccupied = false;
+            playerData.leftHandWeight = 0;
         }
         else
         {
-            SetRightHandFree();
-            ReturnToDestination();
+            playerData.RightHandOccupied = false;
+            playerData.rightHandWeight = 0;
         }
+        Transitions();
     }
+    #endregion
 
-    void ReturnToDestination()
+    #region Transitions
+    private void Transitions()
     {
-        if ((_playerCharacter.playerInputs.MovementInput.x == 0) && (_playerCharacter.playerInputs.MovementInput.z == 0)) ReturnToIdle();
-        else if ((_playerCharacter.playerInputs.MovementInput.x != 0) || (_playerCharacter.playerInputs.MovementInput.z != 0)) ReturnToMovement();
+        if (playerInputs.MovementInput == UnityEngine.Vector3.zero) ReturnToIdle();
+        else ReturnToMovement();
     }
-    void ReturnToIdle()
+    private void ReturnToIdle()
     {
         _playerCharacter.SetState(new Idle(_playerCharacter));
     }
-    void ReturnToMovement()
+    private void ReturnToMovement()
     {
         _playerCharacter.SetState(new Moving(_playerCharacter));
     }
-
-    void SetLeftHandFree()
-    {
-        _playerCharacter.playerData.LeftHandOccupied = false;
-        _playerCharacter.playerData.leftHandWeight = 0;
-        ReturnToDestination();
-    }
-    void SetRightHandFree()
-    {
-        _playerCharacter.playerData.RightHandOccupied = false;
-        _playerCharacter.playerData.rightHandWeight = 0;
-        ReturnToDestination();
-    }
+    #endregion
 }

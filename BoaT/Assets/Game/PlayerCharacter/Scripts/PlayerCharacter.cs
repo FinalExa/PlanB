@@ -5,6 +5,7 @@ public class PlayerCharacter : StateMachine
     [HideInInspector] public Rotation rotation;
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public MouseData mouseData;
+    [HideInInspector] public Rigidbody playerRb;
     public GameObject LeftHand;
     public GameObject RightHand;
 
@@ -12,6 +13,7 @@ public class PlayerCharacter : StateMachine
     {
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
         mouseData = this.gameObject.GetComponent<MouseData>();
+        playerRb = this.gameObject.GetComponent<Rigidbody>();
         rotation = FindObjectOfType<Rotation>();
         rotation.rotationEnabled = false;
         SetState(new Idle(this));
