@@ -10,11 +10,11 @@
     }
     void CheckHand()
     {
-        if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Left)
+        if (_playerCharacter.playerData.selectedHand == PlayerData.SelectedHand.Left)
         {
             ThrowLeftHand();
         }
-        else if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Right)
+        else if (_playerCharacter.playerData.selectedHand == PlayerData.SelectedHand.Right)
         {
             ThrowRightHand();
         }
@@ -71,14 +71,12 @@
     {
         _playerCharacter.playerData.LeftHandOccupied = false;
         _playerCharacter.playerData.leftHandWeight = 0;
-        _playerCharacter.UpdateSpeedValue();
         ReturnToDestination();
     }
     void SetRightHandFree()
     {
         _playerCharacter.playerData.RightHandOccupied = false;
         _playerCharacter.playerData.rightHandWeight = 0;
-        _playerCharacter.UpdateSpeedValue();
         ReturnToDestination();
     }
 }

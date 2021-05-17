@@ -14,4 +14,10 @@ public class PlayerData : ScriptableObject
     public bool RightHandOccupied { get; set; }
     [HideInInspector] public float leftHandWeight;
     [HideInInspector] public float rightHandWeight;
+    public enum SelectedHand
+    {
+        Left,
+        Right
+    }
+    [HideInInspector] public SelectedHand selectedHand;
 }

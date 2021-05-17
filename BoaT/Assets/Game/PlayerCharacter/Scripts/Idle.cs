@@ -1,84 +1,50 @@
 ﻿public class Idle : PlayerState
 {
-    private bool dashInput;
+    private Rotation rotation;
+    private PlayerData playerData;
+    private PlayerInputs playerInputs;
     public Idle(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerCharacter.rotation.rotationEnabled = true;
+        rotation = playerCharacter.rotation;
+        playerData = playerCharacter.playerData;
+        playerInputs = playerCharacter.playerInputs;
+        rotation.rotationEnabled = true;
     }
 
     public override void StateUpdate()
+    {
+        Transitions();
+    }
+
+    #region Transitions
+    private void Transitions()
     {
         GoToMovementState();
         GoToDashState();
         GoToHandsState();
     }
-
     #region ToMovementState
-    void GoToMovementState()
+    private void GoToMovementState()
     {
-        if ((_playerCharacter.playerInputs.MovementInput.x != 0) || (_playerCharacter.playerInputs.MovementInput.z != 0)) _playerCharacter.SetState(new Moving(_playerCharacter));
+        if ((playerInputs.MovementInput != UnityEngine.Vector3.zero)) _playerCharacter.SetState(new Moving(_playerCharacter));
     }
     #endregion
-
     #region ToDashState
-    void GoToDashState()
+    private void GoToDashState()
     {
-        GetDashInput();
-        CheckTransitionToDash(dashInput);
-    }
-    void GetDashInput()
-    {
-        dashInput = _playerCharacter.playerInputs.DashInput;
-    }
-    void CheckTransitionToDash(bool dash)
-    {
-        if (dash && !_playerCharacter.playerData.LeftHandOccupied && !_playerCharacter.playerData.RightHandOccupied) _playerCharacter.SetState(new Dash(_playerCharacter));
+        if (playerInputs.DashInput && !playerData.LeftHandOccupied && !playerData.RightHandOccupied) _playerCharacter.SetState(new Dash(_playerCharacter));
     }
     #endregion
-
     #region ToHandsStates
     private void GoToHandsState()
     {
-        GetHandsInput();
-    }
-    private void GetHandsInput()
-    {
-        if (_playerCharacter.playerInputs.LeftHandInput) CheckLeftHandAction();
-        if (_playerCharacter.playerInputs.RightHandInput) CheckRightHandAction();
-    }
-    private void CheckLeftHandAction()
-    {
-        _playerCharacter.selectedHand = PlayerCharacter.SelectedHand.Left;
-        if (_playerCharacter.playerData.LeftHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) CheckIfObjectIsInPlayerRange();
-        else if (_playerCharacter.playerData.LeftHandOccupied == true) GoToThrow();
-    }
-    private void CheckRightHandAction()
-    {
-        _playerCharacter.selectedHand = PlayerCharacter.SelectedHand.Right;
-        if (_playerCharacter.playerData.RightHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) CheckIfObjectIsInPlayerRange();
-        else if (_playerCharacter.playerData.RightHandOccupied == true) GoToThrow();
-    }
-
-    private void CheckIfObjectIsInPlayerRange()
-    {
-        UnityEngine.Collider[] colliders = UnityEngine.Physics.OverlapSphere(_playerCharacter.gameObject.transform.position, _playerCharacter.playerData.grabRange);
-        foreach (var collider in colliders)
+        if (playerInputs.LeftHandInput || playerInputs.RightHandInput)
         {
-            if (collider == _playerCharacter.mouseData.GetClickPosition().collider)
-            {
-                GoToGrab();
-                break;
-            }
+            if (playerInputs.LeftHandInput) playerData.selectedHand = PlayerData.SelectedHand.Left;
+            else playerData.selectedHand = PlayerData.SelectedHand.Right;
+            _playerCharacter.SetState(new Hands(_playerCharacter));
         }
     }
-
-    private void GoToGrab()
-    {
-        _playerCharacter.SetState(new Grab(_playerCharacter));
-    }
-    private void GoToThrow()
-    {
-        _playerCharacter.SetState(new Throw(_playerCharacter));
-    }
+    #endregion
     #endregion
 }

@@ -6,9 +6,11 @@ public class Dash : PlayerState
     private float speed;
     private UnityEngine.Vector3 forward;
     private float dashTimer;
+    private UnityEngine.Rigidbody playerRB;
     public Dash(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerCharacter.rotation.rotationEnabled = false;
+        playerRB = _playerCharacter.GetComponent<Rigidbody>();
     }
 
     public override void Start()
@@ -22,14 +24,13 @@ public class Dash : PlayerState
     public override void StateUpdate()
     {
         if (!dashFinished) PerformDash();
-        else ReturnToDestination();
     }
 
     public override void Collisions(Collision collision)
     {
         if (!collision.gameObject.CompareTag("Ground"))
         {
-            dashFinished = true;
+            EndDash();
         }
     }
 
@@ -38,21 +39,26 @@ public class Dash : PlayerState
         if (dashTimer > 0)
         {
             dashTimer -= UnityEngine.Time.deltaTime;
-            _playerCharacter.playerRB.velocity = new UnityEngine.Vector3(forward.x, forward.y, forward.z) * speed;
+            playerRB.velocity = new UnityEngine.Vector3(forward.x, forward.y, forward.z) * speed;
         }
         else
         {
-            _playerCharacter.playerRB.velocity = UnityEngine.Vector3.zero;
-            dashFinished = true;
+            EndDash();
         }
     }
 
-    void ReturnToDestination()
+    private void EndDash()
+    {
+        playerRB.velocity = UnityEngine.Vector3.zero;
+        dashFinished = true;
+        Transitions();
+    }
+
+    private void Transitions()
     {
         if ((_playerCharacter.playerInputs.MovementInput.x == 0) && (_playerCharacter.playerInputs.MovementInput.z == 0)) ReturnToIdle();
         else if ((_playerCharacter.playerInputs.MovementInput.x != 0) || (_playerCharacter.playerInputs.MovementInput.z != 0)) ReturnToMovement();
     }
-
     void ReturnToIdle()
     {
         _playerCharacter.SetState(new Idle(_playerCharacter));
