@@ -20,7 +20,8 @@
         forward.Normalize();
         right.Normalize();
         var movementWithDirection = (_playerCharacter.playerInputs.MovementInput.x * forward) + (_playerCharacter.playerInputs.MovementInput.z * right);
-        _playerCharacter.gameObject.transform.Translate(movementWithDirection * _playerCharacter.actualSpeed * UnityEngine.Time.deltaTime);
+        //_playerCharacter.gameObject.transform.Translate(movementWithDirection * _playerCharacter.actualSpeed * UnityEngine.Time.deltaTime);
+        _playerCharacter.playerRB.velocity = new UnityEngine.Vector3(movementWithDirection.x, movementWithDirection.y, movementWithDirection.z) * _playerCharacter.actualSpeed;
     }
 
     private void StateChangesCheck()

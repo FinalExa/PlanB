@@ -18,6 +18,7 @@ public class PlayerCharacter : StateMachine
     }
     [HideInInspector] public SelectedHand selectedHand;
     [HideInInspector] public Rotation rotation;
+    [HideInInspector] public Rigidbody playerRB;
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public MouseData mouseData;
     public GameObject LeftHand;
@@ -31,6 +32,7 @@ public class PlayerCharacter : StateMachine
         mainCamera = FindObjectOfType<Camera>();
         rotation = FindObjectOfType<Rotation>();
         rotation.rotationEnabled = false;
+        playerRB = this.gameObject.GetComponent<Rigidbody>();
         SetState(new Idle(this));
     }
     private void Update()
