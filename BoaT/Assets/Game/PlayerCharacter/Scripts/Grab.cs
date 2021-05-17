@@ -1,8 +1,13 @@
 ﻿public class Grab : PlayerState
 {
-
+    private PlayerData playerData;
+    private PlayerInputs playerInputs;
+    private MouseData mouseData;
     public Grab(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
+        playerData = playerCharacter.playerData;
+        playerInputs = playerCharacter.playerInputs;
+        mouseData = playerCharacter.mouseData;
         playerCharacter.rotation.rotationEnabled = false;
     }
 
@@ -10,51 +15,49 @@
     {
         CheckHand();
     }
-    void CheckHand()
-    {
-        if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Left)
-        {
-            SetLeftHandOccupied();
 
-        }
-        else if (_playerCharacter.selectedHand == PlayerCharacter.SelectedHand.Right)
-        {
-            SetRightHandOccupied();
-        }
-    }
-
-    void ReturnToDestination()
+    #region Grab
+    private void CheckHand()
     {
-        if ((_playerCharacter.playerInputs.MovementInput.x == 0) && (_playerCharacter.playerInputs.MovementInput.z == 0)) ReturnToIdle();
-        else if ((_playerCharacter.playerInputs.MovementInput.x != 0) || (_playerCharacter.playerInputs.MovementInput.z != 0)) ReturnToMovement();
+        PlayerData.SelectedHand selectedHand = playerData.selectedHand;
+        if (selectedHand == PlayerData.SelectedHand.Left) SetHandOccupied(selectedHand);
+        else if (selectedHand == PlayerData.SelectedHand.Right) SetHandOccupied(selectedHand);
     }
-    void ReturnToIdle()
+    private void SetHandOccupied(PlayerData.SelectedHand selectedHand)
+    {
+        IThrowable iThrowable = mouseData.PassThrowableObject().GetComponent<IThrowable>();
+        iThrowable.StopForce();
+        if (selectedHand == PlayerData.SelectedHand.Left) LeftHand(iThrowable);
+        else RightHand(iThrowable);
+        Transitions();
+    }
+    private void LeftHand(IThrowable iThrowable)
+    {
+        iThrowable.AttachToPlayer(_playerCharacter.LeftHand);
+        playerData.LeftHandOccupied = true;
+        playerData.leftHandWeight = iThrowable.Weight;
+    }
+    private void RightHand(IThrowable iThrowable)
+    {
+        iThrowable.AttachToPlayer(_playerCharacter.RightHand);
+        playerData.RightHandOccupied = true;
+        playerData.rightHandWeight = iThrowable.Weight;
+    }
+    #endregion
+
+    #region Transitions
+    private void Transitions()
+    {
+        if (playerInputs.MovementInput == UnityEngine.Vector3.zero) ReturnToIdle();
+        else ReturnToMovement();
+    }
+    private void ReturnToIdle()
     {
         _playerCharacter.SetState(new Idle(_playerCharacter));
     }
-    void ReturnToMovement()
+    private void ReturnToMovement()
     {
         _playerCharacter.SetState(new Moving(_playerCharacter));
     }
-
-    void SetLeftHandOccupied()
-    {
-        IThrowable iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<IThrowable>();
-        iThrowable.StopForce();
-        iThrowable.AttachToPlayer(_playerCharacter.LeftHand);
-        _playerCharacter.playerData.LeftHandOccupied = true;
-        _playerCharacter.playerData.leftHandWeight = iThrowable.Weight;
-        _playerCharacter.UpdateSpeedValue();
-        ReturnToDestination();
-    }
-    void SetRightHandOccupied()
-    {
-        IThrowable iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<IThrowable>();
-        iThrowable.StopForce();
-        iThrowable.AttachToPlayer(_playerCharacter.RightHand);
-        _playerCharacter.playerData.RightHandOccupied = true;
-        _playerCharacter.playerData.rightHandWeight = iThrowable.Weight;
-        _playerCharacter.UpdateSpeedValue();
-        ReturnToDestination();
-    }
+    #endregion
 }

@@ -15,7 +15,7 @@ public class PlayerInputs : MonoBehaviour
         GetLeftHandInput();
         GetRightHandInput();
         GetDashInput();
-        GetFrontInput();
+        GetMovementInput();
     }
     void GetLeftHandInput()
     {
@@ -32,7 +32,7 @@ public class PlayerInputs : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) == true) DashInput = true;
         else DashInput = false;
     }
-    void GetFrontInput()
+    void GetMovementInput()
     {
         float frontInput = Input.GetAxisRaw("Horizontal");
         float sideInput = Input.GetAxisRaw("Vertical");

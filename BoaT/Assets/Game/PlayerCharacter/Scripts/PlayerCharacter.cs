@@ -2,28 +2,20 @@
 public class PlayerCharacter : StateMachine
 {
     [HideInInspector] public PlayerData playerData;
-    [HideInInspector] public SelectedHand selectedHand;
     [HideInInspector] public Rotation rotation;
-    [HideInInspector] public Rigidbody playerRB;
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public MouseData mouseData;
-    public enum SelectedHand
-    {
-        Left,
-        Right
-    }
+    [HideInInspector] public Rigidbody playerRb;
     public GameObject LeftHand;
     public GameObject RightHand;
-    [HideInInspector] public Camera mainCamera;
 
     private void Awake()
     {
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
         mouseData = this.gameObject.GetComponent<MouseData>();
-        mainCamera = FindObjectOfType<Camera>();
+        playerRb = this.gameObject.GetComponent<Rigidbody>();
         rotation = FindObjectOfType<Rotation>();
         rotation.rotationEnabled = false;
-        playerRB = this.gameObject.GetComponent<Rigidbody>();
         SetState(new Idle(this));
     }
     private void Update()
@@ -41,11 +33,7 @@ public class PlayerCharacter : StateMachine
     {
         _state.Collisions(collision);
     }
-    public void UpdateSpeedValue()
-    {
-        playerData.actualSpeed = playerData.movementSpeed - (playerData.leftHandWeight + playerData.rightHandWeight);
-        if (playerData.actualSpeed < playerData.minSpeedValue) playerData.actualSpeed = playerData.minSpeedValue;
-    }
+
 
     private void OnDrawGizmosSelected()
     {
