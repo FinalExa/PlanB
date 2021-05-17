@@ -47,8 +47,9 @@ public class PlayerCharacter : StateMachine
         if (playerData.actualSpeed < playerData.minSpeedValue) playerData.actualSpeed = playerData.minSpeedValue;
     }
 
-    public void PrintStuff(string stringToPrint)
+    private void OnDrawGizmosSelected()
     {
-        print(stringToPrint);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.gameObject.transform.position, playerData.grabRange);
     }
 }

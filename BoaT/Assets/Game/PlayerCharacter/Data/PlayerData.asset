@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85111e694413da499bbfef07c8862b9, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 12
   minSpeedValue: 1
-  actualSpeed: 10
-  leftHandWeight: 0
-  rightHandWeight: 0
+  grabRange: 8
   throwSpeed: 20
   dashDistance: 8
   dashDuration: 0.2
+  actualSpeed: 12
+  leftHandWeight: 0
+  rightHandWeight: 0

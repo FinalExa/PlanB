@@ -49,15 +49,29 @@
     private void CheckLeftHandAction()
     {
         _playerCharacter.selectedHand = PlayerCharacter.SelectedHand.Left;
-        if (_playerCharacter.playerData.LeftHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) GoToGrab();
+        if (_playerCharacter.playerData.LeftHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) CheckIfObjectIsInPlayerRange();
         else if (_playerCharacter.playerData.LeftHandOccupied == true) GoToThrow();
     }
     private void CheckRightHandAction()
     {
         _playerCharacter.selectedHand = PlayerCharacter.SelectedHand.Right;
-        if (_playerCharacter.playerData.RightHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) GoToGrab();
+        if (_playerCharacter.playerData.RightHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) CheckIfObjectIsInPlayerRange();
         else if (_playerCharacter.playerData.RightHandOccupied == true) GoToThrow();
     }
+
+    private void CheckIfObjectIsInPlayerRange()
+    {
+        UnityEngine.Collider[] colliders = UnityEngine.Physics.OverlapSphere(_playerCharacter.gameObject.transform.position, _playerCharacter.playerData.grabRange);
+        foreach (var collider in colliders)
+        {
+            if (collider == _playerCharacter.mouseData.GetClickPosition().collider)
+            {
+                GoToGrab();
+                break;
+            }
+        }
+    }
+
     private void GoToGrab()
     {
         _playerCharacter.SetState(new Grab(_playerCharacter));
