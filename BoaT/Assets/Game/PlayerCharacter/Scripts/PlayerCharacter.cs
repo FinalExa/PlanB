@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 public class PlayerCharacter : StateMachine
 {
-    public PlayerData playerData;
-    public enum SelectedHand
-    {
-        Left,
-        Right
-    }
+    [HideInInspector] public PlayerData playerData;
     [HideInInspector] public SelectedHand selectedHand;
     [HideInInspector] public Rotation rotation;
     [HideInInspector] public Rigidbody playerRB;
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public MouseData mouseData;
+    public enum SelectedHand
+    {
+        Left,
+        Right
+    }
     public GameObject LeftHand;
     public GameObject RightHand;
     [HideInInspector] public Camera mainCamera;
