@@ -14,9 +14,9 @@ public class Dash : PlayerState
     public override void Start()
     {
         dashFinished = false;
-        speed = _playerCharacter.dashDistance / _playerCharacter.dashDuration;
+        speed = _playerCharacter.playerData.dashDistance / _playerCharacter.playerData.dashDuration;
         forward = _playerCharacter.transform.GetChild(0).forward;
-        dashTimer = _playerCharacter.dashDuration;
+        dashTimer = _playerCharacter.playerData.dashDuration;
     }
 
     public override void StateUpdate()
@@ -29,7 +29,7 @@ public class Dash : PlayerState
     {
         if (!collision.gameObject.CompareTag("Ground"))
         {
-            _playerCharacter.PrintStuff("ciao");
+            dashFinished = true;
         }
     }
 

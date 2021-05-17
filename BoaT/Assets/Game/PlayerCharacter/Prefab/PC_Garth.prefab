@@ -168,14 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 302ddb846101bc347a830333f9e4764c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  minSpeedValue: 1
-  actualSpeed: 0
-  leftHandWeight: 0
-  rightHandWeight: 0
-  throwSpeed: 20
-  dashDistance: 8
-  dashDuration: 0.2
+  playerData: {fileID: 11400000, guid: 311653c0f595efe4b9bf12720d42eab5, type: 2}
   selectedHand: 0
   rotation: {fileID: 0}
   playerRB: {fileID: 0}
