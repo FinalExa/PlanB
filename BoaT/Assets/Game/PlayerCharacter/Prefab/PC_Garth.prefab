@@ -173,7 +173,7 @@ MonoBehaviour:
   actualSpeed: 0
   leftHandWeight: 0
   rightHandWeight: 0
-  throwSpeed: 4
+  throwSpeed: 20
   dashDistance: 8
   dashDuration: 0.2
   selectedHand: 0
