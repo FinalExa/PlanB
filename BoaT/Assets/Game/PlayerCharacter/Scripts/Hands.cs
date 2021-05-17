@@ -17,27 +17,22 @@
 
     private void CheckHandToUse()
     {
-        if (playerData.selectedHand == PlayerData.SelectedHand.Left) CheckLeftHandAction();
-        else if (playerData.selectedHand == PlayerData.SelectedHand.Right) CheckRightHandAction();
+        if (playerData.selectedHand == PlayerData.SelectedHand.Left) CheckHandAction(playerData.selectedHand);
+        else if (playerData.selectedHand == PlayerData.SelectedHand.Right) CheckHandAction(playerData.selectedHand);
     }
 
-    private void CheckLeftHandAction()
+    private void CheckHandAction(PlayerData.SelectedHand selectedHand)
     {
-        playerData.selectedHand = PlayerData.SelectedHand.Left;
-        if (!playerData.LeftHandOccupied)
+        if (selectedHand == PlayerData.SelectedHand.Left)
         {
-            CheckIfThrowableIsSelected();
+            if (!playerData.LeftHandOccupied) CheckIfThrowableIsSelected();
+            else GoToThrow();
         }
-        else GoToThrow();
-    }
-    private void CheckRightHandAction()
-    {
-        playerData.selectedHand = PlayerData.SelectedHand.Right;
-        if (!playerData.RightHandOccupied)
+        else
         {
-            CheckIfThrowableIsSelected();
+            if (!playerData.RightHandOccupied) CheckIfThrowableIsSelected();
+            else GoToThrow();
         }
-        else GoToThrow();
     }
     private void CheckIfThrowableIsSelected()
     {
