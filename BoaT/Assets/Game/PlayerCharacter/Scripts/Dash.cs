@@ -38,7 +38,6 @@ public class Dash : PlayerState
         if (dashTimer > 0)
         {
             dashTimer -= UnityEngine.Time.deltaTime;
-            //_playerCharacter.gameObject.transform.Translate(forward * speed * UnityEngine.Time.deltaTime);
             _playerCharacter.playerRB.velocity = new UnityEngine.Vector3(forward.x, forward.y, forward.z) * speed;
         }
         else
