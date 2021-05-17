@@ -42,8 +42,8 @@
         IThrowable iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<IThrowable>();
         iThrowable.StopForce();
         iThrowable.AttachToPlayer(_playerCharacter.LeftHand);
-        _playerCharacter.LeftHandOccupied = true;
-        _playerCharacter.leftHandWeight = iThrowable.Weight;
+        _playerCharacter.playerData.LeftHandOccupied = true;
+        _playerCharacter.playerData.leftHandWeight = iThrowable.Weight;
         _playerCharacter.UpdateSpeedValue();
         ReturnToDestination();
     }
@@ -52,8 +52,8 @@
         IThrowable iThrowable = _playerCharacter.mouseData.PassThrowableObject().GetComponent<IThrowable>();
         iThrowable.StopForce();
         iThrowable.AttachToPlayer(_playerCharacter.RightHand);
-        _playerCharacter.RightHandOccupied = true;
-        _playerCharacter.rightHandWeight = iThrowable.Weight;
+        _playerCharacter.playerData.RightHandOccupied = true;
+        _playerCharacter.playerData.rightHandWeight = iThrowable.Weight;
         _playerCharacter.UpdateSpeedValue();
         ReturnToDestination();
     }

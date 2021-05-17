@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 569149746158535796}
   - component: {fileID: 8490081029144132567}
   - component: {fileID: 7367246450386826994}
+  - component: {fileID: 879281037676685858}
   m_Layer: 2
   m_Name: PC_Garth
   m_TagString: Player
@@ -167,16 +168,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 302ddb846101bc347a830333f9e4764c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  minSpeedValue: 1
-  actualSpeed: 0
-  leftHandWeight: 0
-  rightHandWeight: 0
-  throwSpeed: 10
-  dashDistance: 8
-  dashDuration: 0.2
+  playerData: {fileID: 11400000, guid: 311653c0f595efe4b9bf12720d42eab5, type: 2}
   selectedHand: 0
   rotation: {fileID: 0}
+  playerRB: {fileID: 0}
   playerInputs: {fileID: 0}
   mouseData: {fileID: 0}
   LeftHand: {fileID: 5918292791908574987}
@@ -210,7 +205,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &7367246450386826994
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -220,11 +215,24 @@ CapsuleCollider:
   m_GameObject: {fileID: 8877571697949988489}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 1.75
   m_Direction: 1
   m_Center: {x: 0, y: 0.87, z: 0}
+--- !u!65 &879281037676685858
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8877571697949988489}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6, y: 1.6, z: 0.35}
+  m_Center: {x: 0, y: 0.81, z: 0}
 --- !u!1001 &1849749656985548643
 PrefabInstance:
   m_ObjectHideFlags: 0

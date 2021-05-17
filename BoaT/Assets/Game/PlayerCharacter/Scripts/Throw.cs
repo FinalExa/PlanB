@@ -27,7 +27,7 @@
             IThrowable iThrowable = _playerCharacter.LeftHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
             _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform, _playerCharacter.mouseData.GetClickPosition().point);
             iThrowable.DetachFromPlayer();
-            iThrowable.LaunchSelf(_playerCharacter.throwSpeed);
+            iThrowable.LaunchSelf(_playerCharacter.playerData.throwSpeed);
             SetLeftHandFree();
         }
         else
@@ -43,7 +43,7 @@
             IThrowable iThrowable = _playerCharacter.RightHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
             _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform, _playerCharacter.mouseData.GetClickPosition().point);
             iThrowable.DetachFromPlayer();
-            iThrowable.LaunchSelf(_playerCharacter.throwSpeed);
+            iThrowable.LaunchSelf(_playerCharacter.playerData.throwSpeed);
             SetRightHandFree();
         }
         else
@@ -69,15 +69,15 @@
 
     void SetLeftHandFree()
     {
-        _playerCharacter.LeftHandOccupied = false;
-        _playerCharacter.leftHandWeight = 0;
+        _playerCharacter.playerData.LeftHandOccupied = false;
+        _playerCharacter.playerData.leftHandWeight = 0;
         _playerCharacter.UpdateSpeedValue();
         ReturnToDestination();
     }
     void SetRightHandFree()
     {
-        _playerCharacter.RightHandOccupied = false;
-        _playerCharacter.rightHandWeight = 0;
+        _playerCharacter.playerData.RightHandOccupied = false;
+        _playerCharacter.playerData.rightHandWeight = 0;
         _playerCharacter.UpdateSpeedValue();
         ReturnToDestination();
     }

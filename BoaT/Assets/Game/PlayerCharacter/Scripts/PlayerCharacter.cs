@@ -1,25 +1,17 @@
 ﻿using UnityEngine;
 public class PlayerCharacter : StateMachine
 {
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private float minSpeedValue;
-    [HideInInspector] public float actualSpeed;
-    public bool LeftHandOccupied { get; set; }
-    public bool RightHandOccupied { get; set; }
-    [HideInInspector] public float leftHandWeight;
-    [HideInInspector] public float rightHandWeight;
-    public float throwSpeed;
-    public float dashDistance;
-    public float dashDuration;
+    [HideInInspector] public PlayerData playerData;
+    [HideInInspector] public SelectedHand selectedHand;
+    [HideInInspector] public Rotation rotation;
+    [HideInInspector] public Rigidbody playerRB;
+    [HideInInspector] public PlayerInputs playerInputs;
+    [HideInInspector] public MouseData mouseData;
     public enum SelectedHand
     {
         Left,
         Right
     }
-    [HideInInspector] public SelectedHand selectedHand;
-    [HideInInspector] public Rotation rotation;
-    [HideInInspector] public PlayerInputs playerInputs;
-    [HideInInspector] public MouseData mouseData;
     public GameObject LeftHand;
     public GameObject RightHand;
     [HideInInspector] public Camera mainCamera;
@@ -31,6 +23,7 @@ public class PlayerCharacter : StateMachine
         mainCamera = FindObjectOfType<Camera>();
         rotation = FindObjectOfType<Rotation>();
         rotation.rotationEnabled = false;
+        playerRB = this.gameObject.GetComponent<Rigidbody>();
         SetState(new Idle(this));
     }
     private void Update()
@@ -39,19 +32,24 @@ public class PlayerCharacter : StateMachine
     }
     private void Start()
     {
-        LeftHandOccupied = false;
-        RightHandOccupied = false;
-        actualSpeed = movementSpeed;
+        playerData.LeftHandOccupied = false;
+        playerData.RightHandOccupied = false;
+        playerData.actualSpeed = playerData.movementSpeed;
         _state.Start();
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        _state.Collisions(collision);
     }
     public void UpdateSpeedValue()
     {
-        actualSpeed = movementSpeed - (leftHandWeight + rightHandWeight);
-        if (actualSpeed < minSpeedValue) actualSpeed = minSpeedValue;
+        playerData.actualSpeed = playerData.movementSpeed - (playerData.leftHandWeight + playerData.rightHandWeight);
+        if (playerData.actualSpeed < playerData.minSpeedValue) playerData.actualSpeed = playerData.minSpeedValue;
     }
 
-    public void PrintStuff(string stringToPrint)
+    private void OnDrawGizmosSelected()
     {
-        print(stringToPrint);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.gameObject.transform.position, playerData.grabRange);
     }
 }

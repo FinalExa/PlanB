@@ -1,4 +1,6 @@
-﻿public class Dash : PlayerState
+﻿using UnityEngine;
+
+public class Dash : PlayerState
 {
     private bool dashFinished;
     private float speed;
@@ -12,9 +14,9 @@
     public override void Start()
     {
         dashFinished = false;
-        speed = _playerCharacter.dashDistance / _playerCharacter.dashDuration;
+        speed = _playerCharacter.playerData.dashDistance / _playerCharacter.playerData.dashDuration;
         forward = _playerCharacter.transform.GetChild(0).forward;
-        dashTimer = _playerCharacter.dashDuration;
+        dashTimer = _playerCharacter.playerData.dashDuration;
     }
 
     public override void StateUpdate()
@@ -23,15 +25,24 @@
         else ReturnToDestination();
     }
 
+    public override void Collisions(Collision collision)
+    {
+        if (!collision.gameObject.CompareTag("Ground"))
+        {
+            dashFinished = true;
+        }
+    }
+
     void PerformDash()
     {
         if (dashTimer > 0)
         {
             dashTimer -= UnityEngine.Time.deltaTime;
-            _playerCharacter.gameObject.transform.Translate(forward * speed * UnityEngine.Time.deltaTime);
+            _playerCharacter.playerRB.velocity = new UnityEngine.Vector3(forward.x, forward.y, forward.z) * speed;
         }
         else
         {
+            _playerCharacter.playerRB.velocity = UnityEngine.Vector3.zero;
             dashFinished = true;
         }
     }

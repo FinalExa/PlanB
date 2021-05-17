@@ -20,7 +20,7 @@
         forward.Normalize();
         right.Normalize();
         var movementWithDirection = (_playerCharacter.playerInputs.MovementInput.x * forward) + (_playerCharacter.playerInputs.MovementInput.z * right);
-        _playerCharacter.gameObject.transform.Translate(movementWithDirection * _playerCharacter.actualSpeed * UnityEngine.Time.deltaTime);
+        _playerCharacter.playerRB.velocity = new UnityEngine.Vector3(movementWithDirection.x, movementWithDirection.y, movementWithDirection.z) * _playerCharacter.playerData.actualSpeed;
     }
 
     private void StateChangesCheck()
@@ -49,7 +49,7 @@
     }
     private void CheckTransitionToDash(bool dash)
     {
-        if (dash && !_playerCharacter.LeftHandOccupied && !_playerCharacter.RightHandOccupied) _playerCharacter.SetState(new Dash(_playerCharacter));
+        if (dash && !_playerCharacter.playerData.LeftHandOccupied && !_playerCharacter.playerData.RightHandOccupied) _playerCharacter.SetState(new Dash(_playerCharacter));
     }
     #endregion
 
@@ -66,14 +66,14 @@
     private void CheckLeftHandAction()
     {
         _playerCharacter.selectedHand = PlayerCharacter.SelectedHand.Left;
-        if (_playerCharacter.LeftHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) GoToGrab();
-        else if (_playerCharacter.LeftHandOccupied == true) GoToThrow();
+        if (_playerCharacter.playerData.LeftHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) GoToGrab();
+        else if (_playerCharacter.playerData.LeftHandOccupied == true) GoToThrow();
     }
     private void CheckRightHandAction()
     {
         _playerCharacter.selectedHand = PlayerCharacter.SelectedHand.Right;
-        if (_playerCharacter.RightHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) GoToGrab();
-        else if (_playerCharacter.RightHandOccupied == true) GoToThrow();
+        if (_playerCharacter.playerData.RightHandOccupied == false && _playerCharacter.mouseData.CheckForThrowableObject() == true) GoToGrab();
+        else if (_playerCharacter.playerData.RightHandOccupied == true) GoToThrow();
     }
     private void GoToGrab()
     {
