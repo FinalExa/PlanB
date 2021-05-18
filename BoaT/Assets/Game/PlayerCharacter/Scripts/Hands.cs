@@ -2,12 +2,14 @@
 {
     private PlayerData playerData;
     private MouseData mouseData;
+    private ObjectsOnMouse objectsOnMouse;
     private PlayerInputs playerInputs;
     public Hands(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerData = playerCharacter.playerData;
         mouseData = playerCharacter.mouseData;
         playerInputs = playerCharacter.playerInputs;
+        objectsOnMouse = playerCharacter.objectsOnMouse;
     }
 
     public override void Start()
@@ -36,7 +38,7 @@
     }
     private void CheckIfThrowableIsSelected()
     {
-        if (mouseData.CheckForThrowableObject() == true) CheckIfObjectIsInPlayerRange();
+        if (objectsOnMouse.CheckForThrowableObject() == true) CheckIfObjectIsInPlayerRange();
         else Transitions();
     }
     private void CheckIfObjectIsInPlayerRange()
