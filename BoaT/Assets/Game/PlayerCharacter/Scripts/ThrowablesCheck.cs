@@ -11,17 +11,20 @@ public class ThrowablesCheck : MonoBehaviour
         thisCollider = this.gameObject.GetComponent<SphereCollider>();
     }
 
-    private void Start()
+    private void OnValidate()
     {
         thisCollider.radius = playerData.grabRange;
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
+        //FIX THIS ASAP
         IThrowable otherObject = other.gameObject.GetComponent<IThrowable>();
         if (otherObject != null)
         {
             otherObject.isInsidePlayerRange = true;
-            playerCharacter.objectsInPlayerRange.Add(otherObject.Self.GetComponent<Collider>());
+            Collider otherCol = otherObject.Self.GetComponent<Collider>();
+            if (!playerCharacter.objectsInPlayerRange.Contains(otherCol)) playerCharacter.objectsInPlayerRange.Add(otherCol);
         }
     }
 

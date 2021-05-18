@@ -32,7 +32,6 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
         isAttachedToHand = false;
         this.gameObject.transform.SetParent(baseContainer.transform);
     }
-
     void Update()
     {
         HighlightSelf();
