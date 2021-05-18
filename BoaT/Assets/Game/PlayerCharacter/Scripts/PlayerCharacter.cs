@@ -1,19 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 public class PlayerCharacter : StateMachine
 {
     [HideInInspector] public PlayerData playerData;
     [HideInInspector] public Rotation rotation;
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public MouseData mouseData;
+    [HideInInspector] public ObjectsOnMouse objectsOnMouse;
     [HideInInspector] public Rigidbody playerRb;
+    [HideInInspector] public List<Collider> objectsInPlayerRange;
     public GameObject LeftHand;
     public GameObject RightHand;
 
     private void Awake()
     {
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
-        mouseData = this.gameObject.GetComponent<MouseData>();
         playerRb = this.gameObject.GetComponent<Rigidbody>();
+        mouseData = FindObjectOfType<MouseData>();
+        objectsOnMouse = FindObjectOfType<ObjectsOnMouse>();
         rotation = FindObjectOfType<Rotation>();
         rotation.rotationEnabled = false;
         SetState(new Idle(this));
@@ -32,12 +36,5 @@ public class PlayerCharacter : StateMachine
     private void OnCollisionStay(Collision collision)
     {
         _state.Collisions(collision);
-    }
-
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.gameObject.transform.position, playerData.grabRange);
     }
 }

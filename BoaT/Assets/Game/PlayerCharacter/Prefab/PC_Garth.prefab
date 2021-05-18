@@ -118,9 +118,10 @@ GameObject:
   - component: {fileID: 127697078383323057}
   - component: {fileID: 9075689409390051998}
   - component: {fileID: 1673490640784394817}
-  - component: {fileID: 569149746158535796}
+  - component: {fileID: 419043180686382014}
   - component: {fileID: 8490081029144132567}
   - component: {fileID: 879281037676685858}
+  - component: {fileID: 6026187827951584930}
   m_Layer: 2
   m_Name: PC_Garth
   m_TagString: Player
@@ -171,10 +172,12 @@ MonoBehaviour:
   rotation: {fileID: 0}
   playerInputs: {fileID: 0}
   mouseData: {fileID: 0}
+  objectsOnMouse: {fileID: 0}
   playerRb: {fileID: 0}
+  objectsInPlayerRange: []
   LeftHand: {fileID: 5918292791908574987}
   RightHand: {fileID: 5707342504787091415}
---- !u!114 &569149746158535796
+--- !u!114 &419043180686382014
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,10 +186,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8877571697949988489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e310d717197df424f85577e15f71d680, type: 3}
+  m_Script: {fileID: 11500000, guid: 41659adb6646ee34c810ab1ba5c901ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePositionInSpace: {x: 0, y: 0, z: 0}
+  playerData: {fileID: 11400000, guid: 311653c0f595efe4b9bf12720d42eab5, type: 2}
+  thisCollider: {fileID: 0}
 --- !u!54 &8490081029144132567
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -216,6 +220,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1.6, z: 0.35}
   m_Center: {x: 0, y: 0.81, z: 0}
+--- !u!135 &6026187827951584930
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8877571697949988489}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1849749656985548643
 PrefabInstance:
   m_ObjectHideFlags: 0

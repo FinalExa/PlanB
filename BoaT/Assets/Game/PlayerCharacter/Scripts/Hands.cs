@@ -2,56 +2,53 @@
 {
     private PlayerData playerData;
     private MouseData mouseData;
+    private ObjectsOnMouse objectsOnMouse;
     private PlayerInputs playerInputs;
+    private UnityEngine.Collider mousePos;
     public Hands(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerData = playerCharacter.playerData;
         mouseData = playerCharacter.mouseData;
         playerInputs = playerCharacter.playerInputs;
+        objectsOnMouse = playerCharacter.objectsOnMouse;
     }
 
     public override void Start()
     {
+        mousePos = mouseData.GetClickPosition().collider;
         CheckHandToUse();
     }
 
     private void CheckHandToUse()
     {
-        if (playerData.selectedHand == PlayerData.SelectedHand.Left) CheckLeftHandAction();
-        else if (playerData.selectedHand == PlayerData.SelectedHand.Right) CheckRightHandAction();
+        if (playerData.selectedHand == PlayerData.SelectedHand.Left) CheckHandAction(playerData.selectedHand);
+        else if (playerData.selectedHand == PlayerData.SelectedHand.Right) CheckHandAction(playerData.selectedHand);
     }
 
-    private void CheckLeftHandAction()
+    private void CheckHandAction(PlayerData.SelectedHand selectedHand)
     {
-        playerData.selectedHand = PlayerData.SelectedHand.Left;
-        if (!playerData.LeftHandOccupied)
+        if (selectedHand == PlayerData.SelectedHand.Left)
         {
-            CheckIfThrowableIsSelected();
+            if (!playerData.LeftHandOccupied) CheckIfThrowableIsSelected();
+            else GoToThrow();
         }
-        else GoToThrow();
-    }
-    private void CheckRightHandAction()
-    {
-        playerData.selectedHand = PlayerData.SelectedHand.Right;
-        if (!playerData.RightHandOccupied)
+        else
         {
-            CheckIfThrowableIsSelected();
+            if (!playerData.RightHandOccupied) CheckIfThrowableIsSelected();
+            else GoToThrow();
         }
-        else GoToThrow();
     }
     private void CheckIfThrowableIsSelected()
     {
-        if (mouseData.CheckForThrowableObject() == true) CheckIfObjectIsInPlayerRange();
+        if (objectsOnMouse.CheckForThrowableObject() == true) CheckIfObjectIsInPlayerRange();
         else Transitions();
     }
     private void CheckIfObjectIsInPlayerRange()
     {
         bool noObjectInRange = true;
-        UnityEngine.Vector3 playerPos = _playerCharacter.gameObject.transform.position;
-        UnityEngine.Collider[] colliders = UnityEngine.Physics.OverlapSphere(playerPos, playerData.grabRange);
-        foreach (var collider in colliders)
+        foreach (var collider in _playerCharacter.objectsInPlayerRange)
         {
-            if (collider == mouseData.GetClickPosition().collider)
+            if (collider == mousePos)
             {
                 noObjectInRange = false;
                 GoToGrab();

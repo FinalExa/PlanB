@@ -3,11 +3,13 @@
     private PlayerData playerData;
     private PlayerInputs playerInputs;
     private MouseData mouseData;
+    private ObjectsOnMouse objectsOnMouse;
     public Grab(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerData = playerCharacter.playerData;
         playerInputs = playerCharacter.playerInputs;
         mouseData = playerCharacter.mouseData;
+        objectsOnMouse = playerCharacter.objectsOnMouse;
         playerCharacter.rotation.rotationEnabled = false;
     }
 
@@ -25,7 +27,7 @@
     }
     private void SetHandOccupied(PlayerData.SelectedHand selectedHand)
     {
-        IThrowable iThrowable = mouseData.PassThrowableObject().GetComponent<IThrowable>();
+        IThrowable iThrowable = objectsOnMouse.PassThrowableObject().GetComponent<IThrowable>();
         iThrowable.StopForce();
         if (selectedHand == PlayerData.SelectedHand.Left) LeftHand(iThrowable);
         else RightHand(iThrowable);
