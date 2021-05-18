@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878b21a864fff5b4d966632135c07ffe, type: 3}
   m_Name: ThrowableObjectData
   m_EditorClassIdentifier: 
-  objectWeight: 5
+  objectWeight: 2
   highlightColor: {r: 1, g: 0, b: 0, a: 0}
   baseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
