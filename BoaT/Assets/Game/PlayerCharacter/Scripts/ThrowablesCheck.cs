@@ -11,7 +11,7 @@ public class ThrowablesCheck : MonoBehaviour
         thisCollider = this.gameObject.GetComponent<SphereCollider>();
     }
 
-    private void Start()
+    private void OnValidate()
     {
         thisCollider.radius = playerData.grabRange;
     }

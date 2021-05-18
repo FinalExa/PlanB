@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 311653c0f595efe4b9bf12720d42eab5, type: 2}
-  thisCollider: {fileID: 0}
+  thisCollider: {fileID: 6026187827951584930}
 --- !u!54 &8490081029144132567
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1849749656985548643
 PrefabInstance:
