@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 public class PlayerCharacter : StateMachine
 {
     [HideInInspector] public PlayerData playerData;
@@ -7,7 +8,7 @@ public class PlayerCharacter : StateMachine
     [HideInInspector] public MouseData mouseData;
     [HideInInspector] public ObjectsOnMouse objectsOnMouse;
     [HideInInspector] public Rigidbody playerRb;
-    [HideInInspector] public Collider[] objectsInPlayerRange;
+    [HideInInspector] public List<Collider> objectsInPlayerRange;
     public GameObject LeftHand;
     public GameObject RightHand;
 
@@ -35,15 +36,5 @@ public class PlayerCharacter : StateMachine
     private void OnCollisionStay(Collision collision)
     {
         _state.Collisions(collision);
-    }
-    public Collider[] ObjectsInPlayerRange()
-    {
-        Vector3 playerPos = gameObject.transform.position;
-        return Physics.OverlapSphere(playerPos, playerData.grabRange);
-    }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.gameObject.transform.position, playerData.grabRange);
     }
 }

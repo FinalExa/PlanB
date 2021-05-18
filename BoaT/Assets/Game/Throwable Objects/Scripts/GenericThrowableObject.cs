@@ -78,7 +78,7 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
     public void HighlightSelf()
     {
         Collider collider = mouseData.GetClickPosition().collider;
-        if (collider != null && GameObject.ReferenceEquals(collider.gameObject, this.gameObject)) thisRenderer.material.color = throwableObjectData.highlightColor;
+        if (collider != null && GameObject.ReferenceEquals(collider.gameObject, this.gameObject) && isInsidePlayerRange) thisRenderer.material.color = throwableObjectData.highlightColor;
         else thisRenderer.material.color = throwableObjectData.baseColor;
     }
 

@@ -46,7 +46,7 @@
     private void CheckIfObjectIsInPlayerRange()
     {
         bool noObjectInRange = true;
-        foreach (var collider in _playerCharacter.ObjectsInPlayerRange())
+        foreach (var collider in _playerCharacter.objectsInPlayerRange)
         {
             if (collider == mousePos)
             {

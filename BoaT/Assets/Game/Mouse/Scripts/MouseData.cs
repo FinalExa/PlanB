@@ -11,7 +11,7 @@ public class MouseData : MonoBehaviour
     {
         mainCamera = FindObjectOfType<Camera>();
     }
-    private void Update()
+    private void FixedUpdate()
     {
         MouseRaycast();
     }
