@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 127697078383323057}
   - component: {fileID: 9075689409390051998}
   - component: {fileID: 1673490640784394817}
-  - component: {fileID: 569149746158535796}
   - component: {fileID: 8490081029144132567}
   - component: {fileID: 879281037676685858}
   m_Layer: 2
@@ -174,19 +173,6 @@ MonoBehaviour:
   playerRb: {fileID: 0}
   LeftHand: {fileID: 5918292791908574987}
   RightHand: {fileID: 5707342504787091415}
---- !u!114 &569149746158535796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8877571697949988489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e310d717197df424f85577e15f71d680, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mousePositionInSpace: {x: 0, y: 0, z: 0}
 --- !u!54 &8490081029144132567
 Rigidbody:
   m_ObjectHideFlags: 0

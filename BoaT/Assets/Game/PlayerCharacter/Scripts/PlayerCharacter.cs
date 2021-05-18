@@ -5,6 +5,7 @@ public class PlayerCharacter : StateMachine
     [HideInInspector] public Rotation rotation;
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public MouseData mouseData;
+    [HideInInspector] public ObjectsOnMouse objectsOnMouse;
     [HideInInspector] public Rigidbody playerRb;
     public GameObject LeftHand;
     public GameObject RightHand;
@@ -12,8 +13,9 @@ public class PlayerCharacter : StateMachine
     private void Awake()
     {
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
-        mouseData = this.gameObject.GetComponent<MouseData>();
         playerRb = this.gameObject.GetComponent<Rigidbody>();
+        mouseData = FindObjectOfType<MouseData>();
+        objectsOnMouse = FindObjectOfType<ObjectsOnMouse>();
         rotation = FindObjectOfType<Rotation>();
         rotation.rotationEnabled = false;
         SetState(new Idle(this));
@@ -33,8 +35,6 @@ public class PlayerCharacter : StateMachine
     {
         _state.Collisions(collision);
     }
-
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
