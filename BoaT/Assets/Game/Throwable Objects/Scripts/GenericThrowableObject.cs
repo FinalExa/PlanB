@@ -4,6 +4,7 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
 {
     public float Weight { get; set; }
     public GameObject Self { get; set; }
+    public bool isInsidePlayerRange { get; set; }
     private bool isAttachedToHand;
     private Collider physicsCollider;
     private GameObject baseContainer;
@@ -26,6 +27,7 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
 
     void Start()
     {
+        isInsidePlayerRange = false;
         Weight = throwableObjectData.objectWeight;
         isAttachedToHand = false;
         this.gameObject.transform.SetParent(baseContainer.transform);

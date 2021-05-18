@@ -4,6 +4,7 @@
     private MouseData mouseData;
     private ObjectsOnMouse objectsOnMouse;
     private PlayerInputs playerInputs;
+    private UnityEngine.Collider mousePos;
     public Hands(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerData = playerCharacter.playerData;
@@ -14,6 +15,7 @@
 
     public override void Start()
     {
+        mousePos = mouseData.GetClickPosition().collider;
         CheckHandToUse();
     }
 
@@ -44,11 +46,9 @@
     private void CheckIfObjectIsInPlayerRange()
     {
         bool noObjectInRange = true;
-        UnityEngine.Vector3 playerPos = _playerCharacter.gameObject.transform.position;
-        UnityEngine.Collider[] colliders = UnityEngine.Physics.OverlapSphere(playerPos, playerData.grabRange);
-        foreach (var collider in colliders)
+        foreach (var collider in _playerCharacter.ObjectsInPlayerRange())
         {
-            if (collider == mouseData.GetClickPosition().collider)
+            if (collider == mousePos)
             {
                 noObjectInRange = false;
                 GoToGrab();
