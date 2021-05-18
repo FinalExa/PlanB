@@ -8,7 +8,7 @@ public class PlayerCharacter : StateMachine
     [HideInInspector] public MouseData mouseData;
     [HideInInspector] public ObjectsOnMouse objectsOnMouse;
     [HideInInspector] public Rigidbody playerRb;
-    [HideInInspector] public List<Collider> objectsInPlayerRange;
+    public List<Collider> objectsInPlayerRange;
     public GameObject LeftHand;
     public GameObject RightHand;
 

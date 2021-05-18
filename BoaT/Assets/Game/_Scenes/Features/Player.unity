@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 177495936}
   - component: {fileID: 177495935}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: TestWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,8 +208,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 177495934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0.5, z: 13}
-  m_LocalScale: {x: 25, y: 1, z: 1}
+  m_LocalPosition: {x: 5, y: 1.5, z: 13}
+  m_LocalScale: {x: 25, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -862,9 +862,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC_Garth
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7367246450386826994, guid: 1e4049fc1ce201b4fbe232a2e592ef0e, type: 3}
-    - {fileID: 569149746158535796, guid: 1e4049fc1ce201b4fbe232a2e592ef0e, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e4049fc1ce201b4fbe232a2e592ef0e, type: 3}
 --- !u!4 &1510704596695418245 stripped
 Transform:
