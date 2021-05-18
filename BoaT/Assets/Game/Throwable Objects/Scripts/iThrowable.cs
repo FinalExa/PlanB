@@ -6,5 +6,6 @@ public interface IThrowable
     void AttachToPlayer(GameObject playerHand);
     void DetachFromPlayer();
     void LaunchSelf(float launchSpeed);
+    void HighlightSelf();
     void StopForce();
 }
