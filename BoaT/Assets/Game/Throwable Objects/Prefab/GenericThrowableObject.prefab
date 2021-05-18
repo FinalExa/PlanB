@@ -92,8 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161f37d513038dc46afd11e424084fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectWeight: 1
   selfRB: {fileID: 0}
+  throwableObjectData: {fileID: 11400000, guid: 9b4ae444b5933784faa77e6b5277be92,
+    type: 2}
 --- !u!33 &9192447190871162468
 MeshFilter:
   m_ObjectHideFlags: 0

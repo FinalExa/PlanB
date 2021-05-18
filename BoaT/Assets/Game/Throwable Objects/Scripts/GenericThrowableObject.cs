@@ -3,26 +3,26 @@
 public class GenericThrowableObject : MonoBehaviour, IThrowable
 {
     public float Weight { get; set; }
-    [SerializeField] private float objectWeight;
     public GameObject Self { get; set; }
-    [HideInInspector] public Rigidbody selfRB;
     private bool isAttachedToHand;
     private Collider physicsCollider;
     private GameObject baseContainer;
-    private Color baseColor;
+    [HideInInspector] public Rigidbody selfRB;
+    [HideInInspector] public ThrowableObjectData throwableObjectData;
+
 
     void Awake()
     {
         physicsCollider = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Collider>();
         baseContainer = GameObject.FindGameObjectWithTag("GenericObjectsContainer");
-        baseColor = this.gameObject.GetComponent<Renderer>().material.color;
+        throwableObjectData.baseColor = this.gameObject.GetComponent<Renderer>().material.color;
         Self = this.gameObject;
         selfRB = Self.GetComponent<Rigidbody>();
     }
 
     void Start()
     {
-        Weight = objectWeight;
+        Weight = throwableObjectData.objectWeight;
         isAttachedToHand = false;
         this.gameObject.transform.SetParent(baseContainer.transform);
     }
@@ -50,20 +50,6 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
     public void LaunchSelf(float launchSpeed)
     {
         selfRB.velocity = new Vector3(transform.forward.x, transform.forward.y, transform.forward.z) * launchSpeed;
-    }
-
-    public void Highlighted(bool isHighlighted)
-    {
-        Material mat = this.gameObject.GetComponent<Renderer>().material;
-        if (isAttachedToHand == false)
-        {
-            if (isHighlighted) mat.color = Color.red;
-            else mat.color = baseColor;
-        }
-        else
-        {
-            mat.color = baseColor;
-        }
     }
 
     public void StopForce()
