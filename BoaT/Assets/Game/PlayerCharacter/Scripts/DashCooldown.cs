@@ -3,6 +3,7 @@
 public class DashCooldown : MonoBehaviour
 {
     public PlayerData playerData;
+    private float dashCooldownTimer;
     [HideInInspector] public bool dashOnCooldown;
 
     void Update()
@@ -15,13 +16,13 @@ public class DashCooldown : MonoBehaviour
 
     public void SetDashOnCooldown()
     {
-        playerData.dashCooldownTimer = playerData.dashCooldown;
+        dashCooldownTimer = playerData.dashCooldown;
         dashOnCooldown = true;
     }
 
     private void DashCooldownExecute()
     {
-        if (playerData.dashCooldownTimer > 0) playerData.dashCooldownTimer -= Time.deltaTime;
+        if (dashCooldownTimer > 0) dashCooldownTimer -= Time.deltaTime;
         else dashOnCooldown = false;
     }
 }

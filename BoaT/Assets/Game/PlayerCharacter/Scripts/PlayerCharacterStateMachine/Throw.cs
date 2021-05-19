@@ -42,7 +42,7 @@
     private void LaunchObject(IThrowable iThrowable)
     {
         _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform, mouseData.GetClickPosition().point);
-        iThrowable.DetachFromPlayer(playerData.throwSpeed);
+        iThrowable.DetachFromPlayer(playerData.throwDistance, playerData.throwFlightTime);
     }
     private void SetHandFree()
     {
