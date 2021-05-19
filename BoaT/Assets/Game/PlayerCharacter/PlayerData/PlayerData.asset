@@ -18,8 +18,8 @@ MonoBehaviour:
   throwSpeed: 30
   dashDistance: 8
   dashDuration: 0.2
-  dashCooldown: 0
+  dashCooldown: 0.5
   actualSpeed: 15
   leftHandWeight: 0
   rightHandWeight: 0
-  selectedHand: 0
+  selectedHand: 1
