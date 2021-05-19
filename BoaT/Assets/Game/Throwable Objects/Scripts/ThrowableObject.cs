@@ -7,6 +7,9 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     public bool isInsidePlayerRange { get; set; }
     private float throwSpeed;
     private float flightTimer;
+    private float throwDistance;
+    private float flightTime;
+    private float stopValue;
     private bool isAttachedToHand;
     private bool isFlying;
     private BoxCollider physicsCollider;
@@ -33,9 +36,8 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     }
     public void AttachToPlayer(GameObject playerHand)
     {
-        isFlying = false;
-        isAttachedToHand = true;
         StopForce();
+        isAttachedToHand = true;
         gameObject.layer = 2;
         ActivateConstraints();
         this.gameObject.transform.position = playerHand.transform.position;
@@ -43,33 +45,46 @@ public class ThrowableObject : MonoBehaviour, IThrowable
         this.gameObject.transform.localRotation = Quaternion.identity;
         physicsCollider.enabled = false;
     }
-    public void DetachFromPlayer(float throwDistance, float flightTime)
+    public void DetachFromPlayer(float throwDistanceObtained, float flightTimeObtained, float stopValueThrow)
     {
+        throwDistance = throwDistanceObtained;
+        flightTime = flightTimeObtained;
+        stopValue = stopValueThrow;
         DeactivateConstraintsExceptGravity();
         gameObject.layer = 0;
         this.gameObject.transform.SetParent(baseContainer.transform);
         isAttachedToHand = false;
         physicsCollider.enabled = true;
-        LaunchSelf(throwDistance, flightTime);
+        LaunchSelf();
     }
-    private void LaunchSelf(float throwDistance, float flightTime)
+    private void LaunchSelf()
     {
         throwSpeed = throwDistance / flightTime;
         flightTimer = flightTime;
         isFlying = true;
-        selfRB.velocity = new Vector3(transform.forward.x, transform.forward.y, transform.forward.z) * throwSpeed;
     }
     private void FlightTime()
     {
-        if (flightTimer > 0) flightTimer -= Time.deltaTime;
+        if (flightTimer > 0)
+        {
+            SpeedFormula();
+            flightTimer -= Time.deltaTime;
+        }
         else
         {
             DeactivateConstraintsTotally();
             isFlying = false;
         }
     }
+    private void SpeedFormula()
+    {
+        float offsetToRemove = ((throwSpeed * flightTime * stopValue) * (flightTime - flightTimer));
+        float relativeSpeed = throwSpeed - offsetToRemove;
+        selfRB.velocity = new Vector3(transform.forward.x, transform.forward.y, transform.forward.z) * relativeSpeed;
+    }
     private void StopForce()
     {
+        isFlying = false;
         selfRB.velocity = Vector3.zero;
     }
     private void ActivateConstraints()
@@ -89,6 +104,11 @@ public class ThrowableObject : MonoBehaviour, IThrowable
         if (collision.gameObject.CompareTag("Player") && isAttachedToHand)
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), physicsCollider);
+        }
+        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Ground"))
+        {
+            StopForce();
+            DeactivateConstraintsTotally();
         }
     }
 }

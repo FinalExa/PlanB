@@ -5,6 +5,6 @@ public interface IThrowable
     GameObject Self { get; set; }
     bool isInsidePlayerRange { get; set; }
     void AttachToPlayer(GameObject playerHand);
-    void DetachFromPlayer(float throwDistance, float flightTime);
+    void DetachFromPlayer(float throwDistance, float flightTime, float stopValueThrow);
 
 }

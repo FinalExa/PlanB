@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 15
   minSpeedValue: 1
-  actualSpeed: 13
-  grabRange: 3
-  throwDistance: 3
+  actualSpeed: 15
+  grabRange: 5
+  throwDistance: 5
   throwFlightTime: 0.3
+  throwStopValue: 3
   leftHandWeight: 0
   rightHandWeight: 0
   selectedHand: 1
