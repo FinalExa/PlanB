@@ -3,11 +3,11 @@
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData", order = 1)]
 public class PlayerData : ScriptableObject
 {
-    [Header("Movement related section")]
+    [Header("Movement section")]
     public float movementSpeed;
     public float minSpeedValue;
     [HideInInspector] public float actualSpeed;
-    [Header("Hands related section")]
+    [Header("Hands section")]
     public float grabRange;
     public float throwSpeed;
     public bool LeftHandOccupied { get; set; }
@@ -20,7 +20,7 @@ public class PlayerData : ScriptableObject
         Right
     }
     [HideInInspector] public SelectedHand selectedHand;
-    [Header("Dash related section")]
+    [Header("Dash section")]
     public float dashDistance;
     public float dashDuration;
     public float dashCooldown;
