@@ -9,7 +9,8 @@ public class PlayerData : ScriptableObject
     [HideInInspector] public float actualSpeed;
     [Header("Hands section")]
     public float grabRange;
-    public float throwSpeed;
+    public float throwDistance;
+    public float throwFlightTime;
     public bool LeftHandOccupied { get; set; }
     public bool RightHandOccupied { get; set; }
     [HideInInspector] public float leftHandWeight;
@@ -24,5 +25,4 @@ public class PlayerData : ScriptableObject
     public float dashDistance;
     public float dashDuration;
     public float dashCooldown;
-    [HideInInspector] public float dashCooldownTimer;
 }
