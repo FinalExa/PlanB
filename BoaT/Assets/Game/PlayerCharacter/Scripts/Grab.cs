@@ -28,7 +28,6 @@
     private void SetHandOccupied(PlayerData.SelectedHand selectedHand)
     {
         IThrowable iThrowable = objectsOnMouse.PassThrowableObject().GetComponent<IThrowable>();
-        iThrowable.StopForce();
         if (selectedHand == PlayerData.SelectedHand.Left) LeftHand(iThrowable);
         else RightHand(iThrowable);
         Transitions();

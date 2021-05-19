@@ -28,9 +28,6 @@ public class PlayerCharacter : StateMachine
     }
     private void Start()
     {
-        playerData.LeftHandOccupied = false;
-        playerData.RightHandOccupied = false;
-        playerData.actualSpeed = playerData.movementSpeed;
         _state.Start();
     }
     private void OnCollisionStay(Collision collision)

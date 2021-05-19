@@ -15,7 +15,7 @@ MonoBehaviour:
   movementSpeed: 15
   minSpeedValue: 1
   grabRange: 3
-  throwSpeed: 20
+  throwSpeed: 30
   dashDistance: 8
   dashDuration: 0.2
   dashCooldown: 0

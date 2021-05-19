@@ -1,24 +1,20 @@
 ﻿using UnityEngine;
 
-public class GenericThrowableObject : MonoBehaviour, IThrowable
+public class ThrowableObject : MonoBehaviour, IThrowable
 {
     public float Weight { get; set; }
     public GameObject Self { get; set; }
     public bool isInsidePlayerRange { get; set; }
+
     private bool isAttachedToHand;
-    private Collider physicsCollider;
+    private BoxCollider physicsCollider;
     private GameObject baseContainer;
-    private Renderer thisRenderer;
     [HideInInspector] public Rigidbody selfRB;
     [HideInInspector] public ThrowableObjectData throwableObjectData;
-    private MouseData mouseData;
-
 
     void Awake()
     {
-        physicsCollider = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Collider>();
-        mouseData = FindObjectOfType<MouseData>();
-        thisRenderer = this.gameObject.GetComponent<Renderer>();
+        physicsCollider = this.gameObject.GetComponent<BoxCollider>();
         baseContainer = GameObject.FindGameObjectWithTag("GenericObjectsContainer");
         throwableObjectData.baseColor = this.gameObject.GetComponent<Renderer>().material.color;
         Self = this.gameObject;
@@ -27,41 +23,35 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
 
     void Start()
     {
-        isInsidePlayerRange = false;
         Weight = throwableObjectData.objectWeight;
         isAttachedToHand = false;
         this.gameObject.transform.SetParent(baseContainer.transform);
     }
-    void Update()
-    {
-        HighlightSelf();
-    }
-
     public void AttachToPlayer(GameObject playerHand)
     {
         isAttachedToHand = true;
+        StopForce();
         gameObject.layer = 2;
-        this.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        ActivateConstraints();
         this.gameObject.transform.position = playerHand.transform.position;
         this.gameObject.transform.SetParent(playerHand.transform);
         this.gameObject.transform.localRotation = Quaternion.identity;
-        ActivateConstraints();
         physicsCollider.enabled = false;
     }
-    public void DetachFromPlayer()
+    public void DetachFromPlayer(float throwSpeed)
     {
         DeactivateConstraints();
-        isAttachedToHand = false;
         gameObject.layer = 0;
         this.gameObject.transform.SetParent(baseContainer.transform);
+        isAttachedToHand = false;
         physicsCollider.enabled = true;
-        this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        LaunchSelf(throwSpeed);
     }
-    public void LaunchSelf(float launchSpeed)
+    private void LaunchSelf(float throwSpeed)
     {
-        selfRB.velocity = new Vector3(transform.forward.x, transform.forward.y, transform.forward.z) * launchSpeed;
+        selfRB.velocity = new Vector3(transform.forward.x, transform.forward.y, transform.forward.z) * throwSpeed;
     }
-    public void StopForce()
+    private void StopForce()
     {
         selfRB.velocity = Vector3.zero;
     }
@@ -73,14 +63,6 @@ public class GenericThrowableObject : MonoBehaviour, IThrowable
     {
         selfRB.constraints = RigidbodyConstraints.None | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
-
-    public void HighlightSelf()
-    {
-        Collider collider = mouseData.GetClickPosition().collider;
-        if (collider != null && GameObject.ReferenceEquals(collider.gameObject, this.gameObject) && isInsidePlayerRange) thisRenderer.material.color = throwableObjectData.highlightColor;
-        else thisRenderer.material.color = throwableObjectData.baseColor;
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && isAttachedToHand)
