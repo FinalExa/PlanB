@@ -8,6 +8,7 @@ public class PlayerCharacter : StateMachine
     [HideInInspector] public MouseData mouseData;
     [HideInInspector] public ObjectsOnMouse objectsOnMouse;
     [HideInInspector] public Rigidbody playerRb;
+    [HideInInspector] public DashCooldown dashCooldown;
     public List<Collider> objectsInPlayerRange;
     public GameObject LeftHand;
     public GameObject RightHand;
@@ -16,19 +17,19 @@ public class PlayerCharacter : StateMachine
     {
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
         playerRb = this.gameObject.GetComponent<Rigidbody>();
+        dashCooldown = this.gameObject.GetComponent<DashCooldown>();
         mouseData = FindObjectOfType<MouseData>();
         objectsOnMouse = FindObjectOfType<ObjectsOnMouse>();
         rotation = FindObjectOfType<Rotation>();
-        rotation.rotationEnabled = false;
         SetState(new Idle(this));
-    }
-    private void Update()
-    {
-        _state.StateUpdate();
     }
     private void Start()
     {
         _state.Start();
+    }
+    private void Update()
+    {
+        _state.StateUpdate();
     }
     private void OnCollisionStay(Collision collision)
     {
