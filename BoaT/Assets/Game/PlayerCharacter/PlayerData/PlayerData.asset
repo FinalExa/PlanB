@@ -18,6 +18,7 @@ MonoBehaviour:
   grabRange: 5
   throwDistance: 5
   throwFlightTime: 0.3
+  throwStopValue: 3
   leftHandWeight: 0
   rightHandWeight: 0
   selectedHand: 1

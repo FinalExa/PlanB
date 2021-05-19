@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GenericObjectsContainer
   - Ground
+  - ThrowableObject
   layers:
   - Default
   - TransparentFX
