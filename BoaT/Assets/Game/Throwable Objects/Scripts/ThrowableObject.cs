@@ -54,6 +54,7 @@ public class ThrowableObject : MonoBehaviour, IThrowable
         gameObject.layer = 0;
         this.gameObject.transform.SetParent(baseContainer.transform);
         isAttachedToHand = false;
+        physicsCollider.enabled = true;
         LaunchSelf();
     }
     private void LaunchSelf()
@@ -71,7 +72,6 @@ public class ThrowableObject : MonoBehaviour, IThrowable
         }
         else
         {
-            physicsCollider.enabled = true;
             DeactivateConstraintsTotally();
             isFlying = false;
         }
