@@ -4,6 +4,7 @@ public class Dash : PlayerState
 {
     private PlayerData playerData;
     private PlayerInputs playerInputs;
+    private DashCooldown dashCooldown;
     private bool dashFinished;
     private float dashTimer;
     private UnityEngine.Vector3 dashVector;
@@ -14,12 +15,13 @@ public class Dash : PlayerState
         playerRb = playerCharacter.playerRb;
         playerData = playerCharacter.playerData;
         playerInputs = playerCharacter.playerInputs;
+        dashCooldown = playerCharacter.dashCooldown;
     }
 
     public override void Start()
     {
-        dashFinished = false;
-        DashSetup();
+        if (!dashCooldown.dashOnCooldown) DashSetup();
+        else Transitions();
     }
     public override void StateUpdate()
     {
@@ -36,6 +38,7 @@ public class Dash : PlayerState
     #region Dash
     private void DashSetup()
     {
+        dashFinished = false;
         float speed = playerData.dashDistance / playerData.dashDuration;
         UnityEngine.Vector3 forward = _playerCharacter.transform.GetChild(0).forward;
         dashVector = new UnityEngine.Vector3(forward.x, forward.y, forward.z) * speed;
@@ -54,6 +57,7 @@ public class Dash : PlayerState
     {
         playerRb.velocity = UnityEngine.Vector3.zero;
         dashFinished = true;
+        dashCooldown.SetDashOnCooldown();
         Transitions();
     }
     #endregion

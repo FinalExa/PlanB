@@ -3,12 +3,11 @@
 public class ThrowablesCheck : MonoBehaviour
 {
     private PlayerCharacter playerCharacter;
-    [SerializeField] private PlayerData playerData;
+    [HideInInspector] public PlayerData playerData;
     [SerializeField] private SphereCollider thisCollider;
     private void Awake()
     {
         playerCharacter = FindObjectOfType<PlayerCharacter>();
-        thisCollider = this.gameObject.GetComponent<SphereCollider>();
     }
 
     private void OnValidate()
