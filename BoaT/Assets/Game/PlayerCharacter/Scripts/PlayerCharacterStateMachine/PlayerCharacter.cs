@@ -1,26 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class PlayerCharacter : StateMachine
 {
-    public PlayerData playerData;
-    [HideInInspector] public Rotation rotation;
-    [HideInInspector] public PlayerInputs playerInputs;
-    [HideInInspector] public MouseData mouseData;
-    [HideInInspector] public ObjectsOnMouse objectsOnMouse;
-    [HideInInspector] public Rigidbody playerRb;
-    [HideInInspector] public DashCooldown dashCooldown;
-    public List<Collider> objectsInPlayerRange;
-    public GameObject LeftHand;
-    public GameObject RightHand;
-
+    [HideInInspector] public PlayerController playerController;
     private void Awake()
     {
-        playerInputs = this.gameObject.GetComponent<PlayerInputs>();
-        playerRb = this.gameObject.GetComponent<Rigidbody>();
-        dashCooldown = this.gameObject.GetComponent<DashCooldown>();
-        mouseData = FindObjectOfType<MouseData>();
-        objectsOnMouse = FindObjectOfType<ObjectsOnMouse>();
-        rotation = FindObjectOfType<Rotation>();
+        playerController = this.gameObject.GetComponent<PlayerController>();
         SetState(new Idle(this));
     }
     private void Start()

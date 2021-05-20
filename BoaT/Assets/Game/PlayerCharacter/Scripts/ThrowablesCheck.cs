@@ -23,7 +23,7 @@ public class ThrowablesCheck : MonoBehaviour
         {
             otherObject.IsInsidePlayerRange = true;
             Collider otherCol = otherObject.Self.GetComponent<Collider>();
-            if (!playerCharacter.objectsInPlayerRange.Contains(otherCol)) playerCharacter.objectsInPlayerRange.Add(otherCol);
+            if (!playerCharacter.playerController.objectsInPlayerRange.Contains(otherCol)) playerCharacter.playerController.objectsInPlayerRange.Add(otherCol);
         }
     }
 
@@ -33,7 +33,7 @@ public class ThrowablesCheck : MonoBehaviour
         if (otherObject != null)
         {
             otherObject.IsInsidePlayerRange = false;
-            playerCharacter.objectsInPlayerRange.Remove(otherObject.Self.GetComponent<Collider>());
+            playerCharacter.playerController.objectsInPlayerRange.Remove(otherObject.Self.GetComponent<Collider>());
         }
     }
 }

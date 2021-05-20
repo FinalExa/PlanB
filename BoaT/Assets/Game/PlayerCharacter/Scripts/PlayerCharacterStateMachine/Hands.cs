@@ -1,53 +1,46 @@
 ﻿using UnityEngine;
 public class Hands : PlayerState
 {
-    private PlayerData playerData;
-    private MouseData mouseData;
-    private ObjectsOnMouse objectsOnMouse;
-    private PlayerInputs playerInputs;
-    private UnityEngine.Collider mousePos;
+    private Collider mousePos;
     public Hands(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerData = playerCharacter.playerData;
-        mouseData = playerCharacter.mouseData;
-        playerInputs = playerCharacter.playerInputs;
-        objectsOnMouse = playerCharacter.objectsOnMouse;
     }
 
     public override void Start()
     {
-        mousePos = mouseData.GetClickPosition().collider;
+        mousePos = _playerCharacter.playerController.playerReferences.objectsOnMouse.GetClickPosition().collider;
         CheckHandToUse();
     }
 
     private void CheckHandToUse()
     {
-        if (playerData.selectedHand == PlayerData.SelectedHand.Left) CheckHandAction(playerData.selectedHand);
-        else if (playerData.selectedHand == PlayerData.SelectedHand.Right) CheckHandAction(playerData.selectedHand);
+        if (_playerCharacter.playerController.selectedHand == PlayerController.SelectedHand.Left) CheckHandAction(_playerCharacter.playerController.selectedHand);
+        else if (_playerCharacter.playerController.selectedHand == PlayerController.SelectedHand.Right) CheckHandAction(_playerCharacter.playerController.selectedHand);
     }
 
-    private void CheckHandAction(PlayerData.SelectedHand selectedHand)
+    private void CheckHandAction(PlayerController.SelectedHand selectedHand)
     {
-        if (selectedHand == PlayerData.SelectedHand.Left)
+        if (selectedHand == PlayerController.SelectedHand.Left)
         {
-            if (!playerData.LeftHandOccupied) CheckIfThrowableIsSelected();
+            if (!_playerCharacter.playerController.LeftHandOccupied) CheckIfThrowableIsSelected();
             else GoToThrow();
         }
         else
         {
-            if (!playerData.RightHandOccupied) CheckIfThrowableIsSelected();
+            if (!_playerCharacter.playerController.RightHandOccupied) CheckIfThrowableIsSelected();
             else GoToThrow();
         }
     }
     private void CheckIfThrowableIsSelected()
     {
-        if (objectsOnMouse.CheckForThrowableObject() == true) CheckIfObjectIsInPlayerRange();
+        ObjectsOnMouse objectsOnMouse = _playerCharacter.playerController.playerReferences.objectsOnMouse;
+        if (objectsOnMouse.CheckForThrowableObject(mousePos) == true) CheckIfObjectIsInPlayerRange();
         else Transitions();
     }
     private void CheckIfObjectIsInPlayerRange()
     {
         bool noObjectInRange = true;
-        foreach (var collider in _playerCharacter.objectsInPlayerRange)
+        foreach (var collider in _playerCharacter.playerController.objectsInPlayerRange)
         {
             if (collider == mousePos)
             {
@@ -62,6 +55,7 @@ public class Hands : PlayerState
     #region Transitions
     private void Transitions()
     {
+        PlayerInputs playerInputs = _playerCharacter.playerController.playerReferences.playerInputs;
         if (playerInputs.MovementInput == Vector3.zero) GoToIdle();
         else GoToMoving();
     }

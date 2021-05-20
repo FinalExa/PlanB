@@ -2,24 +2,16 @@
 
 public class Dash : PlayerState
 {
-    private PlayerData playerData;
-    private PlayerInputs playerInputs;
-    private DashCooldown dashCooldown;
     private bool dashFinished;
     private float dashTimer;
     private Vector3 dashVector;
-    private Rigidbody playerRb;
     public Dash(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerCharacter.rotation.rotationEnabled = false;
-        playerRb = playerCharacter.playerRb;
-        playerData = playerCharacter.playerData;
-        playerInputs = playerCharacter.playerInputs;
-        dashCooldown = playerCharacter.dashCooldown;
     }
 
     public override void Start()
     {
+        DashCooldown dashCooldown = _playerCharacter.playerController.playerReferences.dashCooldown;
         if (!dashCooldown.dashOnCooldown) DashSetup();
         else Transitions();
     }
@@ -38,6 +30,7 @@ public class Dash : PlayerState
     #region Dash
     private void DashSetup()
     {
+        PlayerData playerData = _playerCharacter.playerController.playerReferences.playerData;
         dashFinished = false;
         float speed = playerData.dashDistance / playerData.dashDuration;
         Vector3 forward = _playerCharacter.transform.GetChild(0).forward;
@@ -48,6 +41,7 @@ public class Dash : PlayerState
     {
         if (dashTimer > 0)
         {
+            Rigidbody playerRb = _playerCharacter.playerController.playerReferences.playerRb;
             dashTimer -= Time.deltaTime;
             playerRb.velocity = dashVector;
         }
@@ -55,6 +49,8 @@ public class Dash : PlayerState
     }
     private void EndDash()
     {
+        Rigidbody playerRb = _playerCharacter.playerController.playerReferences.playerRb;
+        DashCooldown dashCooldown = _playerCharacter.playerController.playerReferences.dashCooldown;
         playerRb.velocity = Vector3.zero;
         dashFinished = true;
         dashCooldown.SetDashOnCooldown();
@@ -65,6 +61,7 @@ public class Dash : PlayerState
     #region Transitions
     private void Transitions()
     {
+        PlayerInputs playerInputs = _playerCharacter.playerController.playerReferences.playerInputs;
         if (playerInputs.MovementInput == Vector3.zero) ReturnToIdle();
         else ReturnToMovement();
     }

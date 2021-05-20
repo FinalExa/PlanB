@@ -1,27 +1,27 @@
 ﻿using UnityEngine;
 
-public class MouseData : MonoBehaviour
+public abstract class MouseData : MonoBehaviour
 {
     public RaycastHit hit;
     public Ray ray;
     [HideInInspector] public Vector3 mousePositionInSpace;
     private Camera mainCamera;
 
-    private void Awake()
+    public virtual void Awake()
     {
         mainCamera = FindObjectOfType<Camera>();
     }
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         MouseRaycast();
     }
-    void MouseRaycast()
+    public virtual void MouseRaycast()
     {
         ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit);
         mousePositionInSpace = hit.point;
     }
-    public RaycastHit GetClickPosition()
+    public virtual RaycastHit GetClickPosition()
     {
         return hit;
     }

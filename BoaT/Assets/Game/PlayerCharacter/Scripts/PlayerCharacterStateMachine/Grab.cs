@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
 public class Grab : PlayerState
 {
-    private PlayerData playerData;
-    private PlayerInputs playerInputs;
-    private ObjectsOnMouse objectsOnMouse;
     public Grab(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerData = playerCharacter.playerData;
-        playerInputs = playerCharacter.playerInputs;
-        objectsOnMouse = playerCharacter.objectsOnMouse;
-        playerCharacter.rotation.rotationEnabled = false;
+        playerCharacter.playerController.playerReferences.rotation.rotationEnabled = false;
     }
 
     public override void Start()
@@ -20,34 +14,36 @@ public class Grab : PlayerState
     #region Grab
     private void CheckHand()
     {
-        PlayerData.SelectedHand selectedHand = playerData.selectedHand;
-        if (selectedHand == PlayerData.SelectedHand.Left) SetHandOccupied(selectedHand);
-        else if (selectedHand == PlayerData.SelectedHand.Right) SetHandOccupied(selectedHand);
+        PlayerController.SelectedHand selectedHand = _playerCharacter.playerController.selectedHand;
+        if (selectedHand == PlayerController.SelectedHand.Left) SetHandOccupied(selectedHand);
+        else if (selectedHand == PlayerController.SelectedHand.Right) SetHandOccupied(selectedHand);
     }
-    private void SetHandOccupied(PlayerData.SelectedHand selectedHand)
+    private void SetHandOccupied(PlayerController.SelectedHand selectedHand)
     {
-        IThrowable iThrowable = objectsOnMouse.PassThrowableObject().GetComponent<IThrowable>();
-        if (selectedHand == PlayerData.SelectedHand.Left) LeftHand(iThrowable);
+
+        IThrowable iThrowable = _playerCharacter.playerController.playerReferences.objectsOnMouse.PassThrowableObject().GetComponent<IThrowable>();
+        if (selectedHand == PlayerController.SelectedHand.Left) LeftHand(iThrowable);
         else RightHand(iThrowable);
         Transitions();
     }
     private void LeftHand(IThrowable iThrowable)
     {
-        iThrowable.AttachToPlayer(_playerCharacter.LeftHand);
-        playerData.LeftHandOccupied = true;
-        playerData.leftHandWeight = iThrowable.Weight;
+        iThrowable.AttachToPlayer(_playerCharacter.playerController.LeftHand);
+        _playerCharacter.playerController.LeftHandOccupied = true;
+        _playerCharacter.playerController.leftHandWeight = iThrowable.Weight;
     }
     private void RightHand(IThrowable iThrowable)
     {
-        iThrowable.AttachToPlayer(_playerCharacter.RightHand);
-        playerData.RightHandOccupied = true;
-        playerData.rightHandWeight = iThrowable.Weight;
+        iThrowable.AttachToPlayer(_playerCharacter.playerController.RightHand);
+        _playerCharacter.playerController.RightHandOccupied = true;
+        _playerCharacter.playerController.rightHandWeight = iThrowable.Weight;
     }
     #endregion
 
     #region Transitions
     private void Transitions()
     {
+        PlayerInputs playerInputs = _playerCharacter.playerController.playerReferences.playerInputs;
         if (playerInputs.MovementInput == Vector3.zero) ReturnToIdle();
         else ReturnToMovement();
     }

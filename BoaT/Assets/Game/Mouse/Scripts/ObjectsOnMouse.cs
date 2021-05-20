@@ -1,16 +1,10 @@
 ﻿using UnityEngine;
 
-public class ObjectsOnMouse : MonoBehaviour
+public class ObjectsOnMouse : MouseData
 {
-    private MouseData mouseData;
-
-    private void Awake()
+    public bool CheckForThrowableObject(Collider hit)
     {
-        mouseData = this.gameObject.GetComponent<MouseData>();
-    }
-    public bool CheckForThrowableObject()
-    {
-        if (mouseData.hit.collider != null && mouseData.hit.collider.GetComponent<IThrowable>() != null)
+        if (hit != null && hit.GetComponent<IThrowable>() != null)
         {
             return true;
         }
@@ -19,6 +13,6 @@ public class ObjectsOnMouse : MonoBehaviour
 
     public GameObject PassThrowableObject()
     {
-        return mouseData.hit.collider.gameObject;
+        return hit.collider.gameObject;
     }
 }
