@@ -4,7 +4,7 @@ public class ThrowableObject : MonoBehaviour, IThrowable
 {
     public float Weight { get; set; }
     public GameObject Self { get; set; }
-    public bool isInsidePlayerRange { get; set; }
+    public bool IsInsidePlayerRange { get; set; }
     private float throwSpeed;
     private float flightTimer;
     private float throwDistance;

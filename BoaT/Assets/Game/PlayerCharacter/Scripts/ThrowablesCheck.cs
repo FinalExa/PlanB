@@ -21,7 +21,7 @@ public class ThrowablesCheck : MonoBehaviour
         IThrowable otherObject = other.gameObject.GetComponent<IThrowable>();
         if (otherObject != null)
         {
-            otherObject.isInsidePlayerRange = true;
+            otherObject.IsInsidePlayerRange = true;
             Collider otherCol = otherObject.Self.GetComponent<Collider>();
             if (!playerCharacter.objectsInPlayerRange.Contains(otherCol)) playerCharacter.objectsInPlayerRange.Add(otherCol);
         }
@@ -32,7 +32,7 @@ public class ThrowablesCheck : MonoBehaviour
         IThrowable otherObject = other.gameObject.GetComponent<IThrowable>();
         if (otherObject != null)
         {
-            otherObject.isInsidePlayerRange = false;
+            otherObject.IsInsidePlayerRange = false;
             playerCharacter.objectsInPlayerRange.Remove(otherObject.Self.GetComponent<Collider>());
         }
     }
