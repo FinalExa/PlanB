@@ -4,7 +4,7 @@ public class ThrowableObject : MonoBehaviour, IThrowable
 {
     public float Weight { get; set; }
     public GameObject Self { get; set; }
-    public bool isInsidePlayerRange { get; set; }
+    public bool IsInsidePlayerRange { get; set; }
     private float throwSpeed;
     private float flightTimer;
     private float throwDistance;
@@ -13,8 +13,8 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     private bool isFlying;
     private BoxCollider physicsCollider;
     private GameObject baseContainer;
+    public ThrowableObjectData throwableObjectData;
     [HideInInspector] public Rigidbody selfRB;
-    [HideInInspector] public ThrowableObjectData throwableObjectData;
 
     void Awake()
     {
@@ -57,9 +57,9 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     }
     private void LaunchSelf()
     {
-        selfRB.velocity = new Vector3(transform.forward.x, transform.forward.y, transform.forward.z) * throwSpeed;
         throwSpeed = throwDistance / flightTime;
         flightTimer = flightTime;
+        selfRB.velocity = new Vector3(transform.forward.x, transform.forward.y, transform.forward.z) * throwSpeed;
         isFlying = true;
     }
     private void FlightTime()
@@ -94,7 +94,7 @@ public class ThrowableObject : MonoBehaviour, IThrowable
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), physicsCollider);
         }
-        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Ground"))
+        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("ThrowableObject"))
         {
             StopForce();
             DeactivateConstraintsTotally();

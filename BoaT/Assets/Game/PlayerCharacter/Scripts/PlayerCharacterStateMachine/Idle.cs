@@ -1,12 +1,8 @@
 ﻿public class Idle : PlayerState
 {
-    private PlayerData playerData;
-    private PlayerInputs playerInputs;
     public Idle(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerData = playerCharacter.playerData;
-        playerInputs = playerCharacter.playerInputs;
-        playerCharacter.rotation.rotationEnabled = true;
+        playerCharacter.playerController.playerReferences.rotation.rotationEnabled = true;
     }
 
     public override void StateUpdate()
@@ -17,29 +13,30 @@
     #region Transitions
     private void Transitions()
     {
-        GoToMovementState();
-        GoToDashState();
-        GoToHandsState();
+        PlayerInputs playerInputs = _playerCharacter.playerController.playerReferences.playerInputs;
+        GoToMovementState(playerInputs);
+        GoToDashState(playerInputs);
+        GoToHandsState(playerInputs);
     }
     #region ToMovementState
-    private void GoToMovementState()
+    private void GoToMovementState(PlayerInputs playerInputs)
     {
         if ((playerInputs.MovementInput != UnityEngine.Vector3.zero)) _playerCharacter.SetState(new Moving(_playerCharacter));
     }
     #endregion
     #region ToDashState
-    private void GoToDashState()
+    private void GoToDashState(PlayerInputs playerInputs)
     {
-        if (playerInputs.DashInput && !playerData.LeftHandOccupied && !playerData.RightHandOccupied) _playerCharacter.SetState(new Dash(_playerCharacter));
+        if (playerInputs.DashInput && !_playerCharacter.playerController.LeftHandOccupied && !_playerCharacter.playerController.RightHandOccupied) _playerCharacter.SetState(new Dash(_playerCharacter));
     }
     #endregion
     #region ToHandsStates
-    private void GoToHandsState()
+    private void GoToHandsState(PlayerInputs playerInputs)
     {
         if (playerInputs.LeftHandInput || playerInputs.RightHandInput)
         {
-            if (playerInputs.LeftHandInput) playerData.selectedHand = PlayerData.SelectedHand.Left;
-            else playerData.selectedHand = PlayerData.SelectedHand.Right;
+            if (playerInputs.LeftHandInput) _playerCharacter.playerController.selectedHand = PlayerController.SelectedHand.Left;
+            else _playerCharacter.playerController.selectedHand = PlayerController.SelectedHand.Right;
             _playerCharacter.SetState(new Hands(_playerCharacter));
         }
     }

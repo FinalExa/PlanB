@@ -1,14 +1,9 @@
-﻿public class Throw : PlayerState
+﻿using UnityEngine;
+public class Throw : PlayerState
 {
-    private PlayerData playerData;
-    private PlayerInputs playerInputs;
-    private MouseData mouseData;
     public Throw(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerData = playerCharacter.playerData;
-        playerInputs = playerCharacter.playerInputs;
-        mouseData = playerCharacter.mouseData;
-        playerCharacter.rotation.rotationEnabled = false;
+        playerCharacter.playerController.playerReferences.rotation.rotationEnabled = false;
     }
     public override void Start()
     {
@@ -18,43 +13,43 @@
     #region Throw
     private void CheckHand()
     {
-        if (playerData.selectedHand == PlayerData.SelectedHand.Left) ThrowLeftHand();
-        else if (playerData.selectedHand == PlayerData.SelectedHand.Right) ThrowRightHand();
+        if (_playerCharacter.playerController.selectedHand == PlayerController.SelectedHand.Left) ThrowLeftHand();
+        else ThrowRightHand();
     }
     private void ThrowLeftHand()
     {
-        if (_playerCharacter.LeftHand.transform.childCount > 0)
+        if (_playerCharacter.playerController.LeftHand.transform.childCount > 0)
         {
-            IThrowable iThrowable = _playerCharacter.LeftHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
+            IThrowable iThrowable = _playerCharacter.playerController.LeftHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
             LaunchObject(iThrowable);
         }
         SetHandFree();
     }
     private void ThrowRightHand()
     {
-        if (_playerCharacter.RightHand.transform.childCount > 0)
+        if (_playerCharacter.playerController.RightHand.transform.childCount > 0)
         {
-            IThrowable iThrowable = _playerCharacter.RightHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
+            IThrowable iThrowable = _playerCharacter.playerController.RightHand.transform.GetChild(0).gameObject.GetComponent<IThrowable>();
             LaunchObject(iThrowable);
         }
         SetHandFree();
     }
     private void LaunchObject(IThrowable iThrowable)
     {
-        _playerCharacter.rotation.RotateObjectToLaunch(iThrowable.Self.transform, mouseData.GetClickPosition().point);
-        iThrowable.DetachFromPlayer(playerData.throwDistance, playerData.throwFlightTime);
+        _playerCharacter.playerController.playerReferences.rotation.RotateObjectToLaunch(iThrowable.Self.transform, _playerCharacter.playerController.playerReferences.objectsOnMouse.GetClickPosition().point);
+        iThrowable.DetachFromPlayer(_playerCharacter.playerController.playerReferences.playerData.throwDistance, _playerCharacter.playerController.playerReferences.playerData.throwFlightTime);
     }
     private void SetHandFree()
     {
-        if (playerData.selectedHand == PlayerData.SelectedHand.Left)
+        if (_playerCharacter.playerController.selectedHand == PlayerController.SelectedHand.Left)
         {
-            playerData.LeftHandOccupied = false;
-            playerData.leftHandWeight = 0;
+            _playerCharacter.playerController.LeftHandOccupied = false;
+            _playerCharacter.playerController.leftHandWeight = 0;
         }
         else
         {
-            playerData.RightHandOccupied = false;
-            playerData.rightHandWeight = 0;
+            _playerCharacter.playerController.RightHandOccupied = false;
+            _playerCharacter.playerController.rightHandWeight = 0;
         }
         Transitions();
     }
@@ -63,7 +58,8 @@
     #region Transitions
     private void Transitions()
     {
-        if (playerInputs.MovementInput == UnityEngine.Vector3.zero) ReturnToIdle();
+        PlayerInputs playerInputs = _playerCharacter.playerController.playerReferences.playerInputs;
+        if (playerInputs.MovementInput == Vector3.zero) ReturnToIdle();
         else ReturnToMovement();
     }
     private void ReturnToIdle()

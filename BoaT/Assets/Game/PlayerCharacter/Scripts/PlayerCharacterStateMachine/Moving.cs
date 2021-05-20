@@ -1,16 +1,9 @@
-﻿public class Moving : PlayerState
+﻿using UnityEngine;
+public class Moving : PlayerState
 {
-    private PlayerData playerData;
-    private PlayerInputs playerInputs;
-    private UnityEngine.Rigidbody playerRb;
-    private UnityEngine.Camera mainCamera;
     public Moving(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerData = playerCharacter.playerData;
-        playerInputs = playerCharacter.playerInputs;
-        playerRb = _playerCharacter.playerRb;
-        mainCamera = UnityEngine.GameObject.FindObjectOfType<UnityEngine.Camera>();
-        playerCharacter.rotation.rotationEnabled = true;
+        playerCharacter.playerController.playerReferences.rotation.rotationEnabled = true;
     }
     public override void Start()
     {
@@ -25,20 +18,25 @@
     #region Movement
     private void UpdateSpeedValue()
     {
-        playerData.actualSpeed = playerData.movementSpeed - (playerData.leftHandWeight + playerData.rightHandWeight);
+        PlayerData playerData = _playerCharacter.playerController.playerReferences.playerData;
+        playerData.actualSpeed = playerData.movementSpeed - (_playerCharacter.playerController.leftHandWeight + _playerCharacter.playerController.rightHandWeight);
         if (playerData.actualSpeed < playerData.minSpeedValue) playerData.actualSpeed = playerData.minSpeedValue;
     }
     private void Movement()
     {
-        UnityEngine.Vector3 movementWithDirection = MovementInitialization();
-        playerRb.velocity = new UnityEngine.Vector3(movementWithDirection.x, movementWithDirection.y, movementWithDirection.z) * playerData.actualSpeed;
+        Rigidbody playerRb = _playerCharacter.playerController.playerReferences.playerRb;
+        PlayerData playerData = _playerCharacter.playerController.playerReferences.playerData;
+        Vector3 movementWithDirection = MovementInitialization();
+        playerRb.velocity = new Vector3(movementWithDirection.x, movementWithDirection.y, movementWithDirection.z) * playerData.actualSpeed;
     }
 
-    private UnityEngine.Vector3 MovementInitialization()
+    private Vector3 MovementInitialization()
     {
-        UnityEngine.Vector3 forward = mainCamera.transform.forward;
+        Camera mainCamera = _playerCharacter.playerController.playerReferences.mainCamera;
+        PlayerInputs playerInputs = _playerCharacter.playerController.playerReferences.playerInputs;
+        Vector3 forward = mainCamera.transform.forward;
         forward.y = 0f;
-        UnityEngine.Vector3 right = mainCamera.transform.right;
+        Vector3 right = mainCamera.transform.right;
         right.y = 0f;
         forward.Normalize();
         right.Normalize();
@@ -49,29 +47,30 @@
     #region Transitions
     private void Transitions()
     {
-        GoToIdleState();
-        GoToDashState();
-        GoToHandsState();
+        PlayerInputs playerInputs = _playerCharacter.playerController.playerReferences.playerInputs;
+        GoToIdleState(playerInputs);
+        GoToDashState(playerInputs);
+        GoToHandsState(playerInputs);
     }
     #region ToIdleState
-    private void GoToIdleState()
+    private void GoToIdleState(PlayerInputs playerInputs)
     {
-        if (playerInputs.MovementInput == UnityEngine.Vector3.zero) _playerCharacter.SetState(new Idle(_playerCharacter));
+        if (playerInputs.MovementInput == Vector3.zero) _playerCharacter.SetState(new Idle(_playerCharacter));
     }
     #endregion
     #region ToDashState
-    private void GoToDashState()
+    private void GoToDashState(PlayerInputs playerInputs)
     {
-        if (playerInputs.DashInput && !_playerCharacter.playerData.LeftHandOccupied && !_playerCharacter.playerData.RightHandOccupied) _playerCharacter.SetState(new Dash(_playerCharacter));
+        if (playerInputs.DashInput && !_playerCharacter.playerController.LeftHandOccupied && !_playerCharacter.playerController.RightHandOccupied) _playerCharacter.SetState(new Dash(_playerCharacter));
     }
     #endregion
     #region ToHandsStates
-    private void GoToHandsState()
+    private void GoToHandsState(PlayerInputs playerInputs)
     {
         if (playerInputs.LeftHandInput || playerInputs.RightHandInput)
         {
-            if (playerInputs.LeftHandInput) playerData.selectedHand = PlayerData.SelectedHand.Left;
-            else playerData.selectedHand = PlayerData.SelectedHand.Right;
+            if (playerInputs.LeftHandInput) _playerCharacter.playerController.selectedHand = PlayerController.SelectedHand.Left;
+            else _playerCharacter.playerController.selectedHand = PlayerController.SelectedHand.Right;
             _playerCharacter.SetState(new Hands(_playerCharacter));
         }
     }

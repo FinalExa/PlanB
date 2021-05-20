@@ -15,12 +15,9 @@ MonoBehaviour:
   movementSpeed: 15
   minSpeedValue: 1
   actualSpeed: 15
-  grabRange: 5
-  throwDistance: 5
+  grabRange: 3
+  throwDistance: 6
   throwFlightTime: 0.3
-  leftHandWeight: 0
-  rightHandWeight: 2
-  selectedHand: 0
   dashDistance: 8
   dashDuration: 0.2
   dashCooldown: 0.1
