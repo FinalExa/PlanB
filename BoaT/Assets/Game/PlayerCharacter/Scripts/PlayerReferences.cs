@@ -7,7 +7,7 @@ public class PlayerReferences : MonoBehaviour
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public ObjectsOnMouse objectsOnMouse;
     [HideInInspector] public Rigidbody playerRb;
-    [HideInInspector] public DashCooldown dashCooldown;
+    [HideInInspector] public Cooldown cooldown;
     [HideInInspector] public Camera mainCamera;
 
 
@@ -17,7 +17,7 @@ public class PlayerReferences : MonoBehaviour
         playerInputs = this.gameObject.GetComponent<PlayerInputs>();
         objectsOnMouse = FindObjectOfType<ObjectsOnMouse>();
         playerRb = this.gameObject.GetComponent<Rigidbody>();
-        dashCooldown = this.gameObject.GetComponent<DashCooldown>();
+        cooldown = this.gameObject.GetComponent<Cooldown>();
         mainCamera = GameObject.FindObjectOfType<Camera>();
     }
 }

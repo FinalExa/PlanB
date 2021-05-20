@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DashCooldown : MonoBehaviour
+public class Cooldown : MonoBehaviour
 {
     public PlayerData playerData;
     private float dashCooldownTimer;
