@@ -10,17 +10,17 @@ public class DashCooldown : MonoBehaviour
     {
         if (dashOnCooldown)
         {
-            DashCooldownExecute();
+            CooldownExecute();
         }
     }
 
-    public void SetDashOnCooldown()
+    public void SetOnCooldown()
     {
         dashCooldownTimer = playerData.dashCooldown;
         dashOnCooldown = true;
     }
 
-    private void DashCooldownExecute()
+    private void CooldownExecute()
     {
         if (dashCooldownTimer > 0) dashCooldownTimer -= Time.deltaTime;
         else dashOnCooldown = false;

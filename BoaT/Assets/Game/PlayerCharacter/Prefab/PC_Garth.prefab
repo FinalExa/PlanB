@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 127697078383323057}
   - component: {fileID: 9075689409390051998}
   - component: {fileID: 1673490640784394817}
-  - component: {fileID: 419043180686382014}
   - component: {fileID: 94225614841390228}
   - component: {fileID: 6826761888702464984}
   - component: {fileID: 7845207312148664838}
@@ -172,20 +171,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
---- !u!114 &419043180686382014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8877571697949988489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41659adb6646ee34c810ab1ba5c901ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 311653c0f595efe4b9bf12720d42eab5, type: 2}
-  thisCollider: {fileID: 6026187827951584930}
 --- !u!114 &94225614841390228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +222,7 @@ MonoBehaviour:
   RightHand: {fileID: 5707342504787091415}
   leftHandWeight: 0
   rightHandWeight: 0
+  thisTrigger: {fileID: 6026187827951584930}
   selectedHand: 0
 --- !u!54 &8490081029144132567
 Rigidbody:
@@ -278,7 +264,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1849749656985548643
 PrefabInstance:

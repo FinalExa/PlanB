@@ -20,4 +20,4 @@ MonoBehaviour:
   throwFlightTime: 0.3
   dashDistance: 8
   dashDuration: 0.2
-  dashCooldown: 0.1
+  dashCooldown: 0.5

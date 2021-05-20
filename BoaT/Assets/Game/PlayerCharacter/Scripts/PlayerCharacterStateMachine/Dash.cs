@@ -53,7 +53,7 @@ public class Dash : PlayerState
         DashCooldown dashCooldown = _playerCharacter.playerController.playerReferences.dashCooldown;
         playerRb.velocity = Vector3.zero;
         dashFinished = true;
-        dashCooldown.SetDashOnCooldown();
+        dashCooldown.SetOnCooldown();
         Transitions();
     }
     #endregion
