@@ -9,7 +9,6 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     private float flightTimer;
     private float throwDistance;
     private float flightTime;
-    private float stopValue;
     private bool isAttachedToHand;
     private bool isFlying;
     private BoxCollider physicsCollider;
@@ -30,7 +29,7 @@ public class ThrowableObject : MonoBehaviour, IThrowable
         Weight = throwableObjectData.objectWeight;
         this.gameObject.transform.SetParent(baseContainer.transform);
     }
-    void Update()
+    void FixedUpdate()
     {
         if (isFlying) FlightTime();
     }
@@ -45,11 +44,10 @@ public class ThrowableObject : MonoBehaviour, IThrowable
         this.gameObject.transform.localRotation = Quaternion.identity;
         physicsCollider.enabled = false;
     }
-    public void DetachFromPlayer(float throwDistanceObtained, float flightTimeObtained, float stopValueThrow)
+    public void DetachFromPlayer(float throwDistanceObtained, float flightTimeObtained)
     {
         throwDistance = throwDistanceObtained;
         flightTime = flightTimeObtained;
-        stopValue = stopValueThrow;
         DeactivateConstraintsExceptGravity();
         gameObject.layer = 0;
         this.gameObject.transform.SetParent(baseContainer.transform);
@@ -59,28 +57,19 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     }
     private void LaunchSelf()
     {
+        selfRB.velocity = new Vector3(transform.forward.x, transform.forward.y, transform.forward.z) * throwSpeed;
         throwSpeed = throwDistance / flightTime;
         flightTimer = flightTime;
         isFlying = true;
     }
     private void FlightTime()
     {
-        if (flightTimer > 0)
-        {
-            SpeedFormula();
-            flightTimer -= Time.deltaTime;
-        }
+        if (flightTimer > 0) flightTimer -= Time.deltaTime;
         else
         {
             DeactivateConstraintsTotally();
             isFlying = false;
         }
-    }
-    private void SpeedFormula()
-    {
-        float offsetToRemove = ((throwSpeed * flightTime * stopValue) * (flightTime - flightTimer));
-        float relativeSpeed = throwSpeed - offsetToRemove;
-        selfRB.velocity = new Vector3(transform.forward.x, transform.forward.y, transform.forward.z) * relativeSpeed;
     }
     private void StopForce()
     {

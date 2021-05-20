@@ -11,7 +11,6 @@ public class PlayerData : ScriptableObject
     public float grabRange;
     public float throwDistance;
     public float throwFlightTime;
-    public float throwStopValue;
     public bool LeftHandOccupied { get; set; }
     public bool RightHandOccupied { get; set; }
     [HideInInspector] public float leftHandWeight;
