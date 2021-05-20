@@ -1,15 +1,16 @@
-﻿public class Moving : PlayerState
+﻿using UnityEngine;
+public class Moving : PlayerState
 {
     private PlayerData playerData;
     private PlayerInputs playerInputs;
-    private UnityEngine.Rigidbody playerRb;
-    private UnityEngine.Camera mainCamera;
+    private Rigidbody playerRb;
+    private Camera mainCamera;
     public Moving(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerData = playerCharacter.playerData;
         playerInputs = playerCharacter.playerInputs;
         playerRb = _playerCharacter.playerRb;
-        mainCamera = UnityEngine.GameObject.FindObjectOfType<UnityEngine.Camera>();
+        mainCamera = GameObject.FindObjectOfType<Camera>();
         playerCharacter.rotation.rotationEnabled = true;
     }
     public override void Start()
@@ -30,15 +31,15 @@
     }
     private void Movement()
     {
-        UnityEngine.Vector3 movementWithDirection = MovementInitialization();
-        playerRb.velocity = new UnityEngine.Vector3(movementWithDirection.x, movementWithDirection.y, movementWithDirection.z) * playerData.actualSpeed;
+        Vector3 movementWithDirection = MovementInitialization();
+        playerRb.velocity = new Vector3(movementWithDirection.x, movementWithDirection.y, movementWithDirection.z) * playerData.actualSpeed;
     }
 
-    private UnityEngine.Vector3 MovementInitialization()
+    private Vector3 MovementInitialization()
     {
-        UnityEngine.Vector3 forward = mainCamera.transform.forward;
+        Vector3 forward = mainCamera.transform.forward;
         forward.y = 0f;
-        UnityEngine.Vector3 right = mainCamera.transform.right;
+        Vector3 right = mainCamera.transform.right;
         right.y = 0f;
         forward.Normalize();
         right.Normalize();
@@ -56,7 +57,7 @@
     #region ToIdleState
     private void GoToIdleState()
     {
-        if (playerInputs.MovementInput == UnityEngine.Vector3.zero) _playerCharacter.SetState(new Idle(_playerCharacter));
+        if (playerInputs.MovementInput == Vector3.zero) _playerCharacter.SetState(new Idle(_playerCharacter));
     }
     #endregion
     #region ToDashState

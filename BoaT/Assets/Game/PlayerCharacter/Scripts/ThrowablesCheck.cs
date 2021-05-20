@@ -15,7 +15,7 @@ public class ThrowablesCheck : MonoBehaviour
         thisCollider.radius = playerData.grabRange;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         //FIX THIS ASAP
         IThrowable otherObject = other.gameObject.GetComponent<IThrowable>();

@@ -1,4 +1,5 @@
-﻿public class Throw : PlayerState
+﻿using UnityEngine;
+public class Throw : PlayerState
 {
     private PlayerData playerData;
     private PlayerInputs playerInputs;
@@ -63,7 +64,7 @@
     #region Transitions
     private void Transitions()
     {
-        if (playerInputs.MovementInput == UnityEngine.Vector3.zero) ReturnToIdle();
+        if (playerInputs.MovementInput == Vector3.zero) ReturnToIdle();
         else ReturnToMovement();
     }
     private void ReturnToIdle()

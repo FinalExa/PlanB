@@ -1,14 +1,13 @@
-﻿public class Grab : PlayerState
+﻿using UnityEngine;
+public class Grab : PlayerState
 {
     private PlayerData playerData;
     private PlayerInputs playerInputs;
-    private MouseData mouseData;
     private ObjectsOnMouse objectsOnMouse;
     public Grab(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerData = playerCharacter.playerData;
         playerInputs = playerCharacter.playerInputs;
-        mouseData = playerCharacter.mouseData;
         objectsOnMouse = playerCharacter.objectsOnMouse;
         playerCharacter.rotation.rotationEnabled = false;
     }
@@ -49,7 +48,7 @@
     #region Transitions
     private void Transitions()
     {
-        if (playerInputs.MovementInput == UnityEngine.Vector3.zero) ReturnToIdle();
+        if (playerInputs.MovementInput == Vector3.zero) ReturnToIdle();
         else ReturnToMovement();
     }
     private void ReturnToIdle()

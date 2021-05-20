@@ -7,8 +7,8 @@ public class Dash : PlayerState
     private DashCooldown dashCooldown;
     private bool dashFinished;
     private float dashTimer;
-    private UnityEngine.Vector3 dashVector;
-    private UnityEngine.Rigidbody playerRb;
+    private Vector3 dashVector;
+    private Rigidbody playerRb;
     public Dash(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
         playerCharacter.rotation.rotationEnabled = false;
@@ -40,22 +40,22 @@ public class Dash : PlayerState
     {
         dashFinished = false;
         float speed = playerData.dashDistance / playerData.dashDuration;
-        UnityEngine.Vector3 forward = _playerCharacter.transform.GetChild(0).forward;
-        dashVector = new UnityEngine.Vector3(forward.x, forward.y, forward.z) * speed;
+        Vector3 forward = _playerCharacter.transform.GetChild(0).forward;
+        dashVector = new Vector3(forward.x, forward.y, forward.z) * speed;
         dashTimer = playerData.dashDuration;
     }
     private void PerformDash()
     {
         if (dashTimer > 0)
         {
-            dashTimer -= UnityEngine.Time.deltaTime;
+            dashTimer -= Time.deltaTime;
             playerRb.velocity = dashVector;
         }
         else EndDash();
     }
     private void EndDash()
     {
-        playerRb.velocity = UnityEngine.Vector3.zero;
+        playerRb.velocity = Vector3.zero;
         dashFinished = true;
         dashCooldown.SetDashOnCooldown();
         Transitions();
@@ -65,7 +65,7 @@ public class Dash : PlayerState
     #region Transitions
     private void Transitions()
     {
-        if (playerInputs.MovementInput == UnityEngine.Vector3.zero) ReturnToIdle();
+        if (playerInputs.MovementInput == Vector3.zero) ReturnToIdle();
         else ReturnToMovement();
     }
     private void ReturnToIdle()

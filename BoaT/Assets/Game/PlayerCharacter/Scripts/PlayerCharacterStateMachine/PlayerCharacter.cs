@@ -2,7 +2,7 @@
 using UnityEngine;
 public class PlayerCharacter : StateMachine
 {
-    [HideInInspector] public PlayerData playerData;
+    public PlayerData playerData;
     [HideInInspector] public Rotation rotation;
     [HideInInspector] public PlayerInputs playerInputs;
     [HideInInspector] public MouseData mouseData;

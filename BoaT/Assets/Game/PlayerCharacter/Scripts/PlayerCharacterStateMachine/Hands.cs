@@ -1,4 +1,5 @@
-﻿public class Hands : PlayerState
+﻿using UnityEngine;
+public class Hands : PlayerState
 {
     private PlayerData playerData;
     private MouseData mouseData;
@@ -61,7 +62,7 @@
     #region Transitions
     private void Transitions()
     {
-        if (playerInputs.MovementInput == UnityEngine.Vector3.zero) GoToIdle();
+        if (playerInputs.MovementInput == Vector3.zero) GoToIdle();
         else GoToMoving();
     }
     private void GoToGrab()
