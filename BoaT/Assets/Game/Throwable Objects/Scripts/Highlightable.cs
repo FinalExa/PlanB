@@ -5,7 +5,7 @@ public class Highlightable : MonoBehaviour
     private MouseData mouseData;
     private Renderer thisRenderer;
     private ThrowableObject throwableObject;
-    [HideInInspector] public ThrowableObjectData throwableObjectData;
+    public ThrowableObjectData throwableObjectData;
     private void Awake()
     {
         mouseData = FindObjectOfType<MouseData>();
