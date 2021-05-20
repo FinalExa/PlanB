@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
         playerReferences = this.gameObject.GetComponent<PlayerReferences>();
         thisTrigger = this.gameObject.GetComponent<SphereCollider>();
     }
-
     private void Start()
     {
         thisTrigger.radius = playerReferences.playerData.grabRange;
@@ -32,23 +31,39 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //FIX THIS ASAP
+        ObjectIsInRange(other);
+    }
+
+    private void ObjectIsInRange(Collider other)
+    {
         IThrowable otherObject = other.gameObject.GetComponent<IThrowable>();
         if (otherObject != null)
         {
-            otherObject.IsInsidePlayerRange = true;
             Collider otherCol = otherObject.Self.GetComponent<Collider>();
-            if (!objectsInPlayerRange.Contains(otherCol)) objectsInPlayerRange.Add(otherCol);
+            if (!objectsInPlayerRange.Contains(otherCol))
+            {
+                otherObject.IsInsidePlayerRange = true;
+                objectsInPlayerRange.Add(otherCol);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        ObjectIsOutOfRange(other);
+    }
+
+    private void ObjectIsOutOfRange(Collider other)
+    {
         IThrowable otherObject = other.gameObject.GetComponent<IThrowable>();
-        if (otherObject != null)
+        if (otherObject != null && Vector2.Distance(new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.z), new Vector2(other.gameObject.transform.position.x, other.gameObject.transform.position.z)) > playerReferences.playerData.grabRange)
         {
-            otherObject.IsInsidePlayerRange = false;
-            objectsInPlayerRange.Remove(otherObject.Self.GetComponent<Collider>());
+            Collider otherCol = otherObject.Self.GetComponent<Collider>();
+            if (objectsInPlayerRange.Contains(otherCol))
+            {
+                otherObject.IsInsidePlayerRange = false;
+                objectsInPlayerRange.Remove(otherCol);
+            }
         }
     }
 }
