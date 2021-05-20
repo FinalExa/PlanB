@@ -1,28 +1,46 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Cooldown : MonoBehaviour
 {
     public PlayerData playerData;
-    private float dashCooldownTimer;
-    [HideInInspector] public bool dashOnCooldown;
+    public enum CooldownType
+    {
+        Dash
+    }
+    public Dictionary<CooldownType, SingleCooldown> cooldowns = new Dictionary<CooldownType, SingleCooldown>();
 
     void Update()
     {
-        if (dashOnCooldown)
-        {
-            CooldownExecute();
-        }
+        if (cooldowns.Count > 0) CooldownExecute();
     }
 
-    public void SetOnCooldown()
+    public void SetOnCooldown(CooldownType type, float maxTime)
     {
-        dashCooldownTimer = playerData.dashCooldown;
-        dashOnCooldown = true;
+        if (!cooldowns.ContainsKey(type))
+        {
+            SingleCooldown cooldown = new SingleCooldown();
+            cooldown.cooldownTime = maxTime;
+            cooldown.timer = maxTime;
+            cooldowns.Add(type, cooldown);
+        }
     }
 
     private void CooldownExecute()
     {
-        if (dashCooldownTimer > 0) dashCooldownTimer -= Time.deltaTime;
-        else dashOnCooldown = false;
+        foreach (var cooldown in cooldowns)
+        {
+            if (cooldown.Value.cooldownTime > 0) cooldown.Value.cooldownTime -= Time.deltaTime;
+            else
+            {
+                if (cooldowns.Count - 1 != 0) cooldowns.Remove(cooldown.Key);
+                else cooldowns = new Dictionary<CooldownType, SingleCooldown>();
+            }
+        }
     }
+}
+public class SingleCooldown
+{
+    public float cooldownTime;
+    public float timer;
 }

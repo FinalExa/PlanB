@@ -12,7 +12,7 @@ public class Dash : PlayerState
     public override void Start()
     {
         Cooldown cooldown = _playerCharacter.playerController.playerReferences.cooldown;
-        if (!cooldown.dashOnCooldown) DashSetup();
+        if (!cooldown.cooldowns.ContainsKey(Cooldown.CooldownType.Dash)) DashSetup();
         else Transitions();
     }
     public override void StateUpdate()
@@ -50,10 +50,11 @@ public class Dash : PlayerState
     private void EndDash()
     {
         Rigidbody playerRb = _playerCharacter.playerController.playerReferences.playerRb;
-        Cooldown dashCooldown = _playerCharacter.playerController.playerReferences.cooldown;
+        Cooldown cooldown = _playerCharacter.playerController.playerReferences.cooldown;
+        PlayerData playerData = _playerCharacter.playerController.playerReferences.playerData;
         playerRb.velocity = Vector3.zero;
         dashFinished = true;
-        dashCooldown.SetOnCooldown();
+        cooldown.SetOnCooldown(Cooldown.CooldownType.Dash, playerData.dashCooldown);
         Transitions();
     }
     #endregion
