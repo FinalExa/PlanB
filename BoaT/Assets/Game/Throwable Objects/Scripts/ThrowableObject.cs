@@ -94,7 +94,7 @@ public class ThrowableObject : MonoBehaviour, IThrowable
         {
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), physicsCollider);
         }
-        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Ground"))
+        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("ThrowableObject"))
         {
             StopForce();
             DeactivateConstraintsTotally();

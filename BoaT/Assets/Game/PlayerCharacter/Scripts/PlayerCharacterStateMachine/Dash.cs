@@ -21,10 +21,7 @@ public class Dash : PlayerState
     }
     public override void Collisions(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Ground"))
-        {
-            EndDash();
-        }
+        if (!collision.gameObject.CompareTag("Ground")) EndDash();
     }
 
     #region Dash
