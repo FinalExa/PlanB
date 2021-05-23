@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public bool RightHandOccupied { get; set; }
     [HideInInspector] public float leftHandWeight;
     [HideInInspector] public float rightHandWeight;
+    [HideInInspector] public Collider objectClicked;
     [SerializeField] private SphereCollider thisTrigger;
     public enum SelectedHand
     {

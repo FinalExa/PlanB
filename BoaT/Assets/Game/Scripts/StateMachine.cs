@@ -7,7 +7,6 @@ public abstract class StateMachine : MonoBehaviour
     public void SetState(PlayerState state)
     {
         _state = state;
-        stateRef = _state.ToString();
         state.Start();
     }
 }

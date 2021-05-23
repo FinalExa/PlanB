@@ -2,6 +2,7 @@
 
 public class PlayerAnimations : MonoBehaviour
 {
+    [HideInInspector] public bool waitForAnimation;
     [SerializeField] private Animator playerAnimator;
     private PlayerCharacter playerCharacter;
     private string actualState;
@@ -9,6 +10,7 @@ public class PlayerAnimations : MonoBehaviour
     private void Awake()
     {
         playerCharacter = this.gameObject.GetComponent<PlayerCharacter>();
+        PlayerAnimationsBehaviour.onAnimationEnd += AnimationIsOver;
     }
     private void Start()
     {
@@ -31,5 +33,10 @@ public class PlayerAnimations : MonoBehaviour
     {
         actualState = playerCharacter.stateRef;
         playerAnimator.SetBool(actualState, true);
+    }
+
+    private void AnimationIsOver()
+    {
+        waitForAnimation = false;
     }
 }
