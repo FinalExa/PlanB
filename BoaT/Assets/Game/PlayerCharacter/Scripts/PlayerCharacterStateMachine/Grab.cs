@@ -10,13 +10,12 @@ public class Grab : PlayerState
     {
         _playerCharacter.playerController.playerReferences.playerRb.velocity = Vector3.zero;
         _playerCharacter.playerController.playerReferences.playerAnimations.waitForAnimation = true;
-        CheckHand();
     }
 
     public override void StateUpdate()
     {
         PlayerAnimations playerAnimations = _playerCharacter.playerController.playerReferences.playerAnimations;
-        if (!playerAnimations.waitForAnimation) Transitions();
+        if (!playerAnimations.waitForAnimation) CheckHand();
     }
 
     #region Grab
@@ -32,6 +31,7 @@ public class Grab : PlayerState
         IThrowable iThrowable = _playerCharacter.playerController.objectClicked.GetComponent<IThrowable>();
         if (selectedHand == PlayerController.SelectedHand.Left) LeftHand(iThrowable);
         else RightHand(iThrowable);
+        Transitions();
     }
     private void LeftHand(IThrowable iThrowable)
     {

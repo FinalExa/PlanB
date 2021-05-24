@@ -28,6 +28,7 @@ public class PlayerAnimations : MonoBehaviour
         {
             playerAnimator.SetBool(actualState, false);
             SetupStateBool();
+            playerAnimator.Update(0);
         }
     }
     private void HandsChecks()
