@@ -10,6 +10,7 @@ public class Grab : PlayerState
     {
         _playerCharacter.playerController.playerReferences.playerRb.velocity = Vector3.zero;
         _playerCharacter.playerController.playerReferences.playerAnimations.waitForAnimation = true;
+        _playerCharacter.playerController.playerReferences.rotation.RotatePlayerToMousePosition();
     }
 
     public override void StateUpdate()

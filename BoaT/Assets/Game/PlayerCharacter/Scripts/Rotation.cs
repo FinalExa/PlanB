@@ -4,12 +4,14 @@ public class Rotation : MonoBehaviour
 {
     public bool rotationEnabled;
     private PlayerInputs playerInputs;
+    private ObjectsOnMouse objectsOnMouse;
     private Transform playerCharacterTransform;
     private Camera mainCamera;
     void Awake()
     {
         playerInputs = FindObjectOfType<PlayerInputs>();
         mainCamera = FindObjectOfType<Camera>();
+        objectsOnMouse = FindObjectOfType<ObjectsOnMouse>();
         playerCharacterTransform = this.gameObject.transform;
     }
     private void Start()
@@ -45,8 +47,9 @@ public class Rotation : MonoBehaviour
         float angle = CalculateAngle(objectToLaunch.position, endPosition);
         playerCharacterTransform.rotation = Quaternion.Euler(new Vector3(objectToLaunch.rotation.x, angle, playerCharacterTransform.rotation.z));
     }
-    public void RotatePlayerToLaunch()
+    public void RotatePlayerToMousePosition()
     {
-
+        float angle = CalculateAngle(playerCharacterTransform.position, objectsOnMouse.mousePositionInSpace);
+        playerCharacterTransform.rotation = Quaternion.Euler(new Vector3(playerCharacterTransform.rotation.x, angle, playerCharacterTransform.rotation.z));
     }
 }
