@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 4ab7e2d6bcdeacd48bc3ad4df7e865c9
+guid: f70ab079bc9d79540b3506c258c64d48
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -295666800684954421
+    second: Drunk Walk
   externalObjects: {}
   materials:
     materialImportMode: 1

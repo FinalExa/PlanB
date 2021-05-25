@@ -8,7 +8,15 @@ public class Grab : PlayerState
 
     public override void Start()
     {
-        CheckHand();
+        _playerCharacter.playerController.playerReferences.playerRb.velocity = Vector3.zero;
+        _playerCharacter.playerController.playerReferences.playerAnimations.waitForAnimation = true;
+        _playerCharacter.playerController.playerReferences.rotation.RotatePlayerToMousePosition();
+    }
+
+    public override void StateUpdate()
+    {
+        PlayerAnimations playerAnimations = _playerCharacter.playerController.playerReferences.playerAnimations;
+        if (!playerAnimations.waitForAnimation) CheckHand();
     }
 
     #region Grab
@@ -21,7 +29,7 @@ public class Grab : PlayerState
     private void SetHandOccupied(PlayerController.SelectedHand selectedHand)
     {
 
-        IThrowable iThrowable = _playerCharacter.playerController.playerReferences.objectsOnMouse.PassThrowableObject().GetComponent<IThrowable>();
+        IThrowable iThrowable = _playerCharacter.playerController.objectClicked.GetComponent<IThrowable>();
         if (selectedHand == PlayerController.SelectedHand.Left) LeftHand(iThrowable);
         else RightHand(iThrowable);
         Transitions();
