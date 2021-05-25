@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 public class Hands : PlayerState
 {
-    private Collider mousePos;
     public Hands(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
     }
 
     public override void Start()
     {
-        mousePos = _playerCharacter.playerController.playerReferences.objectsOnMouse.GetClickPosition().collider;
+        _playerCharacter.playerController.objectClicked = _playerCharacter.playerController.playerReferences.objectsOnMouse.GetClickPosition().collider;
         CheckHandToUse();
     }
 
@@ -34,7 +33,7 @@ public class Hands : PlayerState
     private void CheckIfThrowableIsSelected()
     {
         ObjectsOnMouse objectsOnMouse = _playerCharacter.playerController.playerReferences.objectsOnMouse;
-        if (objectsOnMouse.CheckForThrowableObject(mousePos) == true) CheckIfObjectIsInPlayerRange();
+        if (objectsOnMouse.CheckForThrowableObject(_playerCharacter.playerController.objectClicked) == true) CheckIfObjectIsInPlayerRange();
         else Transitions();
     }
     private void CheckIfObjectIsInPlayerRange()
@@ -42,7 +41,7 @@ public class Hands : PlayerState
         bool noObjectInRange = true;
         foreach (var collider in _playerCharacter.playerController.objectsInPlayerRange)
         {
-            if (collider == mousePos)
+            if (collider == _playerCharacter.playerController.objectClicked)
             {
                 noObjectInRange = false;
                 GoToGrab();

@@ -9,6 +9,7 @@ public class PlayerReferences : MonoBehaviour
     [HideInInspector] public Rigidbody playerRb;
     [HideInInspector] public Cooldown cooldown;
     [HideInInspector] public Camera mainCamera;
+    [HideInInspector] public PlayerAnimations playerAnimations;
 
 
     private void Awake()
@@ -19,5 +20,6 @@ public class PlayerReferences : MonoBehaviour
         playerRb = this.gameObject.GetComponent<Rigidbody>();
         cooldown = this.gameObject.GetComponent<Cooldown>();
         mainCamera = GameObject.FindObjectOfType<Camera>();
+        playerAnimations = this.gameObject.GetComponent<PlayerAnimations>();
     }
 }

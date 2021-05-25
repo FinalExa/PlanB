@@ -2,6 +2,7 @@
 public class PlayerCharacter : StateMachine
 {
     [HideInInspector] public PlayerController playerController;
+
     private void Awake()
     {
         playerController = this.gameObject.GetComponent<PlayerController>();
