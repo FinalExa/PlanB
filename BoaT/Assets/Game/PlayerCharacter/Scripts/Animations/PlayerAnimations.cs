@@ -31,6 +31,11 @@ public class PlayerAnimations : MonoBehaviour
             playerAnimator.Update(0);
         }
     }
+    private void SetupStateBool()
+    {
+        actualState = playerCharacter.stateRef;
+        playerAnimator.SetBool(actualState, true);
+    }
     private void HandsChecks()
     {
         PlayerController playerController = playerCharacter.playerController;
@@ -81,11 +86,6 @@ public class PlayerAnimations : MonoBehaviour
             playerAnimator.SetBool("LeftOccupiedRightFree", false);
             playerAnimator.SetBool("HandsOccupied", true);
         }
-    }
-    private void SetupStateBool()
-    {
-        actualState = playerCharacter.stateRef;
-        playerAnimator.SetBool(actualState, true);
     }
 
     private void AnimationIsOver()
