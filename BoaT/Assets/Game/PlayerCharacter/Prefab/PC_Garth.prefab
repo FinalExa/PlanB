@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 302ddb846101bc347a830333f9e4764c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateRef: 
   playerController: {fileID: 0}
 --- !u!114 &94225614841390228
 MonoBehaviour:
@@ -223,6 +224,7 @@ MonoBehaviour:
   playerRb: {fileID: 0}
   cooldown: {fileID: 0}
   mainCamera: {fileID: 0}
+  playerAnimations: {fileID: 0}
 --- !u!114 &7845207312148664838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +243,7 @@ MonoBehaviour:
   RightHand: {fileID: 5707342504787091415}
   leftHandWeight: 0
   rightHandWeight: 0
+  objectClicked: {fileID: 0}
   thisTrigger: {fileID: 6026187827951584930}
   selectedHand: 0
 --- !u!114 &3371889578214040557
@@ -255,7 +258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7d53a33dd7f24d9e8c545d2b75b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitForAnimation: 0
   playerAnimator: {fileID: 3957953130347433435}
+  statesToExclude:
+  - Hands
 --- !u!54 &8490081029144132567
 Rigidbody:
   m_ObjectHideFlags: 0

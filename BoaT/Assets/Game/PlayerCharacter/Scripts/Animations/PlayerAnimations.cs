@@ -1,40 +1,14 @@
-﻿using UnityEngine;
-
-public class PlayerAnimations : MonoBehaviour
+﻿public class PlayerAnimations : Animations
 {
-    [HideInInspector] public bool waitForAnimation;
-    [SerializeField] private Animator playerAnimator;
-    private PlayerCharacter playerCharacter;
-    private string actualState;
-
-    private void Awake()
+    public override void Awake()
     {
-        playerCharacter = this.gameObject.GetComponent<PlayerCharacter>();
+        base.Awake();
         PlayerAnimationsBehaviour.onAnimationEnd += AnimationIsOver;
     }
-    private void Start()
-    {
-        SetupStateBool();
-    }
-    private void Update()
+    public override void Update()
     {
         HandsChecks();
-        AnimatorStateUpdate();
-    }
-
-    private void AnimatorStateUpdate()
-    {
-        if (actualState != playerCharacter.stateRef && playerCharacter.stateRef != "Hands")
-        {
-            playerAnimator.SetBool(actualState, false);
-            SetupStateBool();
-            playerAnimator.Update(0);
-        }
-    }
-    private void SetupStateBool()
-    {
-        actualState = playerCharacter.stateRef;
-        playerAnimator.SetBool(actualState, true);
+        base.Update();
     }
     private void HandsChecks()
     {
@@ -86,10 +60,5 @@ public class PlayerAnimations : MonoBehaviour
             playerAnimator.SetBool("LeftOccupiedRightFree", false);
             playerAnimator.SetBool("HandsOccupied", true);
         }
-    }
-
-    private void AnimationIsOver()
-    {
-        waitForAnimation = false;
     }
 }
