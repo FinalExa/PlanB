@@ -34,15 +34,19 @@ public class Rotation : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = lookRotation;
     }
-
     private float CalculateAngle(Vector3 player, Vector3 mouse)
     {
         return Mathf.Atan2(mouse.x - player.x, mouse.z - player.z) * Mathf.Rad2Deg;
     }
+
     public void RotateObjectToLaunch(Transform objectToLaunch, Vector3 endPosition)
     {
         objectToLaunch.localRotation = Quaternion.identity;
         float angle = CalculateAngle(objectToLaunch.position, endPosition);
         playerCharacterTransform.rotation = Quaternion.Euler(new Vector3(objectToLaunch.rotation.x, angle, playerCharacterTransform.rotation.z));
+    }
+    public void RotatePlayerToLaunch()
+    {
+
     }
 }
