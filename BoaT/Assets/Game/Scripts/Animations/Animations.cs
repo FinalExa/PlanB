@@ -11,12 +11,14 @@ public class Animations : MonoBehaviour
     public virtual void Awake()
     {
         playerCharacter = this.gameObject.GetComponent<PlayerCharacter>();
+        StateMachine.stateChanged += UpdateAnimatorValues;
     }
     public virtual void Start()
     {
         SetupStateBool();
     }
-    public virtual void Update()
+
+    public virtual void UpdateAnimatorValues()
     {
         AnimatorStateUpdate();
     }
@@ -25,9 +27,8 @@ public class Animations : MonoBehaviour
     {
         if (actualState != playerCharacter.stateRef && NoStatesToIgnore())
         {
-            playerAnimator.SetBool(actualState, false);
+            if (!string.IsNullOrEmpty(actualState)) playerAnimator.SetBool(actualState, false);
             SetupStateBool();
-            playerAnimator.Update(0);
         }
     }
     public virtual void SetupStateBool()
