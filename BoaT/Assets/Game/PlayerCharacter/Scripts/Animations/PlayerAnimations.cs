@@ -5,10 +5,10 @@
         base.Awake();
         PlayerAnimationsBehaviour.onAnimationEnd += AnimationIsOver;
     }
-    public override void Update()
+    public override void AnimatorStateUpdate()
     {
         HandsChecks();
-        base.Update();
+        base.AnimatorStateUpdate();
     }
     private void HandsChecks()
     {
