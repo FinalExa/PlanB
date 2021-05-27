@@ -237,7 +237,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HandsOccupied
+    m_ConditionEvent: LeftOccupiedRightFree
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: RightHandSelected
@@ -338,7 +338,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: LeftFreeRightOccupied
+    m_ConditionEvent: HandsFree
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: RightHandSelected
@@ -668,7 +668,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Grab Left Arm Right Hold
-  m_Speed: 5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3259185121430079554}
@@ -951,7 +951,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Grab Left Arm Right Free
-  m_Speed: 5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1485062778625349327}
@@ -1326,7 +1326,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: HandsOccupied
+    m_ConditionEvent: LeftFreeRightOccupied
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: LeftHandSelected
@@ -1410,7 +1410,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: LeftOccupiedRightFree
+    m_ConditionEvent: HandsFree
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: LeftHandSelected
@@ -1760,7 +1760,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Grab Right Arm Left Free
-  m_Speed: 5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7700481386086045689}
@@ -1913,7 +1913,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Grab Right Arm Left Hold
-  m_Speed: 5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7418178286620743448}
