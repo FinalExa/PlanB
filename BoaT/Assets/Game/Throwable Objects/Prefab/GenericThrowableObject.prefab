@@ -162,6 +162,7 @@ MonoBehaviour:
     type: 2}
   selfRB: {fileID: 0}
   thisGraphicsObject: {fileID: 151905901253310682}
+  parentObjectTag: GenericObjectsContainer
 --- !u!114 &5000427771403774615
 MonoBehaviour:
   m_ObjectHideFlags: 0

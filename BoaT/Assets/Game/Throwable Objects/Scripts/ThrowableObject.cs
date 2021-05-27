@@ -16,11 +16,12 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     public ThrowableObjectData throwableObjectData;
     [HideInInspector] public Rigidbody selfRB;
     [SerializeField] private GameObject thisGraphicsObject;
+    [SerializeField] private string parentObjectTag;
 
     void Awake()
     {
         physicsCollider = this.gameObject.GetComponent<BoxCollider>();
-        baseContainer = GameObject.FindGameObjectWithTag("GenericObjectsContainer");
+        baseContainer = GameObject.FindGameObjectWithTag(parentObjectTag);
         throwableObjectData.baseColor = thisGraphicsObject.GetComponent<Renderer>().material.color;
         Self = this.gameObject;
         selfRB = Self.GetComponent<Rigidbody>();
