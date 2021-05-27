@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-public class SoulStateMachine : MonoBehaviour
+public class SoulStateMachine : StateMachine
 {
     [HideInInspector] public SoulController soulController;
     private void Awake()
     {
         soulController = this.gameObject.GetComponent<SoulController>();
+        SetState(new SoulIdle(this));
     }
 }

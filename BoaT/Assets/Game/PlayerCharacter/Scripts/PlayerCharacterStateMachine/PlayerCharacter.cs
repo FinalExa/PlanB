@@ -8,14 +8,6 @@ public class PlayerCharacter : StateMachine
         playerController = this.gameObject.GetComponent<PlayerController>();
         SetState(new Idle(this));
     }
-    private void Start()
-    {
-        _state.Start();
-    }
-    private void Update()
-    {
-        _state.StateUpdate();
-    }
     private void OnCollisionStay(Collision collision)
     {
         _state.Collisions(collision);

@@ -9,6 +9,7 @@ TagManager:
   - ThrowableObject
   - Soul
   - SoulContainer
+  - StorageRoom
   layers:
   - Default
   - TransparentFX
