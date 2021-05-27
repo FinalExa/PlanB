@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5740724075522996928}
+  - component: {fileID: 6058865334681178781}
+  - component: {fileID: 7682380320128411222}
   - component: {fileID: 527291455377808624}
   - component: {fileID: 7429171268645209088}
   m_Layer: 0
@@ -33,6 +35,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6058865334681178781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5740724075522996929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7316bfcb3a74b41809ce3d259fc4d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwableObjectData: {fileID: 11400000, guid: 68219eeec7286ab4a9ef389ae8bb94a1,
+    type: 2}
+  selfRB: {fileID: 0}
+  thisGraphicsObject: {fileID: 2040315804440421031}
+--- !u!114 &7682380320128411222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5740724075522996929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6873a95489c9cd4daf976f84850bcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwableObjectData: {fileID: 11400000, guid: 68219eeec7286ab4a9ef389ae8bb94a1,
+    type: 2}
+  thisGraphicsObject: {fileID: 2040315804440421031}
 --- !u!54 &527291455377808624
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -414,6 +447,12 @@ PrefabInstance:
 --- !u!4 &5197610664886101547 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6fb979619f5eeaf4dbf02970171b58bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 5740724077214826944}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2040315804440421031 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3171785055774874777, guid: 6fb979619f5eeaf4dbf02970171b58bc,
     type: 3}
   m_PrefabInstance: {fileID: 5740724077214826944}
   m_PrefabAsset: {fileID: 0}
