@@ -9,6 +9,10 @@ public abstract class State
     {
         return;
     }
+    public virtual void StatePhysicsUpdate()
+    {
+        return;
+    }
     public virtual void Exit()
     {
         return;

@@ -5,5 +5,6 @@
     {
         _soulStateMachine = soulStateMachine;
         soulStateMachine.stateRef = this.ToString();
+        soulStateMachine.StateNamePrint();
     }
 }

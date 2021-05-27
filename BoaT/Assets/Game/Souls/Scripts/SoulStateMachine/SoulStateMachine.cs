@@ -8,4 +8,9 @@ public class SoulStateMachine : StateMachine
         soulController = this.gameObject.GetComponent<SoulController>();
         SetState(new SoulIdle(this));
     }
+
+    public void StateNamePrint()
+    {
+        print(stateRef);
+    }
 }

@@ -9,8 +9,8 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     private float flightTimer;
     private float throwDistance;
     private float flightTime;
-    private bool isAttachedToHand;
-    private bool isFlying;
+    [HideInInspector] public bool isAttachedToHand;
+    [HideInInspector] public bool isFlying;
     private BoxCollider physicsCollider;
     private GameObject baseContainer;
     public ThrowableObjectData throwableObjectData;
