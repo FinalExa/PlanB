@@ -1,9 +1,11 @@
-﻿public class SoulIdle : SoulState
+﻿using UnityEngine;
+public class SoulIdle : SoulState
 {
     public SoulIdle(SoulStateMachine soulStateMachine) : base(soulStateMachine)
     {
-        #region Transitions
-
-        #endregion
+        Debug.Log(soulStateMachine.stateRef);
     }
+    #region Transitions
+
+    #endregion
 }
