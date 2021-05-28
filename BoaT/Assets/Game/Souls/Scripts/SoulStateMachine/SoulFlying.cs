@@ -5,16 +5,21 @@
     }
     public override void StateUpdate()
     {
-        Transitions();
+        if (!_soulStateMachine.soulController.soulReferences.throwableObject.isFlying) Transitions();
     }
     #region Transitions
     private void Transitions()
     {
         GoToIdle();
+        GoToEscapePub();
     }
     private void GoToIdle()
     {
-        if (!_soulStateMachine.soulController.soulReferences.throwableObject.isFlying) _soulStateMachine.SetState(new SoulIdle(_soulStateMachine));
+        if (_soulStateMachine.soulController.isInsideStorageRoom) _soulStateMachine.SetState(new SoulIdle(_soulStateMachine));
+    }
+    private void GoToEscapePub()
+    {
+        if (!_soulStateMachine.soulController.isInsideStorageRoom) _soulStateMachine.SetState(new SoulEscapePub(_soulStateMachine));
     }
     #endregion
 }

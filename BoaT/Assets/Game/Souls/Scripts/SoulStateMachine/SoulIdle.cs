@@ -13,7 +13,6 @@
     {
         GoToGrabbed();
         GoToEscapeThePlayer();
-        GoToEscapeThePub();
     }
     private void GoToGrabbed()
     {
@@ -21,11 +20,7 @@
     }
     private void GoToEscapeThePlayer()
     {
-
-    }
-    private void GoToEscapeThePub()
-    {
-
+        if (_soulStateMachine.soulController.playerIsInRange) _soulStateMachine.SetState(new SoulEscapePlayer(_soulStateMachine));
     }
     #endregion
 }
