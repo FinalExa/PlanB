@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 public class SoulController : MonoBehaviour
 {
     public bool isInsideStorageRoom;
+    public NavMeshAgent thisNavMeshAgent;
+    public Rigidbody thisRigidbody;
     [HideInInspector] public bool playerIsInRange;
     [HideInInspector] public SoulReferences soulReferences;
     [SerializeField] private float soulDetectionRange;

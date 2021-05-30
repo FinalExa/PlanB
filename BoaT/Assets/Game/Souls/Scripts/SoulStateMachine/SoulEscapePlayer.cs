@@ -3,6 +3,10 @@
     public SoulEscapePlayer(SoulStateMachine soulStateMachine) : base(soulStateMachine)
     {
     }
+    public override void Start()
+    {
+        _soulStateMachine.soulController.thisNavMeshAgent.enabled = true;
+    }
     public override void StateUpdate()
     {
         Transitions();
