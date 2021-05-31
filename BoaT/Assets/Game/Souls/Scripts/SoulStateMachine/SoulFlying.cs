@@ -5,7 +5,7 @@
     }
     public override void StateUpdate()
     {
-        if (!_soulStateMachine.soulController.soulReferences.throwableObject.isFlying) Transitions();
+        if (_soulStateMachine.soulController.soulReferences.throwableObject.isNotGrounded) Transitions();
     }
     #region Transitions
     private void Transitions()

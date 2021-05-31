@@ -11,6 +11,7 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     private float flightTime;
     [HideInInspector] public bool isAttachedToHand;
     [HideInInspector] public bool isFlying;
+    [HideInInspector] public bool isNotGrounded;
     private BoxCollider physicsCollider;
     private GameObject baseContainer;
     public ThrowableObjectData throwableObjectData;
@@ -30,6 +31,7 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     {
         Weight = throwableObjectData.objectWeight;
         this.gameObject.transform.SetParent(baseContainer.transform);
+        isNotGrounded = false;
     }
     void FixedUpdate()
     {
@@ -98,5 +100,10 @@ public class ThrowableObject : MonoBehaviour, IThrowable
             StopForce();
             DeactivateConstraintsTotally();
         }
+        if (collision.gameObject.CompareTag("Ground")) isNotGrounded = false;
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground")) isNotGrounded = true;
     }
 }
