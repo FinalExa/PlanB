@@ -9,18 +9,21 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     private float flightTimer;
     private float throwDistance;
     private float flightTime;
-    private bool isAttachedToHand;
-    private bool isFlying;
+    [HideInInspector] public bool isAttachedToHand;
+    [HideInInspector] public bool isFlying;
+    [HideInInspector] public bool isNotGrounded;
     private BoxCollider physicsCollider;
     private GameObject baseContainer;
     public ThrowableObjectData throwableObjectData;
     [HideInInspector] public Rigidbody selfRB;
+    [SerializeField] private GameObject thisGraphicsObject;
+    [SerializeField] private string parentObjectTag;
 
     void Awake()
     {
         physicsCollider = this.gameObject.GetComponent<BoxCollider>();
-        baseContainer = GameObject.FindGameObjectWithTag("GenericObjectsContainer");
-        throwableObjectData.baseColor = this.gameObject.GetComponent<Renderer>().material.color;
+        baseContainer = GameObject.FindGameObjectWithTag(parentObjectTag);
+        throwableObjectData.baseColor = thisGraphicsObject.GetComponent<Renderer>().material.color;
         Self = this.gameObject;
         selfRB = Self.GetComponent<Rigidbody>();
     }
@@ -28,6 +31,7 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     {
         Weight = throwableObjectData.objectWeight;
         this.gameObject.transform.SetParent(baseContainer.transform);
+        isNotGrounded = false;
     }
     void FixedUpdate()
     {
@@ -37,6 +41,7 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     {
         StopForce();
         isAttachedToHand = true;
+        isNotGrounded = true;
         gameObject.layer = 2;
         ActivateConstraints();
         this.gameObject.transform.position = playerHand.transform.position;
@@ -90,14 +95,12 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") && isAttachedToHand)
-        {
-            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), physicsCollider);
-        }
+        if (collision.gameObject.CompareTag("Player") && isAttachedToHand) Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), physicsCollider);
         if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("ThrowableObject"))
         {
             StopForce();
             DeactivateConstraintsTotally();
         }
+        if (collision.gameObject.CompareTag("Ground")) isNotGrounded = false;
     }
 }

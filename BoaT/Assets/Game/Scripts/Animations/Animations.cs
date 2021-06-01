@@ -11,7 +11,7 @@ public class Animations : MonoBehaviour
     public virtual void Awake()
     {
         playerCharacter = this.gameObject.GetComponent<PlayerCharacter>();
-        StateMachine.stateChanged += UpdateAnimatorValues;
+        PlayerCharacter.playerStateChanged += UpdateAnimatorValues;
     }
     public virtual void Start()
     {

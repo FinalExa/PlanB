@@ -7,6 +7,10 @@ TagManager:
   - GenericObjectsContainer
   - Ground
   - ThrowableObject
+  - Soul
+  - SoulContainer
+  - StorageRoom
+  - Exit
   layers:
   - Default
   - TransparentFX
