@@ -5,6 +5,7 @@
     }
     public override void Start()
     {
+        if (_soulStateMachine.soulController.thisNavMeshAgent.isOnNavMesh) _soulStateMachine.soulController.thisNavMeshAgent.isStopped = true;
     }
     public override void StateUpdate()
     {

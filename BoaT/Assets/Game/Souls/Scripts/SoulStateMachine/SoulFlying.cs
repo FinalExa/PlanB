@@ -25,7 +25,7 @@ public class SoulFlying : SoulState
     }
     private void GoToIdle()
     {
-        if (_soulStateMachine.soulController.isInsideStorageRoom) _soulStateMachine.SetState(new SoulIdle(_soulStateMachine));
+        if (_soulStateMachine.soulController.isInsideStorageRoom || !_soulStateMachine.soulController.thisNavMeshAgent.isOnNavMesh) _soulStateMachine.SetState(new SoulIdle(_soulStateMachine));
     }
     private void GoToEscapePub()
     {
