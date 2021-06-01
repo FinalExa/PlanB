@@ -41,6 +41,7 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     {
         StopForce();
         isAttachedToHand = true;
+        isNotGrounded = true;
         gameObject.layer = 2;
         ActivateConstraints();
         this.gameObject.transform.position = playerHand.transform.position;
@@ -101,9 +102,5 @@ public class ThrowableObject : MonoBehaviour, IThrowable
             DeactivateConstraintsTotally();
         }
         if (collision.gameObject.CompareTag("Ground")) isNotGrounded = false;
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground")) isNotGrounded = true;
     }
 }

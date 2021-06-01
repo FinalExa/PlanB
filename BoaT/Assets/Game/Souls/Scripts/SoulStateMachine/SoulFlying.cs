@@ -7,15 +7,14 @@ public class SoulFlying : SoulState
     }
     public override void StateUpdate()
     {
-        if (_soulStateMachine.soulController.soulReferences.throwableObject.isNotGrounded) Transitions();
+        if (!_soulStateMachine.soulController.soulReferences.throwableObject.isNotGrounded) StopFlight();
     }
     private void StopFlight()
     {
-        _soulStateMachine.soulController.thisNavMeshAgent.enabled = true;
+        _soulStateMachine.soulController.thisRigidbody.velocity = Vector3.zero;
+        _soulStateMachine.soulController.thisRigidbody.angularVelocity = Vector3.zero;
         NavMeshAgent thisNavMeshAgent = _soulStateMachine.soulController.thisNavMeshAgent;
         thisNavMeshAgent.enabled = true;
-        thisNavMeshAgent.velocity = Vector3.zero;
-        thisNavMeshAgent.isStopped = true;
         Transitions();
     }
     #region Transitions

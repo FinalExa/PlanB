@@ -976,6 +976,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7246138982620699378, guid: 7f22418e5b6eb1145a23f16f71e31571,
+        type: 3}
+      propertyPath: m_AutoBraking
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f22418e5b6eb1145a23f16f71e31571, type: 3}
 --- !u!1001 &7708417050066267964
