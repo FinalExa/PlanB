@@ -3,6 +3,9 @@
     public SoulIdle(SoulStateMachine soulStateMachine) : base(soulStateMachine)
     {
     }
+    public override void Start()
+    {
+    }
     public override void StateUpdate()
     {
         Transitions();

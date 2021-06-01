@@ -11,10 +11,10 @@ public class PlayerInRange : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) soulController.playerIsInRange = true;
+        if (other.CompareTag("Player")) soulController.playerIsInRange = other.gameObject;
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) soulController.playerIsInRange = false;
+        if (other.CompareTag("Player")) soulController.playerIsInRange = null;
     }
 }
