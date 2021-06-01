@@ -1,17 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
-public class SoulIdle : SoulState
+﻿public class SoulIdle : SoulState
 {
     public SoulIdle(SoulStateMachine soulStateMachine) : base(soulStateMachine)
     {
-    }
-    public override void Start()
-    {
-        NavMeshAgent thisNavMeshAgent = _soulStateMachine.soulController.thisNavMeshAgent;
-        thisNavMeshAgent.enabled = true;
-        thisNavMeshAgent.velocity = Vector3.zero;
-        _soulStateMachine.soulController.thisRigidbody.velocity = Vector3.zero;
-        thisNavMeshAgent.isStopped = true;
     }
     public override void StateUpdate()
     {

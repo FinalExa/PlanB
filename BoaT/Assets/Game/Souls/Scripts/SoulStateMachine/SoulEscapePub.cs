@@ -1,18 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
-public class SoulEscapePub : SoulState
+﻿public class SoulEscapePub : SoulState
 {
     public SoulEscapePub(SoulStateMachine soulStateMachine) : base(soulStateMachine)
     {
-    }
-    public override void Start()
-    {
-        _soulStateMachine.soulController.thisNavMeshAgent.enabled = true;
-        NavMeshAgent thisNavMeshAgent = _soulStateMachine.soulController.thisNavMeshAgent;
-        thisNavMeshAgent.enabled = true;
-        thisNavMeshAgent.velocity = Vector3.zero;
-        _soulStateMachine.soulController.thisRigidbody.velocity = Vector3.zero;
-        thisNavMeshAgent.isStopped = true;
     }
     public override void StateUpdate()
     {

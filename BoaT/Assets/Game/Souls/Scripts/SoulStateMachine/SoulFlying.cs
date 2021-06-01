@@ -1,4 +1,6 @@
-﻿public class SoulFlying : SoulState
+﻿using UnityEngine;
+using UnityEngine.AI;
+public class SoulFlying : SoulState
 {
     public SoulFlying(SoulStateMachine soulStateMachine) : base(soulStateMachine)
     {
@@ -6,6 +8,15 @@
     public override void StateUpdate()
     {
         if (_soulStateMachine.soulController.soulReferences.throwableObject.isNotGrounded) Transitions();
+    }
+    private void StopFlight()
+    {
+        _soulStateMachine.soulController.thisNavMeshAgent.enabled = true;
+        NavMeshAgent thisNavMeshAgent = _soulStateMachine.soulController.thisNavMeshAgent;
+        thisNavMeshAgent.enabled = true;
+        thisNavMeshAgent.velocity = Vector3.zero;
+        thisNavMeshAgent.isStopped = true;
+        Transitions();
     }
     #region Transitions
     private void Transitions()
