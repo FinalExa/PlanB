@@ -6,8 +6,6 @@ public class PlayerData : ScriptableObject
     [Header("Movement section")]
     public float movementSpeed;
     public float minSpeedValue;
-    //[HideInInspector]
-    public float actualSpeed;
     [Header("Hands section")]
     public float grabRange;
     public float throwDistance;

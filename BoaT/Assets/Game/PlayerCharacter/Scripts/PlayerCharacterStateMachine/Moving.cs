@@ -19,15 +19,16 @@ public class Moving : PlayerState
     private void UpdateSpeedValue()
     {
         PlayerData playerData = _playerCharacter.playerController.playerReferences.playerData;
-        playerData.actualSpeed = playerData.movementSpeed - (_playerCharacter.playerController.leftHandWeight + _playerCharacter.playerController.rightHandWeight);
-        if (playerData.actualSpeed < playerData.minSpeedValue) playerData.actualSpeed = playerData.minSpeedValue;
+        PlayerController playerController = _playerCharacter.playerController;
+        playerController.actualSpeed = playerData.movementSpeed - (_playerCharacter.playerController.leftHandWeight + _playerCharacter.playerController.rightHandWeight);
+        if (playerController.actualSpeed < playerData.minSpeedValue) playerController.actualSpeed = playerData.minSpeedValue;
     }
     private void Movement()
     {
         Rigidbody playerRb = _playerCharacter.playerController.playerReferences.playerRb;
-        PlayerData playerData = _playerCharacter.playerController.playerReferences.playerData;
+        PlayerController playerController = _playerCharacter.playerController;
         Vector3 movementWithDirection = MovementInitialization();
-        playerRb.velocity = new Vector3(movementWithDirection.x, movementWithDirection.y, movementWithDirection.z) * playerData.actualSpeed;
+        playerRb.velocity = new Vector3(movementWithDirection.x, movementWithDirection.y, movementWithDirection.z) * playerController.actualSpeed;
     }
 
     private Vector3 MovementInitialization()

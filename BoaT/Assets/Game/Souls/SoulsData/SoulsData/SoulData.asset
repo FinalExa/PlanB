@@ -9,14 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d85111e694413da499bbfef07c8862b9, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: daafea5a44fca694f840d9576f3c9d85, type: 3}
+  m_Name: SoulData
   m_EditorClassIdentifier: 
-  movementSpeed: 15
-  minSpeedValue: 1
-  grabRange: 3
-  throwDistance: 6
-  throwFlightTime: 0.3
-  dashDistance: 8
-  dashDuration: 0.2
-  dashCooldown: 0.1
+  soulMovementSpeed: 10
+  soulAcceleration: 2
+  soulDetectionRange: 5

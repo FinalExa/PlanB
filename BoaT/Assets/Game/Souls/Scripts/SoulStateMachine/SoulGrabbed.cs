@@ -3,11 +3,11 @@ public class SoulGrabbed : SoulState
 {
     public SoulGrabbed(SoulStateMachine soulStateMachine) : base(soulStateMachine)
     {
-        _soulStateMachine.soulController.thisNavMeshAgent.isStopped = true;
-        _soulStateMachine.soulController.thisNavMeshAgent.enabled = false;
     }
     public override void Start()
     {
+        if (_soulStateMachine.soulController.thisNavMeshAgent.isOnNavMesh) _soulStateMachine.soulController.thisNavMeshAgent.isStopped = true;
+        _soulStateMachine.soulController.thisNavMeshAgent.enabled = false;
         _soulStateMachine.soulController.gameObject.transform.localPosition = Vector3.zero;
     }
     public override void StateUpdate()
@@ -21,7 +21,7 @@ public class SoulGrabbed : SoulState
     }
     private void GoToFlying()
     {
-        if (_soulStateMachine.soulController.soulReferences.throwableObject.isFlying) _soulStateMachine.SetState(new SoulFlying(_soulStateMachine));
+        if (_soulStateMachine.soulController.soulReferences.soulThrowableObject.isFlying) _soulStateMachine.SetState(new SoulFlying(_soulStateMachine));
     }
     #endregion
 }

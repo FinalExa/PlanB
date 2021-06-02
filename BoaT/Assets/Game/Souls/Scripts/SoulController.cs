@@ -14,6 +14,11 @@ public class SoulController : MonoBehaviour
         soulReferences = this.gameObject.GetComponent<SoulReferences>();
         exit = GameObject.FindGameObjectWithTag("Exit");
     }
+    private void Start()
+    {
+        thisNavMeshAgent.speed = soulReferences.soulData.soulMovementSpeed;
+        thisNavMeshAgent.acceleration = soulReferences.soulData.soulAcceleration;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("StorageRoom")) isInsideStorageRoom = true;
