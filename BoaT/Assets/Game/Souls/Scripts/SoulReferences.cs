@@ -2,9 +2,10 @@
 
 public class SoulReferences : MonoBehaviour
 {
-    [HideInInspector] public ThrowableObject throwableObject;
+    [HideInInspector] public SoulThrowable soulThrowableObject;
+    public SoulData soulData;
     private void Awake()
     {
-        throwableObject = this.gameObject.GetComponent<ThrowableObject>();
+        soulThrowableObject = this.gameObject.GetComponent<SoulThrowable>();
     }
 }

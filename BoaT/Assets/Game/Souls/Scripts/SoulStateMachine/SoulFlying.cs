@@ -7,7 +7,7 @@ public class SoulFlying : SoulState
     }
     public override void StateUpdate()
     {
-        if (!_soulStateMachine.soulController.soulReferences.throwableObject.isNotGrounded) StopFlight();
+        if (!_soulStateMachine.soulController.soulReferences.soulThrowableObject.isNotGrounded) StopFlight();
     }
     private void StopFlight()
     {

@@ -26,7 +26,7 @@ public class SoulEscapePub : SoulState
     }
     private void GoToGrabbed()
     {
-        if (_soulStateMachine.soulController.soulReferences.throwableObject.isAttachedToHand) _soulStateMachine.SetState(new SoulGrabbed(_soulStateMachine));
+        if (_soulStateMachine.soulController.soulReferences.soulThrowableObject.isAttachedToHand) _soulStateMachine.SetState(new SoulGrabbed(_soulStateMachine));
     }
     #endregion
 }

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5530009672310210676}
   - component: {fileID: 6058865334681178781}
   - component: {fileID: 7255005166623741164}
-  - component: {fileID: 3078550540027063965}
   - component: {fileID: 7682380320128411222}
+  - component: {fileID: 1096875990175124523}
   - component: {fileID: 8768027527686475258}
   - component: {fileID: 7429171268645209088}
   - component: {fileID: 7246138982620699378}
@@ -53,7 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a010af96fe29b648b0c6c9cc7c25487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwableObject: {fileID: 0}
+  soulThrowableObject: {fileID: 0}
+  soulData: {fileID: 11400000, guid: 5e189b5352d206644b4fcbae8aff4615, type: 2}
 --- !u!114 &6058865334681178781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,8 +70,9 @@ MonoBehaviour:
   isInsideStorageRoom: 0
   thisNavMeshAgent: {fileID: 7246138982620699378}
   thisRigidbody: {fileID: 527291455377808624}
-  playerIsInRange: 0
+  playerIsInRange: {fileID: 0}
   soulReferences: {fileID: 0}
+  exit: {fileID: 0}
   soulDetectionRange: 3
 --- !u!114 &7255005166623741164
 MonoBehaviour:
@@ -86,25 +88,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateRef: 
   soulController: {fileID: 0}
---- !u!114 &3078550540027063965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5740724075522996929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 161f37d513038dc46afd11e424084fa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAttachedToHand: 0
-  isFlying: 0
-  throwableObjectData: {fileID: 11400000, guid: 68219eeec7286ab4a9ef389ae8bb94a1,
-    type: 2}
-  selfRB: {fileID: 0}
-  thisGraphicsObject: {fileID: 2040315804440421031}
-  parentObjectTag: SoulContainer
 --- !u!114 &7682380320128411222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +103,26 @@ MonoBehaviour:
   throwableObjectData: {fileID: 11400000, guid: 68219eeec7286ab4a9ef389ae8bb94a1,
     type: 2}
   thisGraphicsObject: {fileID: 2040315804440421031}
+--- !u!114 &1096875990175124523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5740724075522996929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ef81e9a038c624e9ee469061075d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttachedToHand: 0
+  isFlying: 0
+  throwableObjectData: {fileID: 11400000, guid: 68219eeec7286ab4a9ef389ae8bb94a1,
+    type: 2}
+  selfRB: {fileID: 0}
+  thisGraphicsObject: {fileID: 2040315804440421031}
+  parentObjectTag: SoulContainer
+  isNotGrounded: 0
 --- !u!135 &8768027527686475258
 SphereCollider:
   m_ObjectHideFlags: 0

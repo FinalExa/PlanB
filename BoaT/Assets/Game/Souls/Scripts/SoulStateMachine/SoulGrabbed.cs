@@ -21,7 +21,7 @@ public class SoulGrabbed : SoulState
     }
     private void GoToFlying()
     {
-        if (_soulStateMachine.soulController.soulReferences.throwableObject.isFlying) _soulStateMachine.SetState(new SoulFlying(_soulStateMachine));
+        if (_soulStateMachine.soulController.soulReferences.soulThrowableObject.isFlying) _soulStateMachine.SetState(new SoulFlying(_soulStateMachine));
     }
     #endregion
 }
