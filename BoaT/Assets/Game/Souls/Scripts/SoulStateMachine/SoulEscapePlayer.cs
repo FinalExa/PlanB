@@ -5,9 +5,12 @@ public class SoulEscapePlayer : SoulState
     public SoulEscapePlayer(SoulStateMachine soulStateMachine) : base(soulStateMachine)
     {
     }
-    public override void StateUpdate()
+    public override void Start()
     {
         SetupEscape();
+    }
+    public override void StateUpdate()
+    {
         if (CheckForEscapedPlayer()) EndEscape();
     }
     private void SetupEscape()
@@ -52,7 +55,10 @@ public class SoulEscapePlayer : SoulState
     }
     private void GoToGrabbed()
     {
-        if (_soulStateMachine.soulController.soulReferences.soulThrowableObject.isAttachedToHand) _soulStateMachine.SetState(new SoulGrabbed(_soulStateMachine));
+        if (_soulStateMachine.soulController.soulReferences.soulThrowableObject.isAttachedToHand)
+        {
+            _soulStateMachine.SetState(new SoulGrabbed(_soulStateMachine));
+        }
     }
     #endregion
 }

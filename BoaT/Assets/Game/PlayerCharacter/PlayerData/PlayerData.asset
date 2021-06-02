@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 15
   minSpeedValue: 1
-  actualSpeed: 15
   grabRange: 3
   throwDistance: 6
   throwFlightTime: 0.3
