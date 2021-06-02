@@ -6,7 +6,7 @@ public class SoulGrabbed : SoulState
     }
     public override void Start()
     {
-        _soulStateMachine.soulController.thisNavMeshAgent.isStopped = true;
+        if (_soulStateMachine.soulController.thisNavMeshAgent.isOnNavMesh) _soulStateMachine.soulController.thisNavMeshAgent.isStopped = true;
         _soulStateMachine.soulController.thisNavMeshAgent.enabled = false;
         _soulStateMachine.soulController.gameObject.transform.localPosition = Vector3.zero;
     }

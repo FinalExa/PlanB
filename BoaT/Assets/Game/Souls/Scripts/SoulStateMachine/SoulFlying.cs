@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 public class SoulFlying : SoulState
 {
     public SoulFlying(SoulStateMachine soulStateMachine) : base(soulStateMachine)
@@ -13,8 +12,7 @@ public class SoulFlying : SoulState
     {
         _soulStateMachine.soulController.thisRigidbody.velocity = Vector3.zero;
         _soulStateMachine.soulController.thisRigidbody.angularVelocity = Vector3.zero;
-        NavMeshAgent thisNavMeshAgent = _soulStateMachine.soulController.thisNavMeshAgent;
-        thisNavMeshAgent.enabled = true;
+        _soulStateMachine.soulController.thisNavMeshAgent.enabled = true;
         Transitions();
     }
     #region Transitions
