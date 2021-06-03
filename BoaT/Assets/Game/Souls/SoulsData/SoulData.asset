@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SoulData
   m_EditorClassIdentifier: 
   soulMovementSpeed: 10
-  soulAcceleration: 2
-  soulDetectionRange: 5
+  soulAcceleration: 5
+  soulDetectionRange: 3
