@@ -2,14 +2,16 @@
 using UnityEngine.AI;
 public class SoulController : MonoBehaviour
 {
-    public bool isInsideStorageRoom;
-    public bool collidedWithOther;
+    [HideInInspector] public bool isInsideStorageRoom;
+    [HideInInspector] public bool collidedWithOther;
     public NavMeshAgent thisNavMeshAgent;
     public Rigidbody thisRigidbody;
     [HideInInspector] public GameObject playerIsInRange;
     [HideInInspector] public SoulReferences soulReferences;
     [HideInInspector] public GameObject exit;
-    //[SerializeField] private float soulDetectionRange;
+    public SoulType[] soulTypes;
+    public enum SoulColor { Red, Green, Blue, Yellow, Purple };
+    public SoulColor thisSoulColor;
     private void Awake()
     {
         soulReferences = this.gameObject.GetComponent<SoulReferences>();
@@ -17,8 +19,18 @@ public class SoulController : MonoBehaviour
     }
     private void Start()
     {
+        TEMPSelectSoul();
         thisNavMeshAgent.speed = soulReferences.soulData.soulMovementSpeed;
         thisNavMeshAgent.acceleration = soulReferences.soulData.soulAcceleration;
+    }
+    private void TEMPSelectSoul()
+    {
+        int soulIndex = Random.Range(0, soulTypes.Length);
+        thisSoulColor = soulTypes[soulIndex].soulColor;
+        soulTypes[soulIndex].soulMeshContainer.transform.parent.gameObject.SetActive(true);
+        soulReferences.highlightable.thisGraphicsObject = soulTypes[soulIndex].soulMeshContainer;
+        soulReferences.soulThrowableObject.thisGraphicsObject = soulTypes[soulIndex].soulMeshContainer;
+        soulReferences.soulThrowableObject.SetBaseColor();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -36,4 +48,10 @@ public class SoulController : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("Player")) collidedWithOther = false;
     }
+}
+[System.Serializable]
+public class SoulType
+{
+    public SoulController.SoulColor soulColor;
+    public GameObject soulMeshContainer;
 }
