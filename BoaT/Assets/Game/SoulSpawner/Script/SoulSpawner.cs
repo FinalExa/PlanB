@@ -17,17 +17,31 @@ public class SoulSpawner : Spawner
     void CalculateObjectsToInstantiate()
     {
         objectsToInstantiate = (int)(((thisTrigger.size.x - 1) * (thisTrigger.size.z - 1)) / 3);
-        if (objectsToSpawn < 0 || objectsToSpawn > objectsToInstantiate) objectsToSpawn = (int)Mathf.Lerp(0, objectsToInstantiate, 1);
     }
 
-    private void AssignCoordinatesToObjects()
+    private void SpawnSouls()
     {
         ActivateObjects(new Vector3(0f, 0f, 0f));
     }
 
+    public override void ObjectActivatedSetup(int indexInObjectsList)
+    {
+        SetupSoulColors(indexInObjectsList);
+    }
+    private void SetupSoulColors(int indexInObjectsList)
+    {
+        SoulController sc = objects[indexInObjectsList].gameObject.GetComponent<SoulController>();
+        int soulIndex = Random.Range(0, sc.soulTypes.Length);
+        sc.thisSoulTypeIndex = soulIndex;
+        sc.soulTypes[soulIndex].soulMeshContainer.transform.parent.gameObject.SetActive(true);
+        sc.soulReferences.highlightable.thisGraphicsObject = sc.soulTypes[soulIndex].soulMeshContainer;
+        sc.soulReferences.soulThrowableObject.thisGraphicsObject = sc.soulTypes[soulIndex].soulMeshContainer;
+        sc.soulReferences.soulThrowableObject.SetBaseColor();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) AssignCoordinatesToObjects();
+        if (other.CompareTag("Player")) SpawnSouls();
     }
     private void OnTriggerExit(Collider other)
     {

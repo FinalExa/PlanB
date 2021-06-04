@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "SoulData", menuName = "ScriptableObjects/SoulData", order = 1)]
+[CreateAssetMenu(fileName = "SoulData", menuName = "ScriptableObjects/SoulData", order = 3)]
 public class SoulData : ScriptableObject
 {
     [Header("Soul Movement")]

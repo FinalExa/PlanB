@@ -10,8 +10,7 @@ public class SoulController : MonoBehaviour
     [HideInInspector] public SoulReferences soulReferences;
     [HideInInspector] public GameObject exit;
     public SoulType[] soulTypes;
-    public enum SoulColor { Red, Green, Blue, Yellow, Purple };
-    public SoulColor thisSoulColor;
+    [HideInInspector] public int thisSoulTypeIndex;
     private void Awake()
     {
         soulReferences = this.gameObject.GetComponent<SoulReferences>();
@@ -19,18 +18,8 @@ public class SoulController : MonoBehaviour
     }
     private void Start()
     {
-        TEMPSelectSoul();
         thisNavMeshAgent.speed = soulReferences.soulData.soulMovementSpeed;
         thisNavMeshAgent.acceleration = soulReferences.soulData.soulAcceleration;
-    }
-    private void TEMPSelectSoul()
-    {
-        int soulIndex = Random.Range(0, soulTypes.Length);
-        thisSoulColor = soulTypes[soulIndex].soulColor;
-        soulTypes[soulIndex].soulMeshContainer.transform.parent.gameObject.SetActive(true);
-        soulReferences.highlightable.thisGraphicsObject = soulTypes[soulIndex].soulMeshContainer;
-        soulReferences.soulThrowableObject.thisGraphicsObject = soulTypes[soulIndex].soulMeshContainer;
-        soulReferences.soulThrowableObject.SetBaseColor();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -52,6 +41,9 @@ public class SoulController : MonoBehaviour
 [System.Serializable]
 public class SoulType
 {
-    public SoulController.SoulColor soulColor;
+    public enum SoulColor { Red, Blue, Yellow, Green, Purple };
+    public SoulColor soulColor;
+    public GameObject soulMainModelObject;
     public GameObject soulMeshContainer;
+    public Animator soulAnimator;
 }

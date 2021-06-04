@@ -4,12 +4,13 @@ using UnityEngine;
 public abstract class Spawner : MonoBehaviour
 {
     protected int objectsToInstantiate;
-    [SerializeField] protected int objectsToSpawn;
+    protected int objectsToSpawn;
+    [SerializeField] protected List<GameObject> objects;
+    [SerializeField] protected List<GameObject> activeObjects;
     [SerializeField] private GameObject objectReference;
-    [SerializeField] private List<GameObject> objects;
-    [SerializeField] private List<GameObject> activeObjects;
     [SerializeField] private string parentObjectTag;
     private GameObject parentObject;
+    public SpawnerData spawnerData;
 
     public virtual void Awake()
     {
@@ -19,6 +20,7 @@ public abstract class Spawner : MonoBehaviour
     public virtual void Start()
     {
         CreateObjects();
+        SetObjectsToSpawnNumber();
     }
 
     public virtual void CreateObjects()
@@ -28,6 +30,11 @@ public abstract class Spawner : MonoBehaviour
             objects.Add(Instantiate(objectReference, parentObject.transform));
             objects[i].SetActive(false);
         }
+    }
+    private void SetObjectsToSpawnNumber()
+    {
+        objectsToSpawn = spawnerData.objectsToSpawn;
+        if (objectsToSpawn < 0 || objectsToSpawn > objectsToInstantiate) objectsToSpawn = (int)Mathf.Lerp(0, objectsToInstantiate, 1);
     }
     public virtual void ActivateObjects(Vector3 positionToActivate)
     {
@@ -39,6 +46,7 @@ public abstract class Spawner : MonoBehaviour
                 if (!objects[i].activeSelf)
                 {
                     objects[i].transform.localPosition = positionToActivate;
+                    ObjectActivatedSetup(i);
                     objects[i].SetActive(true);
                     activeObjects.Add(objects[i]);
                     countSpawnedObjects++;
@@ -54,5 +62,10 @@ public abstract class Spawner : MonoBehaviour
             activeObjects[i].SetActive(false);
         }
         activeObjects.Clear();
+    }
+
+    public virtual void ObjectActivatedSetup(int indexInObjectsList)
+    {
+        return;
     }
 }
