@@ -21,6 +21,13 @@ public class SoulController : MonoBehaviour
         thisNavMeshAgent.speed = soulReferences.soulData.soulMovementSpeed;
         thisNavMeshAgent.acceleration = soulReferences.soulData.soulAcceleration;
     }
+    public void DeactivateAllSoulModels()
+    {
+        for (int i = 0; i < soulTypes.Length; i++)
+        {
+            soulTypes[i].soulMainModelObject.SetActive(false);
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("StorageRoom")) isInsideStorageRoom = true;

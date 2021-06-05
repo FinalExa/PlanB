@@ -33,10 +33,11 @@ public class SoulSpawner : Spawner
         SoulController sc = objects[indexInObjectsList].gameObject.GetComponent<SoulController>();
         int soulIndex = Random.Range(0, sc.soulTypes.Length);
         sc.thisSoulTypeIndex = soulIndex;
-        sc.soulTypes[soulIndex].soulMeshContainer.transform.parent.gameObject.SetActive(true);
         sc.soulReferences.highlightable.thisGraphicsObject = sc.soulTypes[soulIndex].soulMeshContainer;
         sc.soulReferences.soulThrowableObject.thisGraphicsObject = sc.soulTypes[soulIndex].soulMeshContainer;
         sc.soulReferences.soulThrowableObject.SetBaseColor();
+        sc.DeactivateAllSoulModels();
+        sc.soulTypes[soulIndex].soulMainModelObject.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
