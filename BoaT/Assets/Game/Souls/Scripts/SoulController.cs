@@ -38,11 +38,11 @@ public class SoulController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("Player")) collidedWithOther = true;
+        if (!collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Soul")) collidedWithOther = true;
     }
     private void OnCollisionExit(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("Player")) collidedWithOther = false;
+        if (!collision.gameObject.CompareTag("Ground") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Soul")) collidedWithOther = false;
     }
 }
 [System.Serializable]

@@ -292,6 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitForAnimation: 0
   animator: {fileID: 3957953130347433435}
+  stateMachineToRead: {fileID: 1673490640784394817}
   statesToExclude:
   - Hands
 --- !u!54 &8490081029144132567

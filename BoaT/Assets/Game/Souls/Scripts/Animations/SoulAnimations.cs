@@ -5,16 +5,11 @@
     public override void Awake()
     {
         base.Awake();
-        soulStateMachine = this.gameObject.GetComponent<SoulStateMachine>();
+        soulStateMachine = (SoulStateMachine)stateMachineToRead;
     }
-
-    private void OnEnable()
+    public override void OnEnable()
     {
         animator = soulStateMachine.soulController.soulTypes[soulStateMachine.soulController.thisSoulTypeIndex].soulAnimator;
-    }
-
-    private void Update()
-    {
-        UpdateAnimatorValues();
+        base.OnEnable();
     }
 }

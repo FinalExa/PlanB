@@ -4,15 +4,14 @@ public class Animations : MonoBehaviour
 {
     [HideInInspector] public bool waitForAnimation;
     [SerializeField] protected Animator animator;
-    [HideInInspector] protected StateMachine stateMachineToRead;
+    [SerializeField] protected StateMachine stateMachineToRead;
     [SerializeField] private string[] statesToExclude;
     protected string actualState;
 
     public virtual void Awake()
     {
-        stateMachineToRead = this.gameObject.GetComponent<StateMachine>();
     }
-    public virtual void Start()
+    public virtual void OnEnable()
     {
         SetupStateBool();
     }

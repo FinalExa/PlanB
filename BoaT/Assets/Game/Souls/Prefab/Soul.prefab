@@ -244,6 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soulThrowableObject: {fileID: 0}
   highlightable: {fileID: 0}
+  soulAnimations: {fileID: 8411376419026247185}
   soulData: {fileID: 11400000, guid: 5e189b5352d206644b4fcbae8aff4615, type: 2}
 --- !u!114 &1096875990175124523
 MonoBehaviour:
@@ -349,6 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitForAnimation: 0
   animator: {fileID: 9023260238331158097}
+  stateMachineToRead: {fileID: 7255005166623741164}
   statesToExclude: []
 --- !u!135 &8768027527686475258
 SphereCollider:
