@@ -7,12 +7,16 @@ public class SoulSpawner : Spawner
     {
         base.Awake();
         thisTrigger = this.gameObject.GetComponent<BoxCollider>();
+        SoulGrabbed.soulIsGrabbed += RemoveSingleSoulFromList;
+        SoulIdle.soulIsIdle += AddSingleSoulToList;
+        SoulEscapePlayer.soulIsEscapingPlayer += AddSingleSoulToList;
     }
 
     public override void Start()
     {
         CalculateObjectsToInstantiate();
         base.Start();
+        DeactivateObjects();
     }
     void CalculateObjectsToInstantiate()
     {
@@ -26,9 +30,9 @@ public class SoulSpawner : Spawner
 
     public override void ObjectActivatedSetup(int indexInObjectsList)
     {
-        SetupSoulColors(indexInObjectsList);
+        SetupSoul(indexInObjectsList);
     }
-    private void SetupSoulColors(int indexInObjectsList)
+    private void SetupSoul(int indexInObjectsList)
     {
         SoulController sc = (SoulController)objects[indexInObjectsList];
         int soulIndex = Random.Range(0, sc.soulTypes.Length);
@@ -38,6 +42,14 @@ public class SoulSpawner : Spawner
         sc.soulReferences.soulThrowableObject.SetBaseColor();
         sc.DeactivateAllSoulModels();
         sc.soulTypes[soulIndex].soulMainModelObject.SetActive(true);
+    }
+    public void AddSingleSoulToList(SoulController soul)
+    {
+        if (!activeObjects.Contains(soul)) activeObjects.Add(soul);
+    }
+    public void RemoveSingleSoulFromList(SoulController soul)
+    {
+        activeObjects.Remove(soul);
     }
 
     private void OnTriggerEnter(Collider other)

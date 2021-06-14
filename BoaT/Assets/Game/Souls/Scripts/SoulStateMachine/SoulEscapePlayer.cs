@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 public class SoulEscapePlayer : SoulState
 {
+    public static Action<SoulController> soulIsEscapingPlayer;
     public SoulEscapePlayer(SoulStateMachine soulStateMachine) : base(soulStateMachine)
     {
     }
     public override void Start()
     {
+        soulIsEscapingPlayer(_soulStateMachine.soulController);
         SetupEscape(false);
     }
     public override void StateUpdate()

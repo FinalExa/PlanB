@@ -1,10 +1,13 @@
-﻿public class SoulIdle : SoulState
+﻿using System;
+public class SoulIdle : SoulState
 {
+    public static Action<SoulController> soulIsIdle;
     public SoulIdle(SoulStateMachine soulStateMachine) : base(soulStateMachine)
     {
     }
     public override void Start()
     {
+        soulIsIdle(_soulStateMachine.soulController);
         if (_soulStateMachine.soulController.thisNavMeshAgent.isOnNavMesh) _soulStateMachine.soulController.thisNavMeshAgent.isStopped = true;
     }
     public override void StateUpdate()

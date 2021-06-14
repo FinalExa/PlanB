@@ -31,6 +31,7 @@ public class SoulController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("StorageRoom")) isInsideStorageRoom = true;
+        if (other.CompareTag("Exit")) this.gameObject.SetActive(false);
     }
     private void OnTriggerExit(Collider other)
     {
