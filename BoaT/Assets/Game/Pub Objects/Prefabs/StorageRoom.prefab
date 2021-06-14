@@ -91,22 +91,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects: []
   activeObjects: []
-  objectReference: {fileID: 5740724075522996929, guid: 7f22418e5b6eb1145a23f16f71e31571,
+  objectReference: {fileID: 6058865334681178781, guid: 7f22418e5b6eb1145a23f16f71e31571,
     type: 3}
   parentObjectTag: SoulContainer
   spawnerData: {fileID: 11400000, guid: bf9d6cd897a19dd4b95204dce452ee5b, type: 2}
-  soulTypes:
-  - soulColor: 0
-    soulMeshContainer: {fileID: 5740724075522996929, guid: 7f22418e5b6eb1145a23f16f71e31571,
-      type: 3}
-  - soulColor: 2
-    soulMeshContainer: {fileID: 0}
-  - soulColor: 3
-    soulMeshContainer: {fileID: 0}
-  - soulColor: 1
-    soulMeshContainer: {fileID: 0}
-  - soulColor: 4
-    soulMeshContainer: {fileID: 0}
 --- !u!1 &7708417049040514606
 GameObject:
   m_ObjectHideFlags: 0

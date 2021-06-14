@@ -5,9 +5,9 @@ public abstract class Spawner : MonoBehaviour
 {
     protected int objectsToInstantiate;
     protected int objectsToSpawn;
-    [SerializeField] protected List<GameObject> objects;
-    [SerializeField] protected List<GameObject> activeObjects;
-    [SerializeField] private GameObject objectReference;
+    [SerializeField] protected List<MonoBehaviour> objects;
+    [SerializeField] protected List<MonoBehaviour> activeObjects;
+    [SerializeField] protected MonoBehaviour objectReference;
     [SerializeField] private string parentObjectTag;
     private GameObject parentObject;
     public SpawnerData spawnerData;
@@ -28,7 +28,7 @@ public abstract class Spawner : MonoBehaviour
         for (int i = 0; i < objectsToInstantiate; i++)
         {
             objects.Add(Instantiate(objectReference, parentObject.transform));
-            objects[i].SetActive(false);
+            objects[i].gameObject.SetActive(false);
         }
     }
     private void SetObjectsToSpawnNumber()
@@ -43,11 +43,11 @@ public abstract class Spawner : MonoBehaviour
             int countSpawnedObjects = 0;
             for (int i = 0; i < objectsToInstantiate; i++)
             {
-                if (!objects[i].activeSelf)
+                if (!objects[i].gameObject.activeSelf)
                 {
                     objects[i].transform.localPosition = positionToActivate;
                     ObjectActivatedSetup(i);
-                    objects[i].SetActive(true);
+                    objects[i].gameObject.SetActive(true);
                     activeObjects.Add(objects[i]);
                     countSpawnedObjects++;
                 }
@@ -59,9 +59,10 @@ public abstract class Spawner : MonoBehaviour
     {
         for (int i = 0; i < activeObjects.Count; i++)
         {
-            activeObjects[i].SetActive(false);
+            activeObjects[i].gameObject.SetActive(false);
+            activeObjects.RemoveAt(i);
+            i--;
         }
-        activeObjects.Clear();
     }
 
     public virtual void ObjectActivatedSetup(int indexInObjectsList)

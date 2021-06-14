@@ -197,10 +197,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5740724075522996928}
+  - component: {fileID: 6058865334681178781}
   - component: {fileID: 5530009672310210676}
   - component: {fileID: 1096875990175124523}
   - component: {fileID: 7682380320128411222}
-  - component: {fileID: 6058865334681178781}
   - component: {fileID: 7255005166623741164}
   - component: {fileID: 8411376419026247185}
   - component: {fileID: 8768027527686475258}
@@ -230,6 +230,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6058865334681178781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5740724075522996929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7316bfcb3a74b41809ce3d259fc4d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInsideStorageRoom: 0
+  collidedWithOther: 0
+  thisNavMeshAgent: {fileID: 7246138982620699378}
+  thisRigidbody: {fileID: 527291455377808624}
+  playerIsInRange: {fileID: 0}
+  soulReferences: {fileID: 0}
+  exit: {fileID: 0}
+  soulTypes:
+  - soulColor: 0
+    soulMainModelObject: {fileID: 4857783040482557073}
+    soulMeshContainer: {fileID: 2040315804440421031}
+    soulAnimator: {fileID: 9023260238331158097}
+  - soulColor: 1
+    soulMainModelObject: {fileID: 4857783041625888507}
+    soulMeshContainer: {fileID: 2461139034740131653}
+    soulAnimator: {fileID: 3514779735446408827}
+  - soulColor: 2
+    soulMainModelObject: {fileID: 4857783040402764062}
+    soulMeshContainer: {fileID: 6691826116737365087}
+    soulAnimator: {fileID: 5622609767438150272}
+  - soulColor: 3
+    soulMainModelObject: {fileID: 4857783040794530853}
+    soulMeshContainer: {fileID: 626735195267432303}
+    soulAnimator: {fileID: 4263470750526146311}
+  - soulColor: 4
+    soulMainModelObject: {fileID: 4857783040965364809}
+    soulMeshContainer: {fileID: 7268170923288502637}
+    soulAnimator: {fileID: 7087966874609077787}
+  thisSoulTypeIndex: 0
 --- !u!114 &5530009672310210676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,47 +322,6 @@ MonoBehaviour:
   throwableObjectData: {fileID: 11400000, guid: 68219eeec7286ab4a9ef389ae8bb94a1,
     type: 2}
   thisGraphicsObject: {fileID: 2392543837826645134}
---- !u!114 &6058865334681178781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5740724075522996929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d7316bfcb3a74b41809ce3d259fc4d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInsideStorageRoom: 0
-  collidedWithOther: 0
-  thisNavMeshAgent: {fileID: 7246138982620699378}
-  thisRigidbody: {fileID: 527291455377808624}
-  playerIsInRange: {fileID: 0}
-  soulReferences: {fileID: 0}
-  exit: {fileID: 0}
-  soulTypes:
-  - soulColor: 0
-    soulMainModelObject: {fileID: 4857783040482557073}
-    soulMeshContainer: {fileID: 2040315804440421031}
-    soulAnimator: {fileID: 9023260238331158097}
-  - soulColor: 1
-    soulMainModelObject: {fileID: 4857783041625888507}
-    soulMeshContainer: {fileID: 2461139034740131653}
-    soulAnimator: {fileID: 3514779735446408827}
-  - soulColor: 2
-    soulMainModelObject: {fileID: 4857783040402764062}
-    soulMeshContainer: {fileID: 6691826116737365087}
-    soulAnimator: {fileID: 5622609767438150272}
-  - soulColor: 3
-    soulMainModelObject: {fileID: 4857783040794530853}
-    soulMeshContainer: {fileID: 626735195267432303}
-    soulAnimator: {fileID: 4263470750526146311}
-  - soulColor: 4
-    soulMainModelObject: {fileID: 4857783040965364809}
-    soulMeshContainer: {fileID: 7268170923288502637}
-    soulAnimator: {fileID: 7087966874609077787}
-  thisSoulTypeIndex: 0
 --- !u!114 &7255005166623741164
 MonoBehaviour:
   m_ObjectHideFlags: 0

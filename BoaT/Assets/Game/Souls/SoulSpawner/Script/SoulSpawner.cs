@@ -30,7 +30,7 @@ public class SoulSpawner : Spawner
     }
     private void SetupSoulColors(int indexInObjectsList)
     {
-        SoulController sc = objects[indexInObjectsList].gameObject.GetComponent<SoulController>();
+        SoulController sc = (SoulController)objects[indexInObjectsList];
         int soulIndex = Random.Range(0, sc.soulTypes.Length);
         sc.thisSoulTypeIndex = soulIndex;
         sc.soulReferences.highlightable.thisGraphicsObject = sc.soulTypes[soulIndex].soulMeshContainer;
