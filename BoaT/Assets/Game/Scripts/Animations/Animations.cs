@@ -23,9 +23,9 @@ public class Animations : MonoBehaviour
 
     public virtual void AnimatorStateUpdate()
     {
-        if (actualState != stateMachineToRead.stateRef && NoStatesToIgnore())
+        if (actualState != stateMachineToRead.stateRef && NoStatesToIgnore() && !string.IsNullOrEmpty(actualState))
         {
-            if (!string.IsNullOrEmpty(actualState)) animator.SetBool(actualState, false);
+            animator.SetBool(actualState, false);
             SetupStateBool();
         }
     }
