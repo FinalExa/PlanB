@@ -8,9 +8,6 @@ public class Animations : MonoBehaviour
     [SerializeField] private string[] statesToExclude;
     protected string actualState;
 
-    public virtual void Awake()
-    {
-    }
     public virtual void OnEnable()
     {
         SetupStateBool();

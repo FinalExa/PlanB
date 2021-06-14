@@ -2,9 +2,8 @@
 {
     private SoulStateMachine soulStateMachine;
 
-    public override void Awake()
+    private void Awake()
     {
-        base.Awake();
         soulStateMachine = (SoulStateMachine)stateMachineToRead;
     }
     public override void OnEnable()

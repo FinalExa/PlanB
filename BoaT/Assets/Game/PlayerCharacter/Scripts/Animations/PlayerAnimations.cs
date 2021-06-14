@@ -1,9 +1,8 @@
 ﻿public class PlayerAnimations : Animations
 {
     PlayerCharacter playerCharacter;
-    public override void Awake()
+    private void Awake()
     {
-        base.Awake();
         PlayerCharacter.playerStateChanged += UpdateAnimatorValues;
         PlayerAnimationsBehaviour.onAnimationEnd += AnimationIsOver;
         playerCharacter = this.gameObject.GetComponent<PlayerCharacter>();
