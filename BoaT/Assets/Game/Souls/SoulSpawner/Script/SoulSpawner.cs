@@ -2,6 +2,7 @@
 public class SoulSpawner : Spawner
 {
     private BoxCollider thisTrigger;
+    [SerializeField] private int soulsPerType;
 
     public override void Awake()
     {
@@ -18,7 +19,7 @@ public class SoulSpawner : Spawner
         base.Start();
         DeactivateObjects();
     }
-    void CalculateObjectsToInstantiate()
+    private void CalculateObjectsToInstantiate()
     {
         objectsToInstantiate = (int)(((thisTrigger.size.x - 1) * (thisTrigger.size.z - 1)) / 3);
     }
@@ -35,7 +36,9 @@ public class SoulSpawner : Spawner
     private void SetupSoul(int indexInObjectsList)
     {
         SoulController sc = (SoulController)objects[indexInObjectsList];
-        int soulIndex = Random.Range(0, sc.soulTypes.Length);
+        int soulIndex;
+        if (indexInObjectsList < sc.soulTypes.Length * soulsPerType) soulIndex = indexInObjectsList / soulsPerType;
+        else soulIndex = Random.Range(0, sc.soulTypes.Length);
         sc.thisSoulTypeIndex = soulIndex;
         sc.soulReferences.highlightable.thisGraphicsObject = sc.soulTypes[soulIndex].soulMeshContainer;
         sc.soulReferences.soulThrowableObject.thisGraphicsObject = sc.soulTypes[soulIndex].soulMeshContainer;

@@ -95,6 +95,7 @@ MonoBehaviour:
     type: 3}
   parentObjectTag: SoulContainer
   spawnerData: {fileID: 11400000, guid: bf9d6cd897a19dd4b95204dce452ee5b, type: 2}
+  soulsPerType: 2
 --- !u!1 &7708417049040514606
 GameObject:
   m_ObjectHideFlags: 0
