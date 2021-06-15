@@ -54,7 +54,6 @@ public class SoulSpawner : Spawner
     {
         activeObjects.Remove(soul);
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) SpawnSouls();
