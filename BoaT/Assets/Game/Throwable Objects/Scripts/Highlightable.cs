@@ -6,7 +6,7 @@ public class Highlightable : MonoBehaviour
     private Renderer thisRenderer;
     private ThrowableObject throwableObject;
     public ThrowableObjectData throwableObjectData;
-    [SerializeField] private GameObject thisGraphicsObject;
+    public GameObject thisGraphicsObject;
     private void Awake()
     {
         mouseData = FindObjectOfType<MouseData>();

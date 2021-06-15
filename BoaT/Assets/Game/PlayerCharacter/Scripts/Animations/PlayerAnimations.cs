@@ -1,9 +1,11 @@
 ﻿public class PlayerAnimations : Animations
 {
-    public override void Awake()
+    PlayerCharacter playerCharacter;
+    private void Awake()
     {
-        base.Awake();
+        PlayerCharacter.playerStateChanged += UpdateAnimatorValues;
         PlayerAnimationsBehaviour.onAnimationEnd += AnimationIsOver;
+        playerCharacter = this.gameObject.GetComponent<PlayerCharacter>();
     }
     public override void AnimatorStateUpdate()
     {
@@ -19,46 +21,45 @@
 
     private void ActiveHand(PlayerController playerController)
     {
-        if (playerController.selectedHand == PlayerController.SelectedHand.Left && !playerAnimator.GetBool("LeftHandSelected"))
+        if (playerController.selectedHand == PlayerController.SelectedHand.Left && !animator.GetBool("LeftHandSelected"))
         {
-            playerAnimator.SetBool("RightHandSelected", false);
-            playerAnimator.SetBool("LeftHandSelected", true);
+            animator.SetBool("RightHandSelected", false);
+            animator.SetBool("LeftHandSelected", true);
         }
-        else if (playerController.selectedHand == PlayerController.SelectedHand.Right && !playerAnimator.GetBool("RightHandSelected"))
+        else if (playerController.selectedHand == PlayerController.SelectedHand.Right && !animator.GetBool("RightHandSelected"))
         {
-            playerAnimator.SetBool("LeftHandSelected", false);
-            playerAnimator.SetBool("RightHandSelected", true);
+            animator.SetBool("LeftHandSelected", false);
+            animator.SetBool("RightHandSelected", true);
         }
     }
     private void HandsStatus(PlayerController playerController)
     {
-        if (!playerController.LeftHandOccupied && !playerController.RightHandOccupied && !playerAnimator.GetBool("HandsFree"))
+        if (!playerController.LeftHandOccupied && !playerController.RightHandOccupied && !animator.GetBool("HandsFree"))
         {
-            playerAnimator.SetBool("LeftFreeRightOccupied", false);
-            playerAnimator.SetBool("LeftOccupiedRightFree", false);
-            playerAnimator.SetBool("HandsOccupied", false);
-            playerAnimator.SetBool("HandsFree", true);
+            SetAllHandsBoolFalse();
+            animator.SetBool("HandsFree", true);
         }
-        else if (!playerController.LeftHandOccupied && playerController.RightHandOccupied && !playerAnimator.GetBool("LeftFreeRightOccupied"))
+        else if (!playerController.LeftHandOccupied && playerController.RightHandOccupied && !animator.GetBool("LeftFreeRightOccupied"))
         {
-            playerAnimator.SetBool("HandsFree", false);
-            playerAnimator.SetBool("LeftOccupiedRightFree", false);
-            playerAnimator.SetBool("HandsOccupied", false);
-            playerAnimator.SetBool("LeftFreeRightOccupied", true);
+            SetAllHandsBoolFalse();
+            animator.SetBool("LeftFreeRightOccupied", true);
         }
-        else if (playerController.LeftHandOccupied && !playerController.RightHandOccupied && !playerAnimator.GetBool("LeftOccupiedRightFree"))
+        else if (playerController.LeftHandOccupied && !playerController.RightHandOccupied && !animator.GetBool("LeftOccupiedRightFree"))
         {
-            playerAnimator.SetBool("HandsFree", false);
-            playerAnimator.SetBool("LeftFreeRightOccupied", false);
-            playerAnimator.SetBool("HandsOccupied", false);
-            playerAnimator.SetBool("LeftOccupiedRightFree", true);
+            SetAllHandsBoolFalse();
+            animator.SetBool("LeftOccupiedRightFree", true);
         }
-        else if (playerController.LeftHandOccupied && playerController.RightHandOccupied && !playerAnimator.GetBool("HandsOccupied"))
+        else if (playerController.LeftHandOccupied && playerController.RightHandOccupied && !animator.GetBool("HandsOccupied"))
         {
-            playerAnimator.SetBool("HandsFree", false);
-            playerAnimator.SetBool("LeftFreeRightOccupied", false);
-            playerAnimator.SetBool("LeftOccupiedRightFree", false);
-            playerAnimator.SetBool("HandsOccupied", true);
+            SetAllHandsBoolFalse();
+            animator.SetBool("HandsOccupied", true);
         }
+    }
+    private void SetAllHandsBoolFalse()
+    {
+        animator.SetBool("HandsFree", false);
+        animator.SetBool("LeftFreeRightOccupied", false);
+        animator.SetBool("LeftOccupiedRightFree", false);
+        animator.SetBool("HandsOccupied", false);
     }
 }

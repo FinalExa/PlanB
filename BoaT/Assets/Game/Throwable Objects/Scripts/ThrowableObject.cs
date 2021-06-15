@@ -9,31 +9,35 @@ public class ThrowableObject : MonoBehaviour, IThrowable
     private float flightTimer;
     private float throwDistance;
     private float flightTime;
+    public ThrowableObjectData throwableObjectData;
+    public GameObject thisGraphicsObject;
     [HideInInspector] public bool isAttachedToHand;
     [HideInInspector] public bool isFlying;
     private BoxCollider physicsCollider;
     private GameObject baseContainer;
-    public ThrowableObjectData throwableObjectData;
     [HideInInspector] public Rigidbody selfRB;
-    [SerializeField] private GameObject thisGraphicsObject;
     [SerializeField] private string parentObjectTag;
 
     void Awake()
     {
         physicsCollider = this.gameObject.GetComponent<BoxCollider>();
         baseContainer = GameObject.FindGameObjectWithTag(parentObjectTag);
-        throwableObjectData.baseColor = thisGraphicsObject.GetComponent<Renderer>().material.color;
         Self = this.gameObject;
         selfRB = Self.GetComponent<Rigidbody>();
     }
     public virtual void Start()
     {
+        SetBaseColor();
         Weight = throwableObjectData.objectWeight;
         this.gameObject.transform.SetParent(baseContainer.transform);
     }
     void FixedUpdate()
     {
         if (isFlying) FlightTime();
+    }
+    public void SetBaseColor()
+    {
+        throwableObjectData.baseColor = thisGraphicsObject.GetComponent<Renderer>().material.color;
     }
     public virtual void AttachToPlayer(GameObject playerHand)
     {

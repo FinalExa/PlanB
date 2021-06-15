@@ -11,6 +11,7 @@ TagManager:
   - SoulContainer
   - StorageRoom
   - Exit
+  - Passage
   layers:
   - Default
   - TransparentFX

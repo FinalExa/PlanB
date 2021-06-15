@@ -3,17 +3,12 @@
 public class Animations : MonoBehaviour
 {
     [HideInInspector] public bool waitForAnimation;
-    [SerializeField] protected Animator playerAnimator;
-    [HideInInspector] protected PlayerCharacter playerCharacter;
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected StateMachine stateMachineToRead;
     [SerializeField] private string[] statesToExclude;
-    private string actualState;
+    protected string actualState;
 
-    public virtual void Awake()
-    {
-        playerCharacter = this.gameObject.GetComponent<PlayerCharacter>();
-        PlayerCharacter.playerStateChanged += UpdateAnimatorValues;
-    }
-    public virtual void Start()
+    public virtual void OnEnable()
     {
         SetupStateBool();
     }
@@ -25,16 +20,16 @@ public class Animations : MonoBehaviour
 
     public virtual void AnimatorStateUpdate()
     {
-        if (actualState != playerCharacter.stateRef && NoStatesToIgnore())
+        if (actualState != stateMachineToRead.stateRef && NoStatesToIgnore())
         {
-            if (!string.IsNullOrEmpty(actualState)) playerAnimator.SetBool(actualState, false);
+            if (!string.IsNullOrEmpty(actualState)) animator.SetBool(actualState, false);
             SetupStateBool();
         }
     }
     public virtual void SetupStateBool()
     {
-        actualState = playerCharacter.stateRef;
-        playerAnimator.SetBool(actualState, true);
+        actualState = stateMachineToRead.stateRef;
+        animator.SetBool(actualState, true);
     }
     public virtual void AnimationIsOver()
     {
@@ -45,7 +40,7 @@ public class Animations : MonoBehaviour
         bool passed = true;
         for (int i = 0; i < statesToExclude.Length; i++)
         {
-            if (playerCharacter.stateRef == statesToExclude[i])
+            if (stateMachineToRead.stateRef == statesToExclude[i])
             {
                 passed = false;
                 break;
