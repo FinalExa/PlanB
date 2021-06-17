@@ -17,7 +17,13 @@ public class SoulEscapePub : SoulState
     }
     public override void StateUpdate()
     {
+        CheckForEscapeSuccess();
         Transitions();
+    }
+
+    private void CheckForEscapeSuccess()
+    {
+        if (_soulStateMachine.soulController.isInsideExitDoorCollider) _soulStateMachine.gameObject.SetActive(false);
     }
     #region Transitions
     private void Transitions()
