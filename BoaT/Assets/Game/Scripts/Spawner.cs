@@ -28,7 +28,6 @@ public abstract class Spawner : MonoBehaviour
         for (int i = 0; i < objectsToInstantiate; i++)
         {
             objects.Add(Instantiate(objectReference, parentObject.transform));
-            objects[i].gameObject.SetActive(false);
         }
     }
     private void SetObjectsToSpawnNumber()
