@@ -38,20 +38,17 @@ public abstract class Spawner : MonoBehaviour
     }
     public virtual void ActivateObjects()
     {
-        if (activeObjects.Count == 0)
+        int countSpawnedObjects = objectsToSpawn - (objectsToSpawn - activeObjects.Count);
+        for (int i = 0; i < objectsToInstantiate; i++)
         {
-            int countSpawnedObjects = 0;
-            for (int i = 0; i < objectsToInstantiate; i++)
+            if (!objects[i].gameObject.activeSelf)
             {
-                if (!objects[i].gameObject.activeSelf)
-                {
-                    ObjectActivatedSetup(i);
-                    objects[i].gameObject.SetActive(true);
-                    activeObjects.Add(objects[i]);
-                    countSpawnedObjects++;
-                }
-                if (countSpawnedObjects == objectsToSpawn) break;
+                ObjectActivatedSetup(i);
+                objects[i].gameObject.SetActive(true);
+                activeObjects.Add(objects[i]);
+                countSpawnedObjects++;
             }
+            if (countSpawnedObjects == objectsToSpawn) break;
         }
     }
     public virtual void DeactivateObjects()
