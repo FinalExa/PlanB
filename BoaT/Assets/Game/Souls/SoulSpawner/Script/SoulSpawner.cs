@@ -26,16 +26,24 @@ public class SoulSpawner : Spawner
 
     private void SpawnSouls()
     {
-        ActivateObjects(new Vector3(0f, 0f, 0f));
+        ActivateObjects();
     }
-
     public override void ObjectActivatedSetup(int indexInObjectsList)
     {
-        SetupSoul(indexInObjectsList);
-    }
-    private void SetupSoul(int indexInObjectsList)
-    {
         SoulController sc = (SoulController)objects[indexInObjectsList];
+        RandomizePosition(sc);
+        SetupSoul(indexInObjectsList, sc);
+    }
+    private void RandomizePosition(SoulController sc)
+    {
+        Vector3 positionToSpawn;
+        float xFixedSize = thisTrigger.size.x / 2 - 1;
+        float zFixedSize = thisTrigger.size.z / 2 - 1;
+        positionToSpawn = new Vector3(Random.Range(-xFixedSize, xFixedSize), 0f, Random.Range(-zFixedSize, zFixedSize));
+        sc.gameObject.transform.localPosition = positionToSpawn;
+    }
+    private void SetupSoul(int indexInObjectsList, SoulController sc)
+    {
         int soulIndex;
         if (indexInObjectsList < sc.soulTypes.Length * soulsPerType) soulIndex = indexInObjectsList / soulsPerType;
         else soulIndex = Random.Range(0, sc.soulTypes.Length);
