@@ -37,7 +37,7 @@ public class SoulController : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("StorageRoom") && !other.CompareTag("Player")) isInsideStorageRoom = false;
-        if (other.CompareTag("Exit")) isInsideExitDoorCollider = false;
+        if (other.CompareTag("Exit") && !other.CompareTag("Player")) isInsideExitDoorCollider = false;
     }
     private void OnCollisionEnter(Collision collision)
     {
