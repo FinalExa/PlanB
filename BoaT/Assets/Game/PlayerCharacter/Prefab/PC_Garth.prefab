@@ -110,6 +110,64 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &7383011852184885211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8440566982224227420}
+  - component: {fileID: 6995276498844394870}
+  - component: {fileID: 1885074525970442480}
+  m_Layer: 2
+  m_Name: playerRange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8440566982224227420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383011852184885211}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 127697078383323057}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6995276498844394870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383011852184885211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86dd3fd23bce78498853a2e114dea36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRange: {fileID: 1885074525970442480}
+--- !u!135 &1885074525970442480
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383011852184885211}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8730566588356249954
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +232,6 @@ GameObject:
   - component: {fileID: 3371889578214040557}
   - component: {fileID: 8490081029144132567}
   - component: {fileID: 879281037676685858}
-  - component: {fileID: 6026187827951584930}
   m_Layer: 2
   m_Name: PC_Garth
   m_TagString: Player
@@ -194,6 +251,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2920969739207227579}
+  - {fileID: 8440566982224227420}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -276,7 +334,6 @@ MonoBehaviour:
   rightHandWeight: 0
   actualSpeed: 0
   objectClicked: {fileID: 0}
-  thisTrigger: {fileID: 6026187827951584930}
   selectedHand: 0
 --- !u!114 &3371889578214040557
 MonoBehaviour:
@@ -324,19 +381,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1.6, z: 0.35}
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!135 &6026187827951584930
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8877571697949988489}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6595274228909836926
 PrefabInstance:
   m_ObjectHideFlags: 0

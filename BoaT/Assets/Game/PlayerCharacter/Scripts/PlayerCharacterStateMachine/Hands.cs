@@ -7,7 +7,7 @@ public class Hands : PlayerState
 
     public override void Start()
     {
-        _playerCharacter.playerController.objectClicked = _playerCharacter.playerController.playerReferences.objectsOnMouse.GetClickPosition().collider;
+        _playerCharacter.playerController.objectClicked = _playerCharacter.playerController.playerReferences.objectsOnMouse.GetMousePosition().collider;
         CheckHandToUse();
     }
 

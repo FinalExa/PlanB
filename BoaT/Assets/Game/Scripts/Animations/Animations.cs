@@ -10,7 +10,7 @@ public class Animations : MonoBehaviour
 
     public virtual void OnEnable()
     {
-        SetupStateBool();
+        if (!string.IsNullOrEmpty(actualState)) SetupStateBool();
     }
 
     public virtual void UpdateAnimatorValues()

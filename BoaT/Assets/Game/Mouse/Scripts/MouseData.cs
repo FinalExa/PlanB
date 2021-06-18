@@ -21,7 +21,7 @@ public abstract class MouseData : MonoBehaviour
         Physics.Raycast(ray, out hit);
         mousePositionInSpace = hit.point;
     }
-    public virtual RaycastHit GetClickPosition()
+    public virtual RaycastHit GetMousePosition()
     {
         return hit;
     }

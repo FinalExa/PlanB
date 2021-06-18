@@ -28,7 +28,6 @@ public abstract class Spawner : MonoBehaviour
         for (int i = 0; i < objectsToInstantiate; i++)
         {
             objects.Add(Instantiate(objectReference, parentObject.transform));
-            objects[i].gameObject.SetActive(false);
         }
     }
     private void SetObjectsToSpawnNumber()
@@ -36,23 +35,19 @@ public abstract class Spawner : MonoBehaviour
         objectsToSpawn = spawnerData.objectsToSpawn;
         if (objectsToSpawn < 0 || objectsToSpawn > objectsToInstantiate) objectsToSpawn = (int)Mathf.Lerp(0, objectsToInstantiate, 1);
     }
-    public virtual void ActivateObjects(Vector3 positionToActivate)
+    public virtual void ActivateObjects()
     {
-        if (activeObjects.Count == 0)
+        int countSpawnedObjects = objectsToSpawn - (objectsToSpawn - activeObjects.Count);
+        for (int i = 0; i < objectsToInstantiate; i++)
         {
-            int countSpawnedObjects = 0;
-            for (int i = 0; i < objectsToInstantiate; i++)
+            if (!objects[i].gameObject.activeSelf)
             {
-                if (!objects[i].gameObject.activeSelf)
-                {
-                    objects[i].transform.localPosition = positionToActivate;
-                    ObjectActivatedSetup(i);
-                    objects[i].gameObject.SetActive(true);
-                    activeObjects.Add(objects[i]);
-                    countSpawnedObjects++;
-                }
-                if (countSpawnedObjects == objectsToSpawn) break;
+                ObjectActivatedSetup(i);
+                objects[i].gameObject.SetActive(true);
+                activeObjects.Add(objects[i]);
+                countSpawnedObjects++;
             }
+            if (countSpawnedObjects == objectsToSpawn) break;
         }
     }
     public virtual void DeactivateObjects()

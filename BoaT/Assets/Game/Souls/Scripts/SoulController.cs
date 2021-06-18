@@ -4,6 +4,7 @@ public class SoulController : MonoBehaviour
 {
     [HideInInspector] public bool isInsideStorageRoom;
     [HideInInspector] public bool collidedWithOther;
+    [HideInInspector] public bool isInsideExitDoorCollider;
     public NavMeshAgent thisNavMeshAgent;
     public Rigidbody thisRigidbody;
     [HideInInspector] public GameObject playerIsInRange;
@@ -31,11 +32,12 @@ public class SoulController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("StorageRoom")) isInsideStorageRoom = true;
-        if (other.CompareTag("Exit")) this.gameObject.SetActive(false);
+        if (other.CompareTag("Exit")) isInsideExitDoorCollider = true;
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("StorageRoom") && !other.CompareTag("Player")) isInsideStorageRoom = false;
+        if (other.CompareTag("Exit") && !other.CompareTag("Player")) isInsideExitDoorCollider = false;
     }
     private void OnCollisionEnter(Collision collision)
     {

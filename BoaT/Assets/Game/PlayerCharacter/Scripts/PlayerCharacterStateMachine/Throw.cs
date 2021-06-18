@@ -42,7 +42,7 @@ public class Throw : PlayerState
     }
     private void LaunchObject(IThrowable iThrowable)
     {
-        _playerCharacter.playerController.playerReferences.rotation.RotateObjectToLaunch(iThrowable.Self.transform, _playerCharacter.playerController.playerReferences.objectsOnMouse.GetClickPosition().point);
+        _playerCharacter.playerController.playerReferences.rotation.RotateObjectToLaunch(iThrowable.Self.transform, _playerCharacter.playerController.playerReferences.objectsOnMouse.GetMousePosition().point);
         iThrowable.DetachFromPlayer(_playerCharacter.playerController.playerReferences.playerData.throwDistance, _playerCharacter.playerController.playerReferences.playerData.throwFlightTime);
     }
     private void SetHandFree()
