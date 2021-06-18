@@ -29,10 +29,17 @@ public class SoulController : MonoBehaviour
             soulTypes[i].soulMainModelObject.SetActive(false);
         }
     }
+
+    private void AttemptToEnterMachine(Collider other)
+    {
+        ICanUseIngredients canUseIngredients = other.GetComponent<ICanUseIngredients>();
+        canUseIngredients.RecipeFill(soulTypes[thisSoulTypeIndex].soulColor, this);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("StorageRoom")) isInsideStorageRoom = true;
         if (other.CompareTag("Exit")) isInsideExitDoorCollider = true;
+        if (other.CompareTag("Machine")) AttemptToEnterMachine(other);
     }
     private void OnTriggerExit(Collider other)
     {
