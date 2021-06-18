@@ -5,6 +5,7 @@ public class PlayerInputs : MonoBehaviour
     public bool LeftHandInput { get; private set; }
     public bool RightHandInput { get; private set; }
     public bool DashInput { get; private set; }
+    public bool InteractionInput { get; private set; }
     public Vector3 MovementInput { get; private set; }
     private void Update()
     {
@@ -16,6 +17,7 @@ public class PlayerInputs : MonoBehaviour
         GetRightHandInput();
         GetDashInput();
         GetMovementInput();
+        GetInteractionInput();
     }
     void GetLeftHandInput()
     {
@@ -37,5 +39,10 @@ public class PlayerInputs : MonoBehaviour
         float frontInput = Input.GetAxisRaw("Horizontal");
         float sideInput = Input.GetAxisRaw("Vertical");
         MovementInput = new Vector3(sideInput, 0, frontInput).normalized;
+    }
+    void GetInteractionInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E)) InteractionInput = true;
+        else InteractionInput = false;
     }
 }
