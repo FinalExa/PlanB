@@ -4,7 +4,7 @@ public class IngredientLights : MonoBehaviour, IHaveIngredientLights
 {
     [SerializeField] private Renderer[] lights;
     [SerializeField] private Color baseColor;
-    [SerializeField] private Color testColor;
+    [SerializeField] private IngredientColors[] colors;
 
     private void Start()
     {
@@ -13,7 +13,13 @@ public class IngredientLights : MonoBehaviour, IHaveIngredientLights
 
     public void ActivateLight(Machine machine)
     {
-        lights[machine.recipe.Count - 1].material.color = testColor;
+        for (int i = 0; i < colors.Length; i++)
+        {
+            if (machine.recipe[machine.recipe.Count - 1] == colors[i].soulColor)
+            {
+                lights[machine.recipe.Count - 1].material.color = colors[i].color;
+            }
+        }
     }
 
     public void ResetAllLights()
@@ -23,4 +29,10 @@ public class IngredientLights : MonoBehaviour, IHaveIngredientLights
             lights[i].material.color = baseColor;
         }
     }
+}
+[System.Serializable]
+public class IngredientColors
+{
+    public SoulType.SoulColor soulColor;
+    public Color color;
 }
