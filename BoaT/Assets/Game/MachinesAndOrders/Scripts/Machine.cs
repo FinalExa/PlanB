@@ -31,6 +31,6 @@ public class Machine : MonoBehaviour, ICanUseIngredients, ICanBeInteracted
 
     public void Interaction()
     {
-        return;
+        if (recipe.Count > 0) ProduceOrder();
     }
 }

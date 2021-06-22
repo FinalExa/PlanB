@@ -21,6 +21,7 @@
         GoToMovementState(playerInputs);
         GoToDashState(playerInputs);
         GoToHandsState(playerInputs);
+        GoToInteractState(playerInputs);
     }
     #region ToMovementState
     private void GoToMovementState(PlayerInputs playerInputs)
@@ -43,6 +44,12 @@
             else _playerCharacter.playerController.selectedHand = PlayerController.SelectedHand.Right;
             _playerCharacter.SetState(new Hands(_playerCharacter));
         }
+    }
+    #endregion
+    #region ToInteractState
+    private void GoToInteractState(PlayerInputs playerInputs)
+    {
+        if (playerInputs.InteractionInput) _playerCharacter.SetState(new Interact(_playerCharacter));
     }
     #endregion
     #endregion

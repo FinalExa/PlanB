@@ -52,6 +52,7 @@ public class Moving : PlayerState
         GoToIdleState(playerInputs);
         GoToDashState(playerInputs);
         GoToHandsState(playerInputs);
+        GoToInteractState(playerInputs);
     }
     #region ToIdleState
     private void GoToIdleState(PlayerInputs playerInputs)
@@ -65,7 +66,7 @@ public class Moving : PlayerState
         if (playerInputs.DashInput && !_playerCharacter.playerController.LeftHandOccupied && !_playerCharacter.playerController.RightHandOccupied) _playerCharacter.SetState(new Dash(_playerCharacter));
     }
     #endregion
-    #region ToHandsStates
+    #region ToHandsState
     private void GoToHandsState(PlayerInputs playerInputs)
     {
         if (playerInputs.LeftHandInput || playerInputs.RightHandInput)
@@ -74,6 +75,12 @@ public class Moving : PlayerState
             else _playerCharacter.playerController.selectedHand = PlayerController.SelectedHand.Right;
             _playerCharacter.SetState(new Hands(_playerCharacter));
         }
+    }
+    #endregion
+    #region ToInteractState
+    private void GoToInteractState(PlayerInputs playerInputs)
+    {
+        if (playerInputs.InteractionInput) _playerCharacter.SetState(new Interact(_playerCharacter));
     }
     #endregion
     #endregion
