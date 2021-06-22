@@ -17,6 +17,7 @@ public class IngredientLights : MonoBehaviour, IHaveIngredientLights
         {
             if (machine.recipe[machine.recipe.Count - 1] == colors[i].soulColor)
             {
+                lights[machine.recipe.Count - 1].material.SetColor("_EmissionColor", colors[i].color);
                 lights[machine.recipe.Count - 1].material.color = colors[i].color;
             }
         }
@@ -26,6 +27,7 @@ public class IngredientLights : MonoBehaviour, IHaveIngredientLights
     {
         for (int i = 0; i < lights.Length; i++)
         {
+            lights[i].material.SetColor("_EmissionColor", baseColor);
             lights[i].material.color = baseColor;
         }
     }
