@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [HideInInspector] public PlayerReferences playerReferences;
-    public List<Collider> objectsInPlayerRange;
+    public List<Collider> throwablesInPlayerRange;
+    public List<Collider> interactablesInPlayerRange;
     public GameObject LeftHand;
     public GameObject RightHand;
     public bool LeftHandOccupied { get; set; }

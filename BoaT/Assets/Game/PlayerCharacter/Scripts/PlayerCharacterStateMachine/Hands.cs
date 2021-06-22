@@ -39,7 +39,7 @@ public class Hands : PlayerState
     private void CheckIfObjectIsInPlayerRange()
     {
         bool noObjectInRange = true;
-        foreach (var collider in _playerCharacter.playerController.objectsInPlayerRange)
+        foreach (var collider in _playerCharacter.playerController.throwablesInPlayerRange)
         {
             if (collider == _playerCharacter.playerController.objectClicked)
             {

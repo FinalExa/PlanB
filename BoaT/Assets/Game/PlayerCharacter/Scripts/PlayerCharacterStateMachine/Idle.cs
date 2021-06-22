@@ -2,7 +2,11 @@
 {
     public Idle(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerCharacter.playerController.playerReferences.rotation.rotationEnabled = true;
+    }
+
+    public override void Start()
+    {
+        _playerCharacter.playerController.playerReferences.rotation.rotationEnabled = true;
     }
 
     public override void StateUpdate()

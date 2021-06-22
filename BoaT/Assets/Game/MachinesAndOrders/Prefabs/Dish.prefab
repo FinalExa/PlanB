@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7443002229499881040}
   - component: {fileID: 971017331653552835}
   - component: {fileID: 8860357294858953887}
+  - component: {fileID: 4493137582267161765}
+  - component: {fileID: 4004316034915004406}
   m_Layer: 0
   m_Name: Dish
   m_TagString: Untagged
@@ -48,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisOrderType: 0
+  thisOrderIngredients: 
 --- !u!114 &7443002229499881040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,8 +99,34 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!135 &4493137582267161765
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291122144235993317}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &4004316034915004406
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291122144235993317}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5601525104640398820
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +138,6 @@ GameObject:
   - component: {fileID: 1334403864561674447}
   - component: {fileID: 569019045969564643}
   - component: {fileID: 957921753640957108}
-  - component: {fileID: 6040206200620151707}
   m_Layer: 0
   m_Name: dish
   m_TagString: Untagged
@@ -178,20 +206,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &6040206200620151707
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5601525104640398820}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7608208195051001932
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,10 +3,10 @@ public class Moving : PlayerState
 {
     public Moving(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerCharacter.playerController.playerReferences.rotation.rotationEnabled = true;
     }
     public override void Start()
     {
+        _playerCharacter.playerController.playerReferences.rotation.rotationEnabled = true;
         UpdateSpeedValue();
     }
     public override void StateUpdate()

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5911489799592272282}
   - component: {fileID: 1721227712662869316}
   - component: {fileID: 3090696244789213483}
-  - component: {fileID: 908679125235141691}
   m_Layer: 0
   m_Name: drink
   m_TagString: Untagged
@@ -80,20 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &908679125235141691
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1823405748783158978}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &3291122144235993317
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +92,8 @@ GameObject:
   - component: {fileID: 7443002229499881040}
   - component: {fileID: 971017331653552835}
   - component: {fileID: 8860357294858953887}
+  - component: {fileID: 5300032733128147604}
+  - component: {fileID: 2666093287981000013}
   m_Layer: 0
   m_Name: Drink
   m_TagString: Untagged
@@ -142,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisOrderType: 1
+  thisOrderIngredients: 
 --- !u!114 &7443002229499881040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,9 +142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161f37d513038dc46afd11e424084fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwableObjectData: {fileID: 11400000, guid: 8eed06185090d2a4b8f2e591a466fa9f,
+  throwableObjectData: {fileID: 11400000, guid: 48014ad405e2a6144a72ee177a920a5b,
     type: 2}
-  thisGraphicsObject: {fileID: 0}
+  thisGraphicsObject: {fileID: 1823405748783158978}
   isAttachedToHand: 0
   isFlying: 0
   selfRB: {fileID: 0}
@@ -173,9 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6873a95489c9cd4daf976f84850bcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwableObjectData: {fileID: 11400000, guid: 8eed06185090d2a4b8f2e591a466fa9f,
+  throwableObjectData: {fileID: 11400000, guid: 48014ad405e2a6144a72ee177a920a5b,
     type: 2}
-  thisGraphicsObject: {fileID: 0}
+  thisGraphicsObject: {fileID: 1823405748783158978}
 --- !u!54 &8860357294858953887
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -190,8 +178,34 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!135 &5300032733128147604
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291122144235993317}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &2666093287981000013
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291122144235993317}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 0.65, z: 0.15}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7608208195051001932
 GameObject:
   m_ObjectHideFlags: 0
