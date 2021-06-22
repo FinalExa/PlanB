@@ -70,6 +70,7 @@ MonoBehaviour:
   - {fileID: 1876042997821411530}
   - {fileID: 8950136709703733709}
   baseColor: {r: 1, g: 1, b: 1, a: 0}
+  testColor: {r: 0, g: 1, b: 1, a: 0}
 --- !u!135 &8682722287322134973
 SphereCollider:
   m_ObjectHideFlags: 0
