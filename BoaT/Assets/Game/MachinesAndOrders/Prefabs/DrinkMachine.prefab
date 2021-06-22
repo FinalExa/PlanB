@@ -70,7 +70,17 @@ MonoBehaviour:
   - {fileID: 7679429902357987290}
   - {fileID: 3834360962996011838}
   baseColor: {r: 1, g: 1, b: 1, a: 0}
-  testColor: {r: 0, g: 1, b: 1, a: 0}
+  colors:
+  - soulColor: 0
+    color: {r: 1, g: 0, b: 0, a: 0}
+  - soulColor: 1
+    color: {r: 0, g: 0, b: 1, a: 0}
+  - soulColor: 2
+    color: {r: 1, g: 1, b: 0, a: 0}
+  - soulColor: 3
+    color: {r: 0, g: 1, b: 0, a: 0}
+  - soulColor: 4
+    color: {r: 1, g: 0, b: 1, a: 0}
 --- !u!135 &8682722287322134973
 SphereCollider:
   m_ObjectHideFlags: 0
