@@ -7,6 +7,12 @@ public class Machine : MonoBehaviour, ICanUseIngredients, ICanBeInteracted
     [SerializeField] int recipeMaxLimit;
     [SerializeField] private GameObject thisOrder;
     [SerializeField] GameObject orderOutputPosition;
+    private IHaveIngredientLights thisLightObject;
+
+    private void Awake()
+    {
+        thisLightObject = this.gameObject.GetComponent<IHaveIngredientLights>();
+    }
     private void Start()
     {
         Self = this.gameObject;
@@ -18,6 +24,8 @@ public class Machine : MonoBehaviour, ICanUseIngredients, ICanBeInteracted
         {
             recipe.Add(ingredientType);
             source.gameObject.SetActive(false);
+            source.transform.localPosition = Vector3.zero;
+            thisLightObject.ActivateLight(this);
             if (recipe.Count == recipeMaxLimit) ProduceOrder();
         }
     }
@@ -27,6 +35,7 @@ public class Machine : MonoBehaviour, ICanUseIngredients, ICanBeInteracted
         GameObject obj = Instantiate(thisOrder, orderOutputPosition.transform);
         obj.GetComponent<Order>().SetupOrderIngredients(recipe);
         recipe.Clear();
+        thisLightObject.ResetAllLights();
     }
 
     public void Interaction()
