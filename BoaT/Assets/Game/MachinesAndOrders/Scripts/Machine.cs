@@ -26,7 +26,7 @@ public class Machine : MonoBehaviour, ICanUseIngredients, ICanBeInteracted
             source.gameObject.SetActive(false);
             source.transform.localPosition = Vector3.zero;
             thisLightObject.ActivateLight(this);
-            //if (recipe.Count == recipeMaxLimit) ProduceOrder();
+            if (recipe.Count == recipeMaxLimit) ProduceOrder();
         }
     }
 
