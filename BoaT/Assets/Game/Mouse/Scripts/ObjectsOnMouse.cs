@@ -11,6 +11,15 @@ public class ObjectsOnMouse : MouseData
         else return false;
     }
 
+    public bool CheckForInteractableObject(Collider hit)
+    {
+        if (hit != null && hit.GetComponent<ICanBeInteracted>() != null)
+        {
+            return true;
+        }
+        else return false;
+    }
+
     public GameObject PassThrowableObject()
     {
         return hit.collider.gameObject;

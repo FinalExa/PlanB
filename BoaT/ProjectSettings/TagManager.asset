@@ -12,6 +12,7 @@ TagManager:
   - StorageRoom
   - Exit
   - Passage
+  - Machine
   layers:
   - Default
   - TransparentFX

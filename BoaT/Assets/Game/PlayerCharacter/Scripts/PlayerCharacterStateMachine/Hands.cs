@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 public class Hands : PlayerState
 {
     public Hands(PlayerCharacter playerCharacter) : base(playerCharacter)
@@ -8,13 +9,7 @@ public class Hands : PlayerState
     public override void Start()
     {
         _playerCharacter.playerController.objectClicked = _playerCharacter.playerController.playerReferences.objectsOnMouse.GetMousePosition().collider;
-        CheckHandToUse();
-    }
-
-    private void CheckHandToUse()
-    {
-        if (_playerCharacter.playerController.selectedHand == PlayerController.SelectedHand.Left) CheckHandAction(_playerCharacter.playerController.selectedHand);
-        else if (_playerCharacter.playerController.selectedHand == PlayerController.SelectedHand.Right) CheckHandAction(_playerCharacter.playerController.selectedHand);
+        CheckHandAction(_playerCharacter.playerController.selectedHand);
     }
 
     private void CheckHandAction(PlayerController.SelectedHand selectedHand)
@@ -33,13 +28,13 @@ public class Hands : PlayerState
     private void CheckIfThrowableIsSelected()
     {
         ObjectsOnMouse objectsOnMouse = _playerCharacter.playerController.playerReferences.objectsOnMouse;
-        if (objectsOnMouse.CheckForThrowableObject(_playerCharacter.playerController.objectClicked) == true) CheckIfObjectIsInPlayerRange();
+        if (objectsOnMouse.CheckForThrowableObject(_playerCharacter.playerController.objectClicked)) CheckIfObjectIsInPlayerRange(_playerCharacter.playerController.throwablesInPlayerRange);
         else Transitions();
     }
-    private void CheckIfObjectIsInPlayerRange()
+    private void CheckIfObjectIsInPlayerRange(List<Collider> listToCheck)
     {
         bool noObjectInRange = true;
-        foreach (var collider in _playerCharacter.playerController.objectsInPlayerRange)
+        foreach (var collider in listToCheck)
         {
             if (collider == _playerCharacter.playerController.objectClicked)
             {

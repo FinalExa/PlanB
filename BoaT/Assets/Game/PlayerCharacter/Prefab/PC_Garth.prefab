@@ -154,7 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f86dd3fd23bce78498853a2e114dea36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRange: {fileID: 1885074525970442480}
 --- !u!135 &1885074525970442480
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -327,7 +326,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerReferences: {fileID: 0}
-  objectsInPlayerRange: []
+  throwablesInPlayerRange: []
+  interactablesInPlayerRange: []
   LeftHand: {fileID: 5918292791908574987}
   RightHand: {fileID: 5707342504787091415}
   leftHandWeight: 0
@@ -352,6 +352,7 @@ MonoBehaviour:
   stateMachineToRead: {fileID: 1673490640784394817}
   statesToExclude:
   - Hands
+  - Interact
 --- !u!54 &8490081029144132567
 Rigidbody:
   m_ObjectHideFlags: 0

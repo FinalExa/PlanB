@@ -2,7 +2,11 @@
 {
     public Idle(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerCharacter.playerController.playerReferences.rotation.rotationEnabled = true;
+    }
+
+    public override void Start()
+    {
+        _playerCharacter.playerController.playerReferences.rotation.rotationEnabled = true;
     }
 
     public override void StateUpdate()
@@ -17,6 +21,7 @@
         GoToMovementState(playerInputs);
         GoToDashState(playerInputs);
         GoToHandsState(playerInputs);
+        GoToInteractState(playerInputs);
     }
     #region ToMovementState
     private void GoToMovementState(PlayerInputs playerInputs)
@@ -39,6 +44,12 @@
             else _playerCharacter.playerController.selectedHand = PlayerController.SelectedHand.Right;
             _playerCharacter.SetState(new Hands(_playerCharacter));
         }
+    }
+    #endregion
+    #region ToInteractState
+    private void GoToInteractState(PlayerInputs playerInputs)
+    {
+        if (playerInputs.InteractionInput) _playerCharacter.SetState(new Interact(_playerCharacter));
     }
     #endregion
     #endregion

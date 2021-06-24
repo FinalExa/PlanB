@@ -3,10 +3,10 @@ public class Throw : PlayerState
 {
     public Throw(PlayerCharacter playerCharacter) : base(playerCharacter)
     {
-        playerCharacter.playerController.playerReferences.rotation.rotationEnabled = false;
     }
     public override void Start()
     {
+        _playerCharacter.playerController.playerReferences.rotation.rotationEnabled = false;
         _playerCharacter.playerController.playerReferences.playerRb.velocity = Vector3.zero;
         _playerCharacter.playerController.playerReferences.playerAnimations.waitForAnimation = true;
         _playerCharacter.playerController.playerReferences.rotation.RotatePlayerToMousePosition();

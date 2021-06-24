@@ -3,11 +3,12 @@
 public class PlayerRange : MonoBehaviour
 {
     private PlayerController playerController;
-    [SerializeField] private SphereCollider playerRange;
+    private SphereCollider playerRange;
 
     private void Awake()
     {
         playerController = FindObjectOfType<PlayerController>();
+        playerRange = this.gameObject.GetComponent<SphereCollider>();
     }
     private void Start()
     {
@@ -16,40 +17,66 @@ public class PlayerRange : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        ObjectIsInRange(other);
+        GetIThrowable(other);
+        GetICanBeInteracted(other);
     }
 
-    private void ObjectIsInRange(Collider other)
+    private void GetIThrowable(Collider other)
     {
         IThrowable otherObject = other.gameObject.GetComponent<IThrowable>();
         if (otherObject != null)
         {
             Collider otherCol = otherObject.Self.GetComponent<Collider>();
-            if (!playerController.objectsInPlayerRange.Contains(otherCol))
+            if (!playerController.throwablesInPlayerRange.Contains(otherCol))
             {
                 otherObject.IsInsidePlayerRange = true;
-                playerController.objectsInPlayerRange.Add(otherCol);
+                playerController.throwablesInPlayerRange.Add(otherCol);
+            }
+        }
+    }
+
+    private void GetICanBeInteracted(Collider other)
+    {
+        ICanBeInteracted otherObject = other.gameObject.GetComponent<ICanBeInteracted>();
+        if (otherObject != null)
+        {
+            Collider otherCol = otherObject.Self.GetComponent<Collider>();
+            if (!playerController.interactablesInPlayerRange.Contains(otherCol))
+            {
+                playerController.interactablesInPlayerRange.Add(otherCol);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        ObjectIsOutOfRange(other);
+        ThrowableIsOutOfRange(other);
+        InteractableIsOutOfRange(other);
     }
 
-    private void ObjectIsOutOfRange(Collider other)
+    private void ThrowableIsOutOfRange(Collider other)
     {
         IThrowable otherObject = other.gameObject.GetComponent<IThrowable>();
         if (otherObject != null && Vector2.Distance(new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.z), new Vector2(other.gameObject.transform.position.x, other.gameObject.transform.position.z)) > playerController.playerReferences.playerData.grabRange)
         {
             Collider otherCol = otherObject.Self.GetComponent<Collider>();
-            if (playerController.objectsInPlayerRange.Contains(otherCol))
+            if (playerController.throwablesInPlayerRange.Contains(otherCol))
             {
                 otherObject.IsInsidePlayerRange = false;
-                playerController.objectsInPlayerRange.Remove(otherCol);
+                playerController.throwablesInPlayerRange.Remove(otherCol);
             }
         }
     }
-
+    private void InteractableIsOutOfRange(Collider other)
+    {
+        ICanBeInteracted otherObject = other.gameObject.GetComponent<ICanBeInteracted>();
+        if (otherObject != null && Vector2.Distance(new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.z), new Vector2(other.gameObject.transform.position.x, other.gameObject.transform.position.z)) > playerController.playerReferences.playerData.grabRange)
+        {
+            Collider otherCol = otherObject.Self.GetComponent<Collider>();
+            if (playerController.interactablesInPlayerRange.Contains(otherCol))
+            {
+                playerController.interactablesInPlayerRange.Remove(otherCol);
+            }
+        }
+    }
 }
