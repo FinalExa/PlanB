@@ -3,9 +3,9 @@
 public class CustomerController : MonoBehaviour, ICanBeInteracted
 {
     [SerializeField] private GameObject[] customerModels;
-    [SerializeField] private GameObject exitDoor;
-    private GameObject seatToTake;
-    private GameObject targetedLocation;
+    [HideInInspector] public GameObject exitDoor;
+    [HideInInspector] public GameObject seatToTake;
+    [HideInInspector] public GameObject targetedLocation;
     [HideInInspector] public bool interactionReceived;
     [HideInInspector] public bool waitingForOrder;
     public GameObject Self { get; set; }
@@ -14,6 +14,7 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
     private void Awake()
     {
         Self = this.gameObject;
+        exitDoor = GameObject.FindGameObjectWithTag("Exit");
     }
     private void Start()
     {
@@ -30,7 +31,6 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
         selectedModel = customerModels[randIndex];
         selectedModel.SetActive(true);
     }
-
     public void Interaction()
     {
         interactionReceived = true;

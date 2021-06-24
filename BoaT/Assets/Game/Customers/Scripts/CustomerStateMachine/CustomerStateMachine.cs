@@ -6,6 +6,11 @@ public class CustomerStateMachine : StateMachine
     private void Awake()
     {
         customerController = this.gameObject.GetComponent<CustomerController>();
+    }
+
+    private void OnEnable()
+    {
+        customerController.targetedLocation = customerController.seatToTake;
         SetState(new CustomerGoToLocation(this));
     }
 }

@@ -51,6 +51,8 @@ MonoBehaviour:
   - {fileID: 707125468416459017}
   - {fileID: 7162670638155603737}
   exitDoor: {fileID: 0}
+  seatToTake: {fileID: 0}
+  targetedLocation: {fileID: 0}
   interactionReceived: 0
   waitingForOrder: 0
 --- !u!114 &5838437348996743918
@@ -195,7 +197,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6235e66dd5f25a64fbd9f0c2b6617d20,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6235e66dd5f25a64fbd9f0c2b6617d20, type: 3}
