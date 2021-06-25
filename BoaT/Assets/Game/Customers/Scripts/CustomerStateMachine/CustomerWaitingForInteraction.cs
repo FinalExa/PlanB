@@ -1,18 +1,30 @@
-﻿public class CustomerWaitingForInteraction : CustomerState
+﻿using UnityEngine;
+public class CustomerWaitingForInteraction : CustomerState
 {
     public CustomerWaitingForInteraction(CustomerStateMachine customerStateMachine) : base(customerStateMachine)
     {
     }
 
+    public override void Start()
+    {
+        GenerateOrder();
+    }
+
     public override void StateUpdate()
     {
-        if (_customerStateMachine.customerController.interactionReceived) GenerateOrder();
+        if (_customerStateMachine.customerController.interactionReceived) GoToWaitingForOrder();
     }
 
     private void GenerateOrder()
     {
-        // behaviour
-        GoToWaitingForOrder();
+        CustomerController customerController = _customerStateMachine.customerController;
+        customerController.chosenType = customerController.possibleTypes[Random.Range(0, customerController.possibleTypes.Length)];
+        int orderSize = Random.Range(1, 3);
+        for (int i = 0; i < orderSize; i++)
+        {
+            customerController.chosenIngredients.Add(customerController.possibleIngredients[Random.Range(0, customerController.possibleIngredients.Length)]);
+        }
+        customerController.thisTable.AssignOrderToTable(customerController.thisTableId, customerController);
     }
 
     private void GoToWaitingForOrder()

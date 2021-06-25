@@ -7,6 +7,8 @@
     public override void Start()
     {
         _customerStateMachine.customerController.targetedLocation = _customerStateMachine.customerController.exitDoor;
+        _customerStateMachine.customerController.thisTable.TableClear(_customerStateMachine.customerController.thisTableId);
+        _customerStateMachine.customerController.leave = true;
         GoToGoToLocation();
     }
 

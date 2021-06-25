@@ -13,6 +13,7 @@ TagManager:
   - Exit
   - Passage
   - Machine
+  - Customer
   layers:
   - Default
   - TransparentFX
