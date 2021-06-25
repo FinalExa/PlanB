@@ -6,6 +6,7 @@
 
     public override void Start()
     {
+        _customerStateMachine.customerController.targetedLocation = _customerStateMachine.customerController.exitDoor;
         GoToGoToLocation();
     }
 

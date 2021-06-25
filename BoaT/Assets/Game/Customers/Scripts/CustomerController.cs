@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class CustomerController : MonoBehaviour, ICanBeInteracted
 {
@@ -8,6 +9,7 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
     [HideInInspector] public GameObject targetedLocation;
     [HideInInspector] public bool interactionReceived;
     [HideInInspector] public bool waitingForOrder;
+    public NavMeshAgent thisNavMeshAgent;
     public GameObject Self { get; set; }
     private GameObject selectedModel;
 
@@ -24,7 +26,23 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
     {
         if (interactionReceived) interactionReceived = false;
     }
-
+    public void ChooseSeat()
+    {
+        Table[] tablesList = FindObjectsOfType<Table>();
+        int randIndex = Random.Range(0, tablesList.Length);
+        SeatInfo[] seatInfos = tablesList[randIndex].seatInfo;
+        for (int i = 0; i < seatInfos.Length; i++)
+        {
+            if (!seatInfos[i].seatIsOccupied)
+            {
+                seatToTake = tablesList[randIndex].seatInfo[i].seatTarget;
+                tablesList[randIndex].seatInfo[i].seatIsOccupied = true;
+                tablesList[randIndex].seatInfo[i].customer = this;
+                targetedLocation = seatToTake;
+                break;
+            }
+        }
+    }
     public void RandomizeModel()
     {
         int randIndex = Random.Range(0, customerModels.Length);
