@@ -269,11 +269,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Customer (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 2092333476841107059, guid: 856f26171b0676c468d0de7c251ac9b9,
-        type: 3}
-      propertyPath: m_TagString
-      value: Customer
-      objectReference: {fileID: 0}
     - target: {fileID: 8442260830685920880, guid: 856f26171b0676c468d0de7c251ac9b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -541,11 +536,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Customer (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092333476841107059, guid: 856f26171b0676c468d0de7c251ac9b9,
-        type: 3}
-      propertyPath: m_TagString
-      value: Customer
       objectReference: {fileID: 0}
     - target: {fileID: 8442260830685920880, guid: 856f26171b0676c468d0de7c251ac9b9,
         type: 3}
@@ -1105,11 +1095,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Customer (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092333476841107059, guid: 856f26171b0676c468d0de7c251ac9b9,
-        type: 3}
-      propertyPath: m_TagString
-      value: Customer
       objectReference: {fileID: 0}
     - target: {fileID: 8442260830685920880, guid: 856f26171b0676c468d0de7c251ac9b9,
         type: 3}
