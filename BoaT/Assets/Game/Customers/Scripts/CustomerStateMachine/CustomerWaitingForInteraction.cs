@@ -19,7 +19,7 @@ public class CustomerWaitingForInteraction : CustomerState
     {
         CustomerController customerController = _customerStateMachine.customerController;
         customerController.chosenType = customerController.possibleTypes[Random.Range(0, customerController.possibleTypes.Length)];
-        int orderSize = Random.Range(1, 3);
+        int orderSize = Random.Range(1, 4);
         for (int i = 0; i < orderSize; i++)
         {
             customerController.chosenIngredients.Add(customerController.possibleIngredients[Random.Range(0, customerController.possibleIngredients.Length)]);

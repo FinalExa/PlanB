@@ -22,15 +22,17 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
     [HideInInspector] public List<SoulType.SoulColor> chosenIngredients;
     private Vector3 startingPos;
 
+    [HideInInspector] public CustomerReferences customerReferences;
+
     public GameObject Self { get; set; }
     private GameObject selectedModel;
 
     private void Awake()
     {
+        customerReferences = this.gameObject.GetComponent<CustomerReferences>();
         Self = this.gameObject;
         exitDoor = GameObject.FindGameObjectWithTag("Exit");
         startingPos = this.gameObject.transform.position;
-
     }
     private void Start()
     {
