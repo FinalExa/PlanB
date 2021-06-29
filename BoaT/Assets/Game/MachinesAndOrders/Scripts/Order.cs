@@ -10,6 +10,11 @@ public class Order : MonoBehaviour
     public void SetupOrderIngredients(List<SoulType.SoulColor> ingredients)
     {
         thisOrderIngredients = ingredients;
+        print(thisOrderType);
+        foreach (SoulType.SoulColor ingredient in thisOrderIngredients)
+        {
+            print(ingredient);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
