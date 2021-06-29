@@ -60,6 +60,7 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
                 seatToTake = tablesList[randIndex].seatInfo[i].seatTarget;
                 tablesList[randIndex].seatInfo[i].seatIsOccupied = true;
                 thisTable = tablesList[randIndex];
+                thisTable.seatInfo[i].customer = this;
                 thisTableId = i;
                 targetedLocation = seatToTake;
                 break;

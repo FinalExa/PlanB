@@ -6,16 +6,21 @@
 
     public override void Start()
     {
+        _customerStateMachine.customerController.waitingForOrder = true;
         _customerStateMachine.customerController.customerReferences.customerVignette.SetupVignette(_customerStateMachine.customerController.chosenType, _customerStateMachine.customerController.chosenIngredients);
-        StartSetup();
-        //GoToGoToLocation();
     }
 
-    private void StartSetup()
+    public override void StateUpdate()
+    {
+        if (!_customerStateMachine.customerController.waitingForOrder) EndOrder();
+    }
+
+    private void EndOrder()
     {
         _customerStateMachine.customerController.targetedLocation = _customerStateMachine.customerController.exitDoor;
         _customerStateMachine.customerController.thisTable.TableClear(_customerStateMachine.customerController.thisTableId);
         _customerStateMachine.customerController.leave = true;
+        GoToGoToLocation();
     }
 
     private void GoToGoToLocation()

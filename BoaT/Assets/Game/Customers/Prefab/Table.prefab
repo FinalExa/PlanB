@@ -410,9 +410,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7559050547026962877}
   - component: {fileID: 1520906511136101781}
+  - component: {fileID: 8681715485615646951}
   m_Layer: 2
   m_Name: Table
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -451,18 +452,35 @@ MonoBehaviour:
     seatIsOccupied: 0
     orderType: 0
     ingredients: 
+    customer: {fileID: 0}
   - seatTarget: {fileID: 3300559733092104999}
     seatIsOccupied: 0
     orderType: 0
     ingredients: 
+    customer: {fileID: 0}
   - seatTarget: {fileID: 4492262077429393208}
     seatIsOccupied: 0
     orderType: 0
     ingredients: 
+    customer: {fileID: 0}
   - seatTarget: {fileID: 4849952327997168926}
     seatIsOccupied: 0
     orderType: 0
     ingredients: 
+    customer: {fileID: 0}
+--- !u!135 &8681715485615646951
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7351870943006574549}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7967923947754908730
 GameObject:
   m_ObjectHideFlags: 0

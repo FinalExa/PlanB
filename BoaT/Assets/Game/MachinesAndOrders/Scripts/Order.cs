@@ -11,4 +11,13 @@ public class Order : MonoBehaviour
     {
         thisOrderIngredients = ingredients;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Table"))
+        {
+            Table otherTable = other.GetComponent<Table>();
+            otherTable.RecipeCheck(thisOrderType, thisOrderIngredients, this.gameObject);
+        }
+    }
 }

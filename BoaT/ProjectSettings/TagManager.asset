@@ -14,6 +14,7 @@ TagManager:
   - Passage
   - Machine
   - Customer
+  - Table
   layers:
   - Default
   - TransparentFX
