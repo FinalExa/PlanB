@@ -7,6 +7,7 @@ public class CustomerWaitingForInteraction : CustomerState
 
     public override void Start()
     {
+        _customerStateMachine.customerController.thisNavMeshAgent.enabled = false;
         GenerateOrder();
     }
 

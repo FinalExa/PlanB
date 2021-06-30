@@ -2,7 +2,8 @@
 using UnityEngine;
 public class CustomerVignette : MonoBehaviour
 {
-    [SerializeField] private float fixRotation;
+    [SerializeField] private float fixRotationX;
+    [SerializeField] private float fixRotationY;
     [SerializeField] private float fixPositionX;
     [SerializeField] private float fixPositionZ;
     [SerializeField] private GameObject canvas;
@@ -12,7 +13,7 @@ public class CustomerVignette : MonoBehaviour
 
     public void SetupVignette(Order.OrderType type, List<SoulType.SoulColor> ingredients)
     {
-        canvas.transform.rotation = Quaternion.Euler(0f, fixRotation, 0f);
+        canvas.transform.rotation = Quaternion.Euler(fixRotationX, fixRotationY, 0f);
         canvas.transform.position = new Vector3(this.gameObject.transform.position.x + fixPositionX, canvas.transform.position.y, this.gameObject.transform.position.z + fixPositionZ);
         typeOfOrder.transform.Find(type.ToString()).gameObject.SetActive(true);
         int size = ingredients.Count - 1;

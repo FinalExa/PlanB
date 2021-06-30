@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Table : MonoBehaviour
@@ -16,17 +17,27 @@ public class Table : MonoBehaviour
         seatInfo[id].ingredients.Clear();
     }
 
-    public void RecipeCheck(Order.OrderType type, List<SoulType.SoulColor> listOfIngredients, GameObject orderReceived)
+    public void RecipeCheck(Order order)
     {
         for (int i = 0; i < seatInfo.Length; i++)
         {
-            if (seatInfo[i].orderType == type && seatInfo[i].ingredients.Count == listOfIngredients.Count)
+            if (seatInfo[i].orderType == order.thisOrderType && seatInfo[i].ingredients.Count == order.thisOrderIngredients.Count)
             {
-                seatInfo[i].customer.waitingForOrder = false;
-                orderReceived.gameObject.SetActive(false);
-                break;
+                if (ArrayContentsAreTheSame(i, order))
+                {
+                    seatInfo[i].customer.waitingForOrder = false;
+                    order.gameObject.SetActive(false);
+                    break;
+                }
             }
         }
+    }
+
+    private bool ArrayContentsAreTheSame(int index, Order order)
+    {
+        bool contentsAreTheSame = false;
+        if (Enumerable.SequenceEqual(seatInfo[index].ingredients.OrderBy(e => e), order.thisOrderIngredients.OrderBy(e => e))) contentsAreTheSame = true;
+        return contentsAreTheSame;
     }
 }
 [System.Serializable]

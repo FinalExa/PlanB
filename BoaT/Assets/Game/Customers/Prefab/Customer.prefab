@@ -108,7 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7f8b050bf55b6409ca6af92c9d3962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixRotation: 45
+  fixRotationX: 45
+  fixRotationY: 45
   fixPositionX: 1
   fixPositionZ: -1
   canvas: {fileID: 6345568519247880728}

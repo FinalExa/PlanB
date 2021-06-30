@@ -6,6 +6,7 @@
 
     public override void Start()
     {
+        _customerStateMachine.customerController.thisNavMeshAgent.enabled = true;
         MoveToTarget();
     }
     public override void StateUpdate()
