@@ -8,7 +8,7 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
     [SerializeField] private float maxInteractionTimer;
     private float interactionTimer;
     [HideInInspector] public GameObject exitDoor;
-    [HideInInspector] public GameObject seatToTake;
+    public GameObject seatToTake;
     [HideInInspector] public GameObject targetedLocation;
     [HideInInspector] public Table thisTable;
     [HideInInspector] public int thisTableId;

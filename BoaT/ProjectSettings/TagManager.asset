@@ -15,6 +15,7 @@ TagManager:
   - Machine
   - Customer
   - Table
+  - CustomerSpawner
   layers:
   - Default
   - TransparentFX
