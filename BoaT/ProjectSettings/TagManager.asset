@@ -13,6 +13,9 @@ TagManager:
   - Exit
   - Passage
   - Machine
+  - Customer
+  - Table
+  - CustomerSpawner
   layers:
   - Default
   - TransparentFX

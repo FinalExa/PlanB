@@ -244,11 +244,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8158073373026978372, guid: 4800b7c3fb49f044d819ac762472e1ef,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -6451142449507150053, guid: 4800b7c3fb49f044d819ac762472e1ef,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -4940439875847903247, guid: 4800b7c3fb49f044d819ac762472e1ef,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 77f3a1645935d6a4e8a3b6bd57b20e36, type: 2}
+    - target: {fileID: -4462741712654703697, guid: 4800b7c3fb49f044d819ac762472e1ef,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -2500545784127478026, guid: 4800b7c3fb49f044d819ac762472e1ef,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -263,6 +278,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Env_Furnace
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4800b7c3fb49f044d819ac762472e1ef,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3468665686063936124, guid: 4800b7c3fb49f044d819ac762472e1ef,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3708624384278697742, guid: 4800b7c3fb49f044d819ac762472e1ef,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254834536908116757, guid: 4800b7c3fb49f044d819ac762472e1ef,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794595847912300506, guid: 4800b7c3fb49f044d819ac762472e1ef,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4800b7c3fb49f044d819ac762472e1ef, type: 3}
