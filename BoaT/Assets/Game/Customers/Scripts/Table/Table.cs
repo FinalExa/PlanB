@@ -32,7 +32,7 @@ public class Table : MonoBehaviour
     {
         for (int i = 0; i < seatInfo.Length; i++)
         {
-            if (seatInfo[i].orderType == order.thisOrderType && seatInfo[i].ingredients.Count == order.thisOrderIngredients.Count)
+            if (seatInfo[i].orderType == order.thisOrderType && seatInfo[i].ingredients.Count == order.thisOrderIngredients.Count && seatInfo[i].customer.waitingForOrder)
             {
                 if (ArrayContentsAreTheSame(i, order))
                 {

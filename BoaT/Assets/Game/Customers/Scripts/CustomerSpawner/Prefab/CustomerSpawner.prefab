@@ -49,4 +49,5 @@ MonoBehaviour:
     type: 3}
   parentObjectTag: CustomerSpawner
   spawnerData: {fileID: 11400000, guid: cad1e4c158375f647b57ceac1336fbf5, type: 2}
-  timeBetweenSpawns: 2
+  timeBetweenSpawns: 0.5
+  freeSeats: []

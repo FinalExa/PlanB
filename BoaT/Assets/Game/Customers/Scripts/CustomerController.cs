@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class CustomerController : MonoBehaviour, ICanBeInteracted
 {
+    public static Action<Table, int, CustomerController> customerLeft;
     [SerializeField] private GameObject[] customerModels;
     [SerializeField] private float maxInteractionTimer;
     private float interactionTimer;
@@ -50,7 +52,7 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
     }
     public void RandomizeModel()
     {
-        int randIndex = Random.Range(0, customerModels.Length);
+        int randIndex = UnityEngine.Random.Range(0, customerModels.Length);
         selectedModel = customerModels[randIndex];
         selectedModel.SetActive(true);
     }
@@ -71,6 +73,10 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Exit")) this.gameObject.SetActive(false);
+        if (other.CompareTag("Exit"))
+        {
+            customerLeft(thisTable, thisTableId, this);
+            this.gameObject.SetActive(false);
+        }
     }
 }
