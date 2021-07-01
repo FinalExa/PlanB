@@ -1,26 +1,44 @@
-﻿public class CustomerGoToLocation : CustomerState
+﻿using UnityEngine;
+public class CustomerGoToLocation : CustomerState
 {
     private bool movingIssued;
+    private bool timerIsOver;
+    private bool timerStart;
+    private float timer;
     public CustomerGoToLocation(CustomerStateMachine customerStateMachine) : base(customerStateMachine)
     {
     }
 
     public override void Start()
     {
+        timerIsOver = false;
         movingIssued = false;
+        timerStart = false;
+        timer = _customerStateMachine.navMeshPathTimer;
         _customerStateMachine.customerController.thisNavMeshAgent.enabled = true;
     }
     public override void StateUpdate()
     {
-        if (_customerStateMachine.customerController.seatToTake != null && !movingIssued) MoveToTarget();
-        if (_customerStateMachine.customerController.thisNavMeshAgent.isStopped && movingIssued) GoToWaitingForInteraction();
+        if (!movingIssued) MoveToTarget();
+        if (timerStart) NavMeshTimer();
+        if (_customerStateMachine.customerController.thisNavMeshAgent.destination == _customerStateMachine.gameObject.transform.position && movingIssued && timerIsOver) GoToWaitingForInteraction();
     }
 
     private void MoveToTarget()
     {
-        if (!_customerStateMachine.customerController.leave) _customerStateMachine.customerController.ChooseSeat();
         _customerStateMachine.customerController.thisNavMeshAgent.SetDestination(_customerStateMachine.customerController.targetedLocation.transform.position);
         movingIssued = true;
+        timerStart = true;
+    }
+
+    private void NavMeshTimer()
+    {
+        if (timer > 0) timer -= Time.deltaTime;
+        else
+        {
+            timerStart = false;
+            timerIsOver = true;
+        }
     }
 
     private void GoToWaitingForInteraction()

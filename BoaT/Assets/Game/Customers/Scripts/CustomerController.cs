@@ -34,10 +34,10 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
         exitDoor = GameObject.FindGameObjectWithTag("Exit");
         startingPos = this.gameObject.transform.position;
     }
-    private void Start()
+    private void OnEnable()
     {
-        interactionTimer = maxInteractionTimer;
         RandomizeModel();
+        targetedLocation = seatToTake;
     }
     private void OnDisable()
     {
@@ -48,25 +48,6 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
     {
         if (interactionReceived) InteractionTimer();
     }
-    public void ChooseSeat()
-    {
-        Table[] tablesList = FindObjectsOfType<Table>();
-        int randIndex = Random.Range(0, tablesList.Length);
-        SeatInfo[] seatInfos = tablesList[randIndex].seatInfo;
-        for (int i = 0; i < seatInfos.Length; i++)
-        {
-            if (!seatInfos[i].seatIsOccupied)
-            {
-                seatToTake = tablesList[randIndex].seatInfo[i].seatTarget;
-                tablesList[randIndex].seatInfo[i].seatIsOccupied = true;
-                thisTable = tablesList[randIndex];
-                thisTable.seatInfo[i].customer = this;
-                thisTableId = i;
-                targetedLocation = seatToTake;
-                break;
-            }
-        }
-    }
     public void RandomizeModel()
     {
         int randIndex = Random.Range(0, customerModels.Length);
@@ -76,6 +57,7 @@ public class CustomerController : MonoBehaviour, ICanBeInteracted
     public void Interaction()
     {
         interactionReceived = true;
+        interactionTimer = maxInteractionTimer;
     }
     private void InteractionTimer()
     {

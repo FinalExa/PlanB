@@ -83,6 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateRef: 
   customerController: {fileID: 0}
+  navMeshPathTimer: 0.3
 --- !u!114 &1089795606939318255
 MonoBehaviour:
   m_ObjectHideFlags: 0

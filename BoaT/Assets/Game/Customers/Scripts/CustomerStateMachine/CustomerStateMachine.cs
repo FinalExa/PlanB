@@ -2,6 +2,7 @@
 public class CustomerStateMachine : StateMachine
 {
     [HideInInspector] public CustomerController customerController;
+    public float navMeshPathTimer;
 
     private void Awake()
     {

@@ -1,17 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 public class CustomerSpawner : Spawner
 {
     [SerializeField] private float timeBetweenSpawns;
     private float spawnerTimer;
     private bool spawnerIsFilled;
+    [SerializeField] private List<SeatInfo> freeSeats;
     private Table[] tablesList;
     public override void Start()
     {
-        tablesList = FindObjectsOfType<Table>();
         spawnerTimer = timeBetweenSpawns;
         CalculateObjectsToInstantiate();
         base.Start();
-        DeactivateObjects();
+        SetupFreeSeats();
     }
     private void Update()
     {
@@ -19,8 +20,19 @@ public class CustomerSpawner : Spawner
     }
     private void CalculateObjectsToInstantiate()
     {
-        Table[] tables = FindObjectsOfType<Table>();
-        objectsToInstantiate = tables.Length * 4;
+        tablesList = FindObjectsOfType<Table>();
+        objectsToInstantiate = tablesList.Length * 4;
+    }
+
+    private void SetupFreeSeats()
+    {
+        foreach (Table table in tablesList)
+        {
+            for (int i = 0; i < table.seatInfo.Length; i++)
+            {
+                freeSeats.Add(table.seatInfo[i]);
+            }
+        }
     }
 
     private void SpawnerTimer()
@@ -28,32 +40,29 @@ public class CustomerSpawner : Spawner
         if (spawnerTimer > 0) spawnerTimer -= Time.deltaTime;
         else
         {
-            InitializeCustomer();
+            SearchForFreeSeat();
             spawnerTimer = timeBetweenSpawns;
             if (activeObjects.Count == objects.Count) spawnerIsFilled = true;
         }
     }
 
-    private void InitializeCustomer()
+    private void SearchForFreeSeat()
     {
         int currentIndex = activeObjects.Count;
         activeObjects.Add(objects[currentIndex]);
         CustomerController cc = (CustomerController)activeObjects[currentIndex];
+        int randomIndex = Random.Range(0, freeSeats.Count);
+        StartupCustomer(cc, randomIndex);
+    }
+
+    private void StartupCustomer(CustomerController cc, int seatIndex)
+    {
+        cc.seatToTake = freeSeats[seatIndex].seatTarget;
+        cc.thisTable = freeSeats[seatIndex].thisTable;
+        freeSeats[seatIndex].customer = cc;
+        cc.thisTableId = freeSeats[seatIndex].thisId;
+        cc.targetedLocation = cc.seatToTake;
         cc.gameObject.SetActive(true);
-        int randIndex = Random.Range(0, tablesList.Length);
-        SeatInfo[] seatInfos = tablesList[randIndex].seatInfo;
-        for (int i = 0; i < seatInfos.Length; i++)
-        {
-            if (!seatInfos[i].seatIsOccupied)
-            {
-                cc.seatToTake = tablesList[randIndex].seatInfo[i].seatTarget;
-                tablesList[randIndex].seatInfo[i].seatIsOccupied = true;
-                cc.thisTable = tablesList[randIndex];
-                cc.thisTable.seatInfo[i].customer = cc;
-                cc.thisTableId = i;
-                cc.targetedLocation = cc.seatToTake;
-                break;
-            }
-        }
+        freeSeats.RemoveAt(seatIndex);
     }
 }

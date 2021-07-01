@@ -6,6 +6,18 @@ public class Table : MonoBehaviour
 {
     public SeatInfo[] seatInfo;
 
+    private void Start()
+    {
+        AssignSelf();
+    }
+    private void AssignSelf()
+    {
+        for (int i = 0; i < seatInfo.Length; i++)
+        {
+            seatInfo[i].thisTable = this;
+            seatInfo[i].thisId = i;
+        }
+    }
     public void AssignOrderToTable(int id, CustomerController customer)
     {
         seatInfo[id].orderType = customer.chosenType;
@@ -13,7 +25,6 @@ public class Table : MonoBehaviour
     }
     public void TableClear(int id)
     {
-        seatInfo[id].seatIsOccupied = false;
         seatInfo[id].ingredients.Clear();
     }
 
@@ -44,8 +55,9 @@ public class Table : MonoBehaviour
 public class SeatInfo
 {
     public GameObject seatTarget;
-    public bool seatIsOccupied;
     public Order.OrderType orderType;
     public List<SoulType.SoulColor> ingredients;
     public CustomerController customer;
+    public Table thisTable;
+    public int thisId;
 }
